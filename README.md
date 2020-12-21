@@ -10,7 +10,7 @@
   - [问题合集](note/security/问题合集.md)  最后更新于2020-12-13  
   
 + Spring
-  - [面试题](note/spring/知识点.md)  最后更新于2020-12-14  
+  - [知识点](note/spring/知识点.md)  最后更新于2020-12-14  
 
 ### 数据库
 + MySQL
