@@ -13,7 +13,7 @@
   - [知识点](note/spring/知识点.md)  最后更新于2020-12-14  
 
 + 微服务
-  - [分布式事务](note/microservice/transaction/知识点.md)  **最后更新于2020-12-23**  
+  - [分布式事务](note/microservice/transaction/知识点.md)  **最后更新于2020-12-24**  
 
 ### 数据库
 + MySQL
