@@ -22,6 +22,10 @@
     - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25   
     - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25  
 
++ 中间件
+  - 消息队列
+    - [知识点](note/middleware/mq/知识点.md)  **最后更新于2020-12-28**  
+
 ### 数据库
 + MySQL
   - [问题合集](note/mysql/问题合集.md)  最后更新于2020-12-13  
