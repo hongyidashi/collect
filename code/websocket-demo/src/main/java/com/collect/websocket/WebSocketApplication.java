@@ -1,5 +1,6 @@
 package com.collect.websocket;
 
+import com.collect.websocket.server.MyServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @SpringBootApplication
 public class WebSocketApplication {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(WebSocketApplication.class);
+        MyServer.startServer();
     }
 }
