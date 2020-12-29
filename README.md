@@ -26,6 +26,9 @@
   - 消息队列
     - [知识点](note/middleware/mq/知识点.md)  **最后更新于2020-12-28**  
 
++ 开箱即用类
+  - [定时器-Quartz](note/other-frame/quartz.md)  **最后更新于2020-12-29**  
+
 ### 数据库
 + MySQL
   - [问题合集](note/mysql/问题合集.md)  最后更新于2020-12-13  
