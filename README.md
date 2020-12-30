@@ -10,6 +10,11 @@
   - JDK9
     - [新特性](note/jdk/jdk9/新特性.md)
 
+### Java高级
++ JVM
+  - GC
+    - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  **最后更新于2020-12-30**  
+
 ### 框架
 + Spring Security
   - [问题合集](note/security/问题合集.md)  最后更新于2020-12-13  
@@ -24,10 +29,10 @@
 
 + 中间件
   - 消息队列
-    - [知识点](note/middleware/mq/知识点.md)  **最后更新于2020-12-28**  
+    - [知识点](note/middleware/mq/知识点.md)  最后更新于2020-12-28  
 
 + 开箱即用类
-  - [定时器-Quartz](note/other-frame/quartz.md)  **最后更新于2020-12-29**  
+  - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑  
 
 ### 数据库
 + MySQL
@@ -45,4 +50,4 @@
   - [知识点](note/http/知识点.md)  最后更新于2020-12-23  
 
 + WebSocket
-  - [知识点](note/websocket/知识点.md)  **最后更新于2020-12-28**  
+  - [知识点](note/websocket/知识点.md)  最后更新于2020-12-28  
