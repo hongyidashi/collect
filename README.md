@@ -13,7 +13,7 @@
 ### Java高级
 + JVM
   - GC
-    - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  **最后更新于2020-12-30**  
+    - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  **最后更新于2020-12-31**  
 
 ### 框架
 + Spring Security
