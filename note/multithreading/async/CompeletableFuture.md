@@ -7,6 +7,8 @@
 + [线程并行执行](#线程并行执行)
 + [线程并行执行，谁先执行完则谁触发下一任务](#线程并行执行，谁先执行完则谁触发下一任务)
 + [处理任务结果或者异常](#处理任务结果或者异常)
++ [多个任务的简单组合](#多个任务的简单组合)
++ [取消执行线程任务](#取消执行线程任务)
 
 
 
@@ -395,3 +397,63 @@ public class Demo5 {
 }
 ```
 
+## 多个任务的简单组合
+```java
+public static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs)
+public static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs)
+```
+
+![anyof](images/anyof.png)  
+![allof](images/allof.png)  
+
+### 使用示例
+```java
+public class Demo6 {
+    public static void main(String[] args) {
+
+        //全部任务都需要执行完
+        CompletableFuture<Void> future = CompletableFuture
+                .allOf(CompletableFuture.completedFuture("A"),
+                        CompletableFuture.completedFuture("B"));
+        System.out.println(future.join());
+
+        CompletableFuture<Object> future2 = CompletableFuture
+                .anyOf(CompletableFuture.completedFuture("C"),
+                        CompletableFuture.completedFuture("D"));
+        //其中一个任务行完即可
+        System.out.println(future2.join());
+    }
+}
+```
+
+## 取消执行线程任务
+```java
+// mayInterruptIfRunning 无影响；如果任务未完成,则返回异常
+public boolean cancel(boolean mayInterruptIfRunning) 
+//任务是否取消
+public boolean isCancelled()
+```
+
+### 使用示例
+```java
+public class Demo7 {
+    public static void main(String[] args) {
+        CompletableFuture<Integer> future = CompletableFuture
+                .supplyAsync(() -> {
+                    try { Thread.sleep(1000);  } catch (Exception e) { }
+                    return "hello world";
+                })
+                .thenApply(data -> 1);
+
+        System.out.println("任务取消前:" + future.isCancelled());
+        // 如果任务未完成,则返回异常,需要对使用exceptionally，handle 对结果处理
+        future.cancel(true);
+        System.out.println("任务取消后:" + future.isCancelled());
+        future = future.exceptionally(e -> {
+            e.printStackTrace();
+            return 0;
+        });
+        System.out.println(future.join());
+    }
+}
+```
