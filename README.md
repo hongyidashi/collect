@@ -10,13 +10,16 @@
   - JDK9
     - [新特性](note/jdk/jdk9/新特性.md)
 
++ JavaSE
+  - [序列化](note/javase/serialization.md)  最后更新于2021-1-3  
+
 ### Java高级
 + JVM
   - GC
     - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  最后更新于2020-12-31  
 
 + 多线程
-  - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  **最后更新于2021-1-1**  
+  - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  最后更新于2021-1-2  
 
 ### 框架
 + Spring Security

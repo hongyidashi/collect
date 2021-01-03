@@ -12,6 +12,7 @@
         <module>websocket-demo</module>
         <module>quartz-demo</module>
         <module>multithreading-demo</module>
+        <module>javase-demo</module>
     </modules>
 
     <dependencyManagement>
