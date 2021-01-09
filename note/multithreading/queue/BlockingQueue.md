@@ -11,6 +11,8 @@
   - [构造器分析](#构造器分析)
   - [节点入队](#节点入队)
   - [节点出队](#节点出队)
+  - [节点查询](#节点查询)
+  - [节点删除](#节点删除)
 
 
 ## 什么是阻塞队列
@@ -267,4 +269,86 @@ private E dequeue() {
 
 出队流程图如上，流程中没有特别注意的点。另外一个 LBQ#poll 出队方法，如果队列中元素为空，返回 null，不会像 take 一样阻塞。
 
+### 节点查询
+因为 element 查找方法在父类 AbstractQueue 里实现的，LBQ 里只对 peek 方法进行了实现，节点查询就用 peek 做代表了。
+
+peek 和 element 都是获取队列头节点数据，两者的区别是，前者如果队列为空返回 null，后者抛出相关异常：
+```java
+public E peek() {
+    if (count.get() == 0)  // 队列为空返回 null
+        return null;
+    final ReentrantLock takeLock = this.takeLock;
+    takeLock.lock();  // 获取锁
+    try {
+        LinkedBlockingQueue.Node<E> first = head.next;  // 获取头节点的 next 后继节点
+        if (first == null)  // 如果后继节点为空，返回 null，否则返回后继节点的 item
+            return null;
+        else
+            return first.item;
+    } finally {
+        takeLock.unlock();  // 解锁
+    }
+}
+```
+看到这里，能够得到结论，虽然 head 节点 item 永远为 null，但是 peek 方法获取的是 head.next 节点 item。
+
+### 节点删除
+删除操作需要获得两把锁，所以关于获取节点、节点出队、节点入队等操作都会被阻塞：
+```java
+public boolean remove(Object o) {
+    if (o == null) return false;
+    fullyLock();  // 获取两把锁
+    try {
+        // 从头节点开始，循环遍历队列
+        for (Node<E> trail = head, p = trail.next;
+             p != null;
+             trail = p, p = p.next) {
+            if (o.equals(p.item)) {  // item == o 执行删除操作
+                unlink(p, trail);  // 删除操作
+                return true;
+            }
+        }
+        return false;
+    } finally {
+        fullyUnlock();  // 释放两把锁
+    }
+}
+```
+链表删除操作，一般而言都是循环逐条遍历，而这种的 遍历时间复杂度为 O(n)，最坏情况就是遍历了链表全部节点。
+
+看一下 LBQ#remove 中 unlink 是如何取消节点关联的：
+```java
+void unlink(Node<E> p, Node<E> trail) {
+    p.item = null;  // 以第一次遍历而言，trail 是头节点，p 为头节点的后继节点
+    trail.next = p.next;  // 把头节点的后继指针，设置为 p 节点的后继指针
+    if (last == p)  // 如果 p == last 设置 last == trail
+        last = trail;
+    // 如果删除元素前队列是满的，删除后就有了空余位置，唤醒生产线程
+    if (count.getAndDecrement() == capacity)
+        notFull.signal();
+}
+```
+remove 方法和 take 方法是有相似之处，如果 remove 方法的元素是头节点，效果和 take 一致，头节点元素出队。
+
+为了更好的理解，我们删除中间元素。画两张图理解下其中原委，代码如下：
+```java
+public static void main(String[] args) {
+    BlockingQueue<String> blockingQueue = new LinkedBlockingQueue();
+    blockingQueue.offer("a");
+    blockingQueue.offer("b");
+    blockingQueue.offer("c");
+    // 删除队列中间元素
+    blockingQueue.remove("b");
+}
+```
+执行完上述代码中三个 offer 操作，队列结构图如下：  
+![png](images/删除节点队列结构图.png)
+
+执行删除元素 b 操作后队列结构如下图：  
+![png](images/删除队列节点示意图.png)
+
+如果 p 节点就是 last 尾节点，则把 p 的前驱节点设置为新的尾节点。删除操作大致如此。
+
+
 [回到顶部](#阻塞队列)
+
