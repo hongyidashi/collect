@@ -13,6 +13,7 @@
         <module>quartz-demo</module>
         <module>multithreading-demo</module>
         <module>javase-demo</module>
+        <module>security-jwt-demo</module>
     </modules>
 
     <dependencyManagement>
