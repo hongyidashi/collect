@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.collect.security.mapper.RoleInfoMapper">
+
+    <select id="listRoleByUserId" resultType="org.collect.security.entity.RoleInfo">
+        SELECT
+        a.id, a.role_name, a.role_code, a.role_remark
+        FROM `role_info` a INNER JOIN `user_role_link` b ON a.id=b.role_id
+        WHERE
+        b.user_id = #{userId} and a.deleted = 1
+    </select>
+</mapper>
