@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // 4 生成自定义token
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
-        AccessToken accessToken = jwtProvider.createToken((UserDetails) authentication.getPrincipal());
+        AccessToken accessToken = jwtProvider.createToken(userDetail);
 
         // 5 放入缓存
         // ...
