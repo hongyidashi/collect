@@ -1,6 +1,7 @@
 package com.collect.javase.jvmDemo;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author： peng
@@ -9,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 class A {
     volatile int val = 0;
+    //默认是0，并且保证原子性
+    AtomicInteger atomicInteger = new AtomicInteger();
     public void update() {
         this.val = 486;
     }
@@ -26,6 +29,9 @@ public class ValatileDemo {
      *      如果线程数量比较多的时候，两个线程同时取到了val=0
      *      两个线程几乎同时在自己的工作空间修改为1
      *      这个时候再不保证原子性的情况下，就会出现数据的错误写问题相当于少写了一次
+     * 如何保证原子性
+     *      通过synchronized修饰，杀鸡用牛刀
+     *      通过AtomicInteger来去执行原子性操作
      */
     private static void testNoAtom() {
         A a = new A();
@@ -34,6 +40,8 @@ public class ValatileDemo {
             new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
                     a.val++;
+                    //getAndIncrement也是自增方法，不过保证了原子性
+                    a.atomicInteger.getAndIncrement();
                 }
             }, i+"").start();
         }
@@ -44,7 +52,8 @@ public class ValatileDemo {
         }
 
         //最终结果小于2000
-        System.out.println(a.val);
+        System.out.println("普通的int类型：" + a.val);
+        System.out.println("保证原子性的AtomicInteger类型：" + a.atomicInteger);
     }
 
     /**
