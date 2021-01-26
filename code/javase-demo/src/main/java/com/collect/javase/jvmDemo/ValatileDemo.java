@@ -1,4 +1,4 @@
-package com.collect.javase;
+package com.collect.javase.jvmDemo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +17,15 @@ class A {
 public class ValatileDemo {
 
     public static void main(String[] args) {
+
+    }
+
+    /**
+     * 测试volatile的可见性
+     *      如果不加volatile就是死循环
+     *      加了volatile保证了可见性，那么就不会是死循环
+     */
+    private static void testSeek() {
         A a = new A();
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + "-come");
