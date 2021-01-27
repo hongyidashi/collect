@@ -17,10 +17,41 @@ class A {
     }
 }
 
+class B {
+    private volatile static B b = null;
+    private B() {
+        System.out.println(Thread.currentThread().getName() + "-构造方法被执行");
+    }
+    public static B getInstance() {
+        if(b == null) {
+            //dcl 双端检查锁机制
+            synchronized (B.class) {
+                if(b == null) {
+                    //其实分为了三部，分配内存空间，创建对象，指向内存空间
+                    //如果重排的话，也不是很安全
+                    b = new B();
+                }
+            }
+        }
+        return b;
+    }
+}
 public class ValatileDemo {
 
     public static void main(String[] args) {
-        testNoAtom();
+        testDanLi();
+    }
+
+    /**
+     * 测试指令重排案例，以单例模式举例子
+     */
+    public static void testDanLi() {
+        for(int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                B b = B.getInstance();
+            }, ""+i).start();
+        }
+
     }
 
     /**
