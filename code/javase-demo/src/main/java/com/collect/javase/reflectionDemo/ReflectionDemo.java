@@ -40,8 +40,37 @@ class A {
 }
 
 public class ReflectionDemo {
-    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, NoSuchFieldException {
-        demo01();
+    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, NoSuchFieldException, ClassNotFoundException {
+        demo02();
+    }
+
+    /**
+     * 获取Class实例的四种方式
+     */
+    private static void demo02() throws ClassNotFoundException {
+        //1. 通过类获取Class实例
+        Class<A> aClass = A.class;
+        System.out.println(aClass);
+
+        //2. 通过类实例获取 Class实例
+        A a = new A(486, "486");
+        Class<? extends A> aClass1 = a.getClass();
+        System.out.println(aClass1);
+
+        //3. 通过Class获取某个实例
+        Class<?> aClass2 = Class.forName("com.collect.javase.reflectionDemo.A");
+        System.out.println(aClass2);
+
+        //4. 通过类加载器获得
+        Class<?> aClass3 = ReflectionDemo.class.getClassLoader()
+                .loadClass("com.collect.javase.reflectionDemo.A");
+        System.out.println(aClass3);
+
+        //本质上他们是相同的，因为运行时类是会被缓存一段时间的
+        //而这些都不属于new而是从缓存中获取到这个实例而已
+        System.out.println(aClass == aClass1);
+        System.out.println(aClass1 == aClass2);
+        System.out.println(aClass2 == aClass3);
     }
 
     /**
