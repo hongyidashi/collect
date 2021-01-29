@@ -16,7 +16,7 @@
 ### Java高级
 + JVM
   - GC
-    - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  最后更新于2020-1-27  
+    - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  最后更新于2020-1-29  
 
 + 多线程和并发
   - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  最后更新于2021-1-2  
