@@ -41,7 +41,47 @@ class A {
 
 public class ReflectionDemo {
     public static void main(String[] args) throws Exception{
-        demo03();
+        demo04();
+    }
+
+    /**
+     * 反射对方法的相关操作
+     */
+    private static void demo04() throws Exception {
+        //获取运行时类
+        Class<A> aClass = A.class;
+        //最常用创建类实例的方式
+        A a = aClass.newInstance();
+        //获取当前类及其父类的public方法
+        Method[] methods = aClass.getMethods();
+        //获取当前类的所有方法，包括private，但不包括其父类
+        methods = aClass.getDeclaredMethods();
+        for (Method method : methods) {
+            //获取方法的所有注解
+            method.getAnnotations();
+            method.getDeclaredAnnotations();
+
+            //获取权限
+            Modifier.toString(method.getModifiers());
+
+            //获取返回值类型
+            method.getReturnType();
+
+            //获取方法名
+            method.getName();
+
+            //获取形参类型
+            method.getParameterTypes();
+
+            //获取方法throws的异常
+            method.getExceptionTypes();
+
+            //方法的执行，视权限不同，可能需要允许访问私有
+            if(method.getName().equals("publicToString")) {
+                method.setAccessible(true);
+                method.invoke(a);
+            }
+        }
     }
 
     /**
