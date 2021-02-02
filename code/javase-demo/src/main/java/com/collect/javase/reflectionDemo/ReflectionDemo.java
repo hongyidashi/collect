@@ -1,9 +1,6 @@
 package com.collect.javase.reflectionDemo;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 
 /**
  * @author： peng
@@ -14,6 +11,9 @@ import java.lang.reflect.Method;
 class A {
     private int age;
     private String name;
+    public A() {
+
+    }
     public A(int age, String name) {
         this.age = age;
         this.name = name;
@@ -40,8 +40,45 @@ class A {
 }
 
 public class ReflectionDemo {
-    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, NoSuchFieldException, ClassNotFoundException {
-        demo02();
+    public static void main(String[] args) throws Exception{
+        demo03();
+    }
+
+    /**
+     * 反射对属性的相关操作
+     */
+    private static void demo03() throws Exception {
+        //获取运行时类
+        Class<A> aClass = A.class;
+        //最常用创建类实例的方式
+        A a = aClass.newInstance();
+        //获取所有public属性，包括继承父类的
+        Field[] fields = aClass.getFields();
+        //获取当前类中的所有属性，包括私有的，但是不包括父类中的属性
+        fields = aClass.getDeclaredFields();
+        for (Field field : fields) {
+            //获取权限，但是权限用012这样代替
+            int modifiers = field.getModifiers();
+            //将权限转换为一个一个的数据
+            Modifier.toString(modifiers);
+            //总的来说就是
+            String s = Modifier.toString(field.getModifiers());
+
+            //数据类型
+            Class<?> type = field.getType();
+
+            //获取属性名
+            String name = field.getName();
+
+            //变更属性
+            if(field.getName().equals("name")) {
+                //允许对私有属性进行操作
+                field.setAccessible(true);
+                field.set(a, "486");
+            }
+            System.out.println(s + " " + type + " " + name);
+        }
+        System.out.println(a);
     }
 
     /**
