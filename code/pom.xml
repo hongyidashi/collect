@@ -14,6 +14,7 @@
         <module>multithreading-demo</module>
         <module>javase-demo</module>
         <module>security-jwt-demo</module>
+        <module>springboot-test-demo</module>
     </modules>
 
     <dependencyManagement>
