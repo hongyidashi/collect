@@ -12,6 +12,7 @@
 
 + JavaSE
   - [序列化](note/javase/serialization.md)  最后更新于2021-1-3  
+  - [伪共享](note/javase/falsesharing.md)  最后更新于2021-3-11  
 
 ### Java高级
 + JVM
