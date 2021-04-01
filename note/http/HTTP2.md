@@ -165,3 +165,93 @@ HTTP/2通过请求多路复用解决了应用程序层的队头阻塞，但队�
 
 假设有一个响应体的某些包丢失了，那么应用程序就会一直等待接收该响应中丢失的包，服务器也会尝试重传，那么后续的服务端响应可能就被这个丢包问题给阻塞了。
 
+## 5. 安全升级
+
+HTTP/2最初被设计为仅可以通过加密协议进行传输，但是遭到反对之后，修订版中除了加密传输之外，还可以选择纯文本版本。
+
+前面我们提到，HTTP/2有两个具体的实现：
+
+- 基于HTTPS的实现：HTTP/2 over TLS，一般简写为h2；
+- 基于HTTP的实现：HTTP/2 over TCP，一般简写为h2c。
+
+虽然基于TLS的实现是其中一个选项，但是主流的浏览器团队开始只支持HTTP/2 over TLS，所以，实际上，我们要用到HTTP/2，都是要基于HTTPS的。
+
+这样，我们用上了h2之后，就避免了明文传输的各种安全问题，如：数据报被截获、中间人攻击等，尽可能的保证了我们网站的安全。
+
+并且HTTPS要求TLS必须在V1.2以上，这也就避免了过时的加密套件导致的安全漏洞问题。
+
+## 6. ALPN
+
+Application-Layer Protocol Negotiation (**ALPN**)是TLS的扩展，它允许应用程序协商在安全连接上执行的协议，以避免额外的往返行程。
+
+### 创建H2C连接
+
+首先我们还是先看看没有用到TLS的h2c的连接创建过程。
+
+h2c连接由于没有加密，因此可以直接使用Upgrade请求头来协商连接的升级。
+
+![png](images/创建H2C连接示意图.png)
+
+当客户端发起HTTP请求的时候，并不知道下一站是否支持HTTP/2，于是会在请求头包含`Upgrade:h2c`标识自己是支持HTTP/2的，同时通过`HTTP2-Settings`头发送Base64编码的SETTINGS帧信息。
+
+由于升级只应该用于直接连接，所以发送HTTP2-Settings的客户端必须将`HTTP2-Settings`作为连接选项包含在`Connection`请求头中，防止被中间代理进行转发给下一跳了。
+
+接收端收到后，如果发现自己也支持，就会协商一起使用HTTP/2了，然后返回`101`切换协议的状态码，接下来就可以发送HTTP/2帧了。
+
+### 通过ALPN创建H2连接
+
+h2是基于TLS的，为此，需要用到ALPN来协商升级。
+
+![png](images/ALPN创建H2连接示意图.png)
+
+在客户端发送的Client Hello请求中，会携带一个ALPN扩展信息，里面列出了客户端支持的协议，通过Wireshark抓包可以观察到如下内容：
+
+![png](images/ALPN创建H2连接抓包内容.png)
+
+服务端回复Server Hello的时候，会携带一个ALPN扩展信息，指明最终选择的协议。如果回复的是h2，则表示最终协商使用了HTTP/2协议，后续开始使用HTTP/2进行通信。
+
+## 7. 服务器推送
+
+HTTP/1中，支持服务器将资源推送到服务器，而无需服务器的请求。客户端可以选择是否接收服务端推送的数据。
+
+**通过服务器推送，消除了对内联资源的优化需求。但是服务器推送不能替代WebSocket技术。**
+
+举个例子，假设客户端请求的一个index.html页面中同时包含了其他的图片和样式资源：
+
+```
+<html>
+<head><link rel="stylesheet" href="style.css" /></head>
+<body><img src="itzhai-logo.png" /></body>
+</html>
+```
+
+如果是HTTP/1.1需要发送三个请求：
+
+- GET /index.html HTTP/1.1
+- GET /style.css HTTP/1.1
+- GET /itzhai-logo.png HTTP/1.1
+
+在HTTP/1.1中，为了减少这种情况，于是对资源进行内联：
+
+- css样式内嵌到HTML文档中；
+- 图片通过base64编码直接放到HTML中。
+
+而在HTTP/2中，服务器则可以在接收到客户端的index.html页面请求后，把index.html、style.css、itzhai-logo.png一次性发送给浏览器。
+
+### 服务器推送设置
+
+为了实现服务器推送，可以在服务器中进行相应的配置，比如我们用的是Nginx服务器，那么可以通过http2_push命令进行配置：
+
+```
+server {
+    listen 443 ssl http2;
+    ···//省略
+    location / {
+        ···//省略
+        http2_push /style.css；
+        http2_push /itzhai-logo.png;
+    }
+}
+```
+
+![png](images/服务器推送设置示意图.png)
