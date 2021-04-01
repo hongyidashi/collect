@@ -62,7 +62,8 @@
 
 + HTTP
   - [知识点](note/http/知识点.md)  最后更新于2020-12-23  
-  - [HTTP1.1](note/http/HTPP1.1.md)  最后更新于2021-3-30  
+  - [HTTP1.1](note/http/HTPP1.1.md)  最后更新于2021-3-31  
+  - [HTTP2](note/http/HTTP2.md)  最后更新于2021-4-1  
 
 + WebSocket
   - [知识点](note/websocket/知识点.md)  最后更新于2020-12-28  
