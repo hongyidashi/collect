@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [HTPP/1.1](#htpp11)
+  - [HTTP/1.1基本概念](#http11%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
+    - [1. 可扩展](#1-%E5%8F%AF%E6%89%A9%E5%B1%95)
+    - [2. 传输可靠性](#2-%E4%BC%A0%E8%BE%93%E5%8F%AF%E9%9D%A0%E6%80%A7)
+    - [3. 基于请求应答模式](#3-%E5%9F%BA%E4%BA%8E%E8%AF%B7%E6%B1%82%E5%BA%94%E7%AD%94%E6%A8%A1%E5%BC%8F)
+    - [4. 无状态](#4-%E6%97%A0%E7%8A%B6%E6%80%81)
+    - [5. 明文传输，不安全](#5-%E6%98%8E%E6%96%87%E4%BC%A0%E8%BE%93%E4%B8%8D%E5%AE%89%E5%85%A8)
+    - [6. 性能较差(请求-应答)](#6-%E6%80%A7%E8%83%BD%E8%BE%83%E5%B7%AE%E8%AF%B7%E6%B1%82-%E5%BA%94%E7%AD%94)
+  - [HTTP/1.1报文详解](#http11%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3)
+    - [1. HTTP报文组成部分](#1-http%E6%8A%A5%E6%96%87%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86)
+    - [2. 请求行](#2-%E8%AF%B7%E6%B1%82%E8%A1%8C)
+      - [1. Method](#1-method)
+      - [2. Request-URI](#2-request-uri)
+      - [3. HTTP-Version](#3-http-version)
+      - [4. 消息头](#4-%E6%B6%88%E6%81%AF%E5%A4%B4)
+      - [5. 消息体](#5-%E6%B6%88%E6%81%AF%E4%BD%93)
+      - [6. 状态行](#6-%E7%8A%B6%E6%80%81%E8%A1%8C)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # HTPP/1.1
 
 [TOC]
