@@ -1,5 +1,32 @@
 # HTTP/2
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [0. HTTP/1.1的问题](#0-http11%E7%9A%84%E9%97%AE%E9%A2%98)
+- [1. 兼容HTTP/1](#1-%E5%85%BC%E5%AE%B9http1)
+- [2. 二进制帧](#2-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%B8%A7)
+  - [HTTP/2与HTTP/1.X的格式转换](#http2%E4%B8%8Ehttp1x%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2)
+- [3. 头信息压缩](#3-%E5%A4%B4%E4%BF%A1%E6%81%AF%E5%8E%8B%E7%BC%A9)
+  - [关于起始行](#%E5%85%B3%E4%BA%8E%E8%B5%B7%E5%A7%8B%E8%A1%8C)
+  - [HPACK](#hpack)
+  - [HPACK头部压缩](#hpack%E5%A4%B4%E9%83%A8%E5%8E%8B%E7%BC%A9)
+- [4. 流传输](#4-%E6%B5%81%E4%BC%A0%E8%BE%93)
+  - [HTTP/1.1队头阻塞](#http11%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E)
+  - [流传输与连接多路复用](#%E6%B5%81%E4%BC%A0%E8%BE%93%E4%B8%8E%E8%BF%9E%E6%8E%A5%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8)
+    - [KEEP-ALIVE与HTTP/2连接多路复用](#keep-alive%E4%B8%8Ehttp2%E8%BF%9E%E6%8E%A5%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8)
+    - [多路复用的好处](#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E5%A5%BD%E5%A4%84)
+    - [流传输问题](#%E6%B5%81%E4%BC%A0%E8%BE%93%E9%97%AE%E9%A2%98)
+- [5. 安全升级](#5-%E5%AE%89%E5%85%A8%E5%8D%87%E7%BA%A7)
+- [6. ALPN](#6-alpn)
+  - [创建H2C连接](#%E5%88%9B%E5%BB%BAh2c%E8%BF%9E%E6%8E%A5)
+  - [通过ALPN创建H2连接](#%E9%80%9A%E8%BF%87alpn%E5%88%9B%E5%BB%BAh2%E8%BF%9E%E6%8E%A5)
+- [7. 服务器推送](#7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A8%E9%80%81)
+  - [服务器推送设置](#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A8%E9%80%81%E8%AE%BE%E7%BD%AE)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 [TOC]
 
 ## 0. HTTP/1.1的问题
