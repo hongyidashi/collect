@@ -1,4 +1,20 @@
 # NIO系列 - TCP
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [NIO系列 - TCP](#nio%E7%B3%BB%E5%88%97---tcp)
+  - [一、TCP 特性](#%E4%B8%80tcp-%E7%89%B9%E6%80%A7)
+  - [二、IP网络层为何不保证数据包的可靠性](#%E4%BA%8Cip%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B8%BA%E4%BD%95%E4%B8%8D%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7)
+  - [三、TCP 协议](#%E4%B8%89tcp-%E5%8D%8F%E8%AE%AE)
+    - [1. TCP 包组成](#1-tcp-%E5%8C%85%E7%BB%84%E6%88%90)
+    - [2. 如何保证可靠性](#2-%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E6%80%A7)
+  - [四、流量控制](#%E5%9B%9B%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6)
+    - [1. 滑动窗口](#1-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3)
+    - [2. 拥堵控制](#2-%E6%8B%A5%E5%A0%B5%E6%8E%A7%E5%88%B6)
+  - [五、TCP 状态](#%E4%BA%94tcp-%E7%8A%B6%E6%80%81)
+  - [六、消失的连接——TIME_WAIT](#%E5%85%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E8%BF%9E%E6%8E%A5time_wait)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 [TOC]
 
