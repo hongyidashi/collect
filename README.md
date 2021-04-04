@@ -60,7 +60,7 @@
 + I/O
   - [知识点](note/io/知识点.md)  最后更新于2020-12-23
   - NIO系列
-    - [NIO系列-TPC](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3  
+    - [TPC](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3  
 
 + HTTP
   - [知识点](note/http/知识点.md)  最后更新于2020-12-23  
