@@ -13,6 +13,7 @@
 + JavaSE
   - [序列化](note/javase/serialization.md)  最后更新于2021-1-3  
   - [伪共享](note/javase/falsesharing.md)  最后更新于2021-3-11  
+  - [JDK自带的观察者模式](note/javase/JDK自带的观察者模式实现.md)  最后更新于2021-4-10  
 
 ### Java高级
 + JVM
