@@ -46,6 +46,7 @@
 + 中间件
   - 消息队列
     - [知识点](note/middleware/mq/知识点.md)  最后更新于2020-12-28  
+    - [知识点](note/middleware/mq/面试角度学习Kafka.md)  最后更新于2021-4-28  
 
 + 开箱即用类
   - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑  
