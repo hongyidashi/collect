@@ -15,7 +15,9 @@
         <module>javase-demo</module>
         <module>security-jwt-demo</module>
         <module>springboot-test-demo</module>
-        <module>registry-demo</module>
+        <module>registry-center</module>
+        <module>server-demo1</module>
+        <module>registry-dependency</module>
     </modules>
 
     <dependencyManagement>

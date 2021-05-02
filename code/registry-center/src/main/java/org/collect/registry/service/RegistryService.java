@@ -1,6 +1,10 @@
 package org.collect.registry.service;
 
+import org.collect.registry.bean.Instance;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述:
@@ -17,4 +21,12 @@ public interface RegistryService {
      * @return 是否注册成功
      */
     String registry(HttpServletRequest request);
+
+    /**
+     * 获取服务信息，若服务名为空，则获取所有
+     *
+     * @param serverName 服务名
+     * @return 服务信息
+     */
+    Map<String, List<Instance>> serverInfo(String serverName);
 }

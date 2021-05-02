@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述: 注册业务实现类
@@ -50,6 +52,17 @@ public class RegistryServiceImpl implements RegistryService {
 
 
         return RespConstant.SUCCESS;
+    }
+
+    /**
+     * 获取服务信息，若服务名为空，则获取所有
+     *
+     * @param serverName 服务名
+     * @return 服务信息
+     */
+    @Override
+    public Map<String, List<Instance>> serverInfo(String serverName) {
+        return serverManager.getServerInfo(serverName);
     }
 
     /**

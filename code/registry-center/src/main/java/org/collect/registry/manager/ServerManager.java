@@ -1,12 +1,18 @@
 package org.collect.registry.manager;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.collect.registry.bean.Instance;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -32,7 +38,25 @@ public class ServerManager {
     /**
      * 服务名：服务实例集合
      */
-    private static final ConcurrentHashMap<String, CopyOnWriteArrayList<Instance>> SERVERS = MapUtil.newConcurrentHashMap();
+    private static final Map<String, CopyOnWriteArrayList<Instance>> SERVERS = MapUtil.newConcurrentHashMap();
+
+    /**
+     * 获取服务信息，若服务名为空，则获取所有
+     *
+     * @param serverName 服务名
+     * @return 服务信息
+     */
+    public Map<String, List<Instance>> getServerInfo(String serverName) {
+        if (CollUtil.isEmpty(SERVERS) || !SERVERS.containsKey(serverName)) {
+            return Collections.emptyMap();
+        }
+        if (StringUtils.isEmpty(serverName)) {
+            return new HashMap<>(SERVERS);
+        }
+        HashMap<String, List<Instance>> resultMap = Maps.newHashMap();
+        resultMap.put(serverName, SERVERS.get(serverName));
+        return resultMap;
+    }
 
     /**
      * 注册一个服务实例
