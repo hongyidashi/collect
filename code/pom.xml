@@ -15,6 +15,7 @@
         <module>javase-demo</module>
         <module>security-jwt-demo</module>
         <module>springboot-test-demo</module>
+        <module>registry-demo</module>
     </modules>
 
     <dependencyManagement>
@@ -22,7 +23,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.3.4.RELEASE</version>
+                <version>2.4.5</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
