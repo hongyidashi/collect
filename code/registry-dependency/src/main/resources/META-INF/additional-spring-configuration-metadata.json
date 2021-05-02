@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "app.registry.addr",
+      "type": "java.lang.String",
+      "description": "Description for app.registry.addr."
+    },
+    {
+      "name": "app.registry.enable",
+      "type": "java.lang.String",
+      "description": "Description for app.registry.enable."
+    }
+  ] }

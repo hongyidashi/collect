@@ -39,16 +39,14 @@ public class RegistryServiceImpl implements RegistryService {
         }
 
         // 检测服务心跳
-        if (!serverManager.checkHealthy(instance)) {
-            return RespConstant.UNHEALTHY;
-        }
+        instance.setHealthy(serverManager.checkHealthy(instance));
 
         // 注册服务
         if (!serverManager.registryInstance(instance)) {
             return RespConstant.FAIL;
         }
 
-        // 通知消费者更新注册信息
+        // TODO 通知消费者更新注册信息
 
 
         return RespConstant.SUCCESS;

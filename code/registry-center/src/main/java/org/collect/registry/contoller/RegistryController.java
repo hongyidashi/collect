@@ -4,7 +4,6 @@ import org.collect.registry.bean.Instance;
 import org.collect.registry.service.RegistryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +29,7 @@ public class RegistryController {
      * @param request 请求对象
      * @return 是否注册成功
      */
-    @PostMapping("registry")
+    @GetMapping("registry")
     public String registry(HttpServletRequest request) {
         return registryService.registry(request);
     }

@@ -33,7 +33,7 @@ public class ServerManager {
     /**
      * 健康检查接口路径
      */
-    private static final String HEALTHY_PATH = "/registry/status";
+    private static final String HEALTHY_PATH = "/registry/healthy";
 
     /**
      * 服务名：服务实例集合
@@ -47,11 +47,14 @@ public class ServerManager {
      * @return 服务信息
      */
     public Map<String, List<Instance>> getServerInfo(String serverName) {
-        if (CollUtil.isEmpty(SERVERS) || !SERVERS.containsKey(serverName)) {
+        if (CollUtil.isEmpty(SERVERS)) {
             return Collections.emptyMap();
         }
         if (StringUtils.isEmpty(serverName)) {
             return new HashMap<>(SERVERS);
+        }
+        if (!SERVERS.containsKey(serverName)) {
+            return Collections.emptyMap();
         }
         HashMap<String, List<Instance>> resultMap = Maps.newHashMap();
         resultMap.put(serverName, SERVERS.get(serverName));

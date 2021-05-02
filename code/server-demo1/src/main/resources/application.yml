@@ -1,0 +1,11 @@
+server:
+  port: 8821
+
+spring:
+  application:
+    name: server-demo1
+
+app:
+  registry:
+    addr: localhost:8808
+    enable: true
