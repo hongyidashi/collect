@@ -19,6 +19,7 @@ public class Instance implements Serializable {
      */
     public static int DOWN = 0;
     public static int UP = 1;
+    public static int UNHEALTHY = 3;
 
     /**
      * 字段默认字符串值
@@ -68,6 +69,11 @@ public class Instance implements Serializable {
      * 是否开启注册功能
      */
     private Boolean enable;
+
+    /**
+     * 联系失败次数
+     */
+    private Integer lossCount;
 
     @Override
     public boolean equals(Object o) {

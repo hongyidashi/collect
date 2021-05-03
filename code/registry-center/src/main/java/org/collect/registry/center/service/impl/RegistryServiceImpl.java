@@ -85,6 +85,7 @@ public class RegistryServiceImpl implements RegistryService {
         instance.setPort(Integer.parseInt(portStr));
         instance.setHealthy(Boolean.parseBoolean(healthyStr));
         instance.setStatus(Integer.parseInt(statusStr));
+        instance.setLossCount(0);
         return instance;
     }
 

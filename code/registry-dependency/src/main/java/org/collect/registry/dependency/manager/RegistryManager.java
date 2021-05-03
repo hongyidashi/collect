@@ -63,6 +63,15 @@ public class RegistryManager {
     }
 
     /**
+     * set
+     * @param registryInfo info
+     */
+    public void setRegistryInfo(Map<String, Set<Instance>> registryInfo) {
+        this.registryInfo = registryInfo;
+        log.info("同步服务信息：{}",this.registryInfo.toString());
+    }
+
+    /**
      * 获取拉取服务信息请求路径
      *
      * @return 拉取服务信息请求路径
