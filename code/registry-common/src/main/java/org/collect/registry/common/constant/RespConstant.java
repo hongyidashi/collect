@@ -1,4 +1,4 @@
-package org.collect.registry.constant;
+package org.collect.registry.common.constant;
 
 /**
  * 描述: 常量

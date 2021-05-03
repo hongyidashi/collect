@@ -1,4 +1,4 @@
-package org.collect.registry.bean;
+package org.collect.registry.common.bean;
 
 import lombok.Data;
 

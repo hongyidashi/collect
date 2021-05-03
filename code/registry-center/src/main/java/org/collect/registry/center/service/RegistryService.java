@@ -1,6 +1,6 @@
-package org.collect.registry.service;
+package org.collect.registry.center.service;
 
-import org.collect.registry.bean.Instance;
+import org.collect.registry.common.bean.Instance;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.collect.registry.dependency.manager.RegistryManager,\
+  org.collect.registry.dependency.registry.RegistryConfig

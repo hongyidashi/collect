@@ -1,4 +1,4 @@
-package org.collect.registry;
+package org.collect.registry.center;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

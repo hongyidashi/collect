@@ -1,4 +1,4 @@
-package org.collect.registry.utils;
+package org.collect.registry.center.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

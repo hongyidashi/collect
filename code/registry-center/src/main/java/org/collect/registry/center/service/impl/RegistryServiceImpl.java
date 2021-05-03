@@ -1,10 +1,10 @@
-package org.collect.registry.service.impl;
+package org.collect.registry.center.service.impl;
 
-import org.collect.registry.bean.Instance;
-import org.collect.registry.constant.RespConstant;
-import org.collect.registry.manager.ServerManager;
-import org.collect.registry.service.RegistryService;
-import org.collect.registry.utils.WebUtil;
+import org.collect.registry.common.bean.Instance;
+import org.collect.registry.common.constant.RespConstant;
+import org.collect.registry.center.manager.ServerManager;
+import org.collect.registry.center.utils.WebUtil;
+import org.collect.registry.center.service.RegistryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +32,7 @@ public class RegistryServiceImpl implements RegistryService {
      */
     @Override
     public String registry(HttpServletRequest request) {
+        // TODO 接住异常，响应回服务端
         final Instance instance = parseInstance(request);
 
         if (!instance.getEnable()) {
@@ -64,9 +65,9 @@ public class RegistryServiceImpl implements RegistryService {
     }
 
     /**
-     * 获取服务实例
+     * 解析服务实例信息
      *
-     * @param request 请求对线
+     * @param request 请求对象
      * @return 服务实例
      */
     private Instance parseInstance(HttpServletRequest request) {

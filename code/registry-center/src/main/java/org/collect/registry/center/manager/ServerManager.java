@@ -1,4 +1,4 @@
-package org.collect.registry.manager;
+package org.collect.registry.center.manager;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
@@ -6,7 +6,7 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
-import org.collect.registry.bean.Instance;
+import org.collect.registry.common.bean.Instance;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -35,8 +35,8 @@ public class ServerManager {
      */
     private static final String HEALTHY_PATH = "/registry/healthy";
 
-    /**
-     * 服务名：服务实例集合
+    /**Ø
+     * 服务信息 服务名：服务实例集合
      */
     private static final Map<String, CopyOnWriteArrayList<Instance>> SERVERS = MapUtil.newConcurrentHashMap();
 

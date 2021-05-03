@@ -18,6 +18,7 @@
         <module>registry-center</module>
         <module>server-demo1</module>
         <module>registry-dependency</module>
+        <module>registry-common</module>
     </modules>
 
     <dependencyManagement>

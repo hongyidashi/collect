@@ -1,4 +1,4 @@
-package org.collect.dependency.registry;
+package org.collect.registry.dependency.registry;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package org.collect.registry.contoller;
+package org.collect.registry.center.contoller;
 
-import org.collect.registry.bean.Instance;
-import org.collect.registry.service.RegistryService;
+import org.collect.registry.center.service.RegistryService;
+import org.collect.registry.common.bean.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

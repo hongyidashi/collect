@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.collect.registry.common.aop.ResponseControllerAdvice,\
+  org.collect.registry.common.exception.CustomizeExceptionController
