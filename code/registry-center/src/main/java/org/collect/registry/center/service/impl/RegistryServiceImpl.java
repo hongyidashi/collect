@@ -1,16 +1,16 @@
 package org.collect.registry.center.service.impl;
 
+import org.collect.registry.center.manager.ServerManager;
+import org.collect.registry.center.service.RegistryService;
+import org.collect.registry.center.utils.WebUtil;
 import org.collect.registry.common.bean.Instance;
 import org.collect.registry.common.constant.RespConstant;
-import org.collect.registry.center.manager.ServerManager;
-import org.collect.registry.center.utils.WebUtil;
-import org.collect.registry.center.service.RegistryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 描述: 注册业务实现类
@@ -60,7 +60,7 @@ public class RegistryServiceImpl implements RegistryService {
      * @return 服务信息
      */
     @Override
-    public Map<String, List<Instance>> serverInfo(String serverName) {
+    public Map<String, Set<Instance>> serverInfo(String serverName) {
         return serverManager.getServerInfo(serverName);
     }
 

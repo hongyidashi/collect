@@ -19,6 +19,7 @@
         <module>server-demo1</module>
         <module>registry-dependency</module>
         <module>registry-common</module>
+        <module>server-demo2</module>
     </modules>
 
     <dependencyManagement>

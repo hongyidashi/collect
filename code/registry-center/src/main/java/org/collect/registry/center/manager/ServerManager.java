@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * 描述: 服务管理器
@@ -38,7 +38,7 @@ public class ServerManager {
     /**Ø
      * 服务信息 服务名：服务实例集合
      */
-    private static final Map<String, CopyOnWriteArrayList<Instance>> SERVERS = MapUtil.newConcurrentHashMap();
+    private static final Map<String, CopyOnWriteArraySet<Instance>> SERVERS = MapUtil.newConcurrentHashMap();
 
     /**
      * 获取服务信息，若服务名为空，则获取所有
@@ -46,7 +46,7 @@ public class ServerManager {
      * @param serverName 服务名
      * @return 服务信息
      */
-    public Map<String, List<Instance>> getServerInfo(String serverName) {
+    public Map<String, Set<Instance>> getServerInfo(String serverName) {
         if (CollUtil.isEmpty(SERVERS)) {
             return Collections.emptyMap();
         }
@@ -56,7 +56,7 @@ public class ServerManager {
         if (!SERVERS.containsKey(serverName)) {
             return Collections.emptyMap();
         }
-        HashMap<String, List<Instance>> resultMap = Maps.newHashMap();
+        HashMap<String, Set<Instance>> resultMap = Maps.newHashMap();
         resultMap.put(serverName, SERVERS.get(serverName));
         return resultMap;
     }
@@ -68,8 +68,8 @@ public class ServerManager {
      * @return 是否注册成功
      */
     public Boolean registryInstance(Instance instance) {
-        CopyOnWriteArrayList<Instance> instances = SERVERS
-                .computeIfAbsent(instance.getServerName(), name -> new CopyOnWriteArrayList<>());
+        CopyOnWriteArraySet<Instance> instances = SERVERS
+                .computeIfAbsent(instance.getServerName(), name -> new CopyOnWriteArraySet<>());
         instances.add(instance);
         return Boolean.TRUE;
     }

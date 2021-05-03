@@ -3,6 +3,7 @@ package org.collect.registry.common.bean;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 描述: 服务实例
@@ -68,4 +69,20 @@ public class Instance implements Serializable {
      */
     private Boolean enable;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Instance instance = (Instance) o;
+        return Objects.equals(ip, instance.ip) && Objects.equals(port, instance.port) && Objects.equals(serverName, instance.serverName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ip, port, serverName);
+    }
 }

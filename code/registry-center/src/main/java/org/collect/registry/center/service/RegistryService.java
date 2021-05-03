@@ -3,8 +3,8 @@ package org.collect.registry.center.service;
 import org.collect.registry.common.bean.Instance;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 描述:
@@ -28,5 +28,5 @@ public interface RegistryService {
      * @param serverName 服务名
      * @return 服务信息
      */
-    Map<String, List<Instance>> serverInfo(String serverName);
+    Map<String, Set<Instance>> serverInfo(String serverName);
 }

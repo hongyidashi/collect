@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 描述: 注册接口
@@ -41,7 +41,7 @@ public class RegistryController {
      * @return 服务信息
      */
     @GetMapping("serverInfo")
-    public Map<String, List<Instance>> serverInfo(@RequestParam(value = "serverName",required = false) String serverName) {
+    public Map<String, Set<Instance>> serverInfo(@RequestParam(value = "serverName",required = false) String serverName) {
         return registryService.serverInfo(serverName);
     }
 }

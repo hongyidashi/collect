@@ -10,8 +10,8 @@ import org.collect.registry.common.bean.Instance;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 描述: 注册信息管理器
@@ -29,7 +29,7 @@ public class RegistryManager {
     /**
      * 注册信息 服务名：实例集合
      */
-    private Map<String, List<Instance>> registryInfo = Maps.newConcurrentMap();
+    private Map<String, Set<Instance>> registryInfo = Maps.newConcurrentMap();
 
     /**
      * 拉取服务信息
@@ -37,12 +37,11 @@ public class RegistryManager {
     public void pullServerInfo() {
         String addr = getPullServerAddr();
         String result = HttpUtil.get(addr);
-        ResponseVo<Map<String, List<Instance>>> vo = JSONUtil.toBean(result, ResponseVo.class);
+        ResponseVo<Map<String, Set<Instance>>> vo = JSONUtil.toBean(result, ResponseVo.class);
         if (vo.isSuccess()) {
             registryInfo = vo.getData();
             return;
         }
-        // TODO 失败重试 算了，懒惰
         log.error("服务拉取失败：{}", vo.getMsg());
     }
 
@@ -58,7 +57,6 @@ public class RegistryManager {
         String result = HttpUtil.get(addr, param);
         ResponseVo vo = JSONUtil.toBean(result, ResponseVo.class);
         if (!vo.isSuccess()) {
-            // TODO 否则重试 算了 懒惰
             log.error("服务注册失败：{}", vo.getMsg());
         }
         return vo;
