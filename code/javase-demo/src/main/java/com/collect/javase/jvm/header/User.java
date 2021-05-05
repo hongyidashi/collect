@@ -1,4 +1,4 @@
-package com.collect.javase.jvm;
+package com.collect.javase.jvm.header;
 
 /**
  * 描述: 空对象
