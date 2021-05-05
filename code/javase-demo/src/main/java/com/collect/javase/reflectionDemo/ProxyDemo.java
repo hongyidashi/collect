@@ -5,7 +5,7 @@ import java.lang.reflect.Proxy;
 /**
  * @author： peng
  * @date：2021/2/3 15:02
- * @description: 反射的应用，动态代理
+ * @description: 反射的应用，动态代理 你这些个包 命名劳资不想吐槽了
  */
 
 interface Animal {

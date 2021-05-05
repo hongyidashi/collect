@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author： peng
  * @date：2021/1/25 23:07
- * @description:
+ * @description: 你这些个包 命名劳资不想吐槽了
  */
 class A {
     volatile int val = 0;

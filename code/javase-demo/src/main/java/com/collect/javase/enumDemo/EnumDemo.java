@@ -3,7 +3,7 @@ package com.collect.javase.enumDemo;
 /**
  * @author： peng
  * @date：2021/1/18 12:38
- * @description: java枚举类测试demo
+ * @description: java枚举类测试demo 你这些个包 命名劳资不想吐槽了
  */
 public class EnumDemo {
     public static void main(String[] args) {

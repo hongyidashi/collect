@@ -20,7 +20,9 @@
   - GC
     - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  最后更新于2021-1-29  
     - [TLAB](note/jvm/gc/TLAB.md)  最后更新于2021-2-5  
-  - [JVM深入](note/jvm/jvm-deepen/JVM深入.md)  最后更新于2021-4-22  
+  - JVM深入  
+    - [JVM深入-基础概念](note/jvm/jvm-deepen/JVM基础概念深入.md)  最后更新于2021-4-22  
+    - [JVM深入-Java对象内存布局](note/jvm/jvm-deepen/JVM深入-Java对象内存布局.md)  最后更新于2021-5-5  
 
 + 多线程和并发
   - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  最后更新于2021-1-2  
