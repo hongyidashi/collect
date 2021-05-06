@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  **/
 public class HeaderDemo {
     public static void main(String[] args) throws InterruptedException {
-        demo0();
+        demo3();
     }
 
     /**
@@ -31,6 +31,8 @@ public class HeaderDemo {
 
     /**
      * 演示升级为重量级锁
+     *
+     * -XX:BiasedLockingStartupDelay=0
      */
     private static void demo4() {
         User user = new User();
@@ -59,6 +61,8 @@ public class HeaderDemo {
     /**
      * 演示偏向锁失效被打破
      *
+     * -XX:BiasedLockingStartupDelay=0
+     *
      * @throws InterruptedException
      */
     private static void demo3() throws InterruptedException {
@@ -79,6 +83,8 @@ public class HeaderDemo {
 
     /**
      * 演示一个线程获取偏向锁
+     *
+     * -XX:BiasedLockingStartupDelay=0
      */
     private static void demo2() {
         User user = new User();
