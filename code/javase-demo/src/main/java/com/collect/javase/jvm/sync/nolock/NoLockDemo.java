@@ -1,5 +1,6 @@
 package com.collect.javase.jvm.sync.nolock;
 
+import com.collect.javase.jvm.sync.User;
 import org.openjdk.jol.info.ClassLayout;
 
 import java.util.concurrent.TimeUnit;

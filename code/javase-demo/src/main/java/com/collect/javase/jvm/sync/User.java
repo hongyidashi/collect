@@ -1,4 +1,4 @@
-package com.collect.javase.jvm.sync.nolock;
+package com.collect.javase.jvm.sync;
 
 /**
  * 描述:
