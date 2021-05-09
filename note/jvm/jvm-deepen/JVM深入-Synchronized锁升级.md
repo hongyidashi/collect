@@ -413,7 +413,7 @@ private static void getYesLock() {
 
 ![png](images/轻量级锁升级为重量级锁运行结果1.png)
 
-![png](/Users/panhongtong/work/IDEA-workspace/collect/note/jvm/jvm-deepen/images/轻量级锁升级为重量级锁运行结果2.png)
+![png](images/轻量级锁升级为重量级锁运行结果2.png)
 
 在一个线程持有轻量级锁的情况下，其他线程去尝试获取锁，导致资源竞争，使轻量级锁升级到重量级锁。在两个线程都运行结束后，可以看到对象的状态恢复为了无锁不可偏向状态，在下一次线程尝试获取锁时，会直接从轻量级锁状态开始。
 
