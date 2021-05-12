@@ -32,7 +32,7 @@
   - [66个并发多线程基础知识](note/multithreading/interview/66个并发多线程基础知识.md)  最后更新于2021-5-9  
 
 + 代码优化
- - [代码优化细节](note/optimization/代码优化细节.md)  最后更新于2021-5-12
+  - [代码优化细节](note/optimization/代码优化细节.md)  最后更新于2021-5-12
 
 ### 框架
 + Spring
@@ -49,6 +49,9 @@
     - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25
   - 远程调用
     - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19  
+  - 服务发现
+    - [Feign](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13  
+  
 
 + 中间件
   - 消息队列
