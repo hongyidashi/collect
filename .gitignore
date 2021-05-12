@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/code/registry-dependency/gradle/
+/code/registry-dependency/gradlew
+/code/registry-dependency/gradlew.bat
