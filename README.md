@@ -51,7 +51,7 @@
   - 远程调用
     - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19  
   - 服务发现
-    - [Feign](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13  
+    - [浅谈Kubernetes中的服务发现](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13  
   
 
 + 中间件
