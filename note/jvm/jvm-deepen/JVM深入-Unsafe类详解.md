@@ -1,5 +1,25 @@
 # JVM深入-Unsafe类详解
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、前言](#%E9%9B%B6%E5%89%8D%E8%A8%80)
+- [一、Unsafe 基础](#%E4%B8%80unsafe-%E5%9F%BA%E7%A1%80)
+    - [1. 创建实例](#1-%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B)
+    - [2. native方法](#2-native%E6%96%B9%E6%B3%95)
+- [二、Unsafe 应用](#%E4%BA%8Cunsafe-%E5%BA%94%E7%94%A8)
+    - [1. 内存操作](#1-%E5%86%85%E5%AD%98%E6%93%8D%E4%BD%9C)
+    - [2. 内存屏障](#2-%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C)
+    - [3. 对象操作](#3-%E5%AF%B9%E8%B1%A1%E6%93%8D%E4%BD%9C)
+    - [4. 数组操作](#4-%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C)
+    - [5. CAS操作](#5-cas%E6%93%8D%E4%BD%9C)
+    - [6. 线程调度](#6-%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6)
+    - [7. Class操作](#7-class%E6%93%8D%E4%BD%9C)
+    - [8. 系统信息](#8-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF)
+- [三、总结](#%E4%B8%89%E6%80%BB%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、前言
