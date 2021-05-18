@@ -25,7 +25,8 @@
     - [VM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15  
     - [JVM深入-Java对象内存布局](note/jvm/jvm-deepen/JVM深入-Java对象内存布局.md)  最后更新于2021-5-5  
     - [JVM深入-Synchronized锁升级](note/jvm/jvm-deepen/JVM深入-Synchronized锁升级.md)  最后更新于2021-5-9  
-    - [JVM深入-Unsafe类详解](note/jvm/jvm-deepen/JVM深入-Unsafe类详解.md)  最后更新于2021-5-17  
+    - [JVM深入-Unsafe类详解](note/jvm/jvm-deepen/JVM深入-Unsafe类详解.md)  最后更新于2021-5-18  
+    - [JVM深入-JNI到底是个啥](note/jvm/jvm-deepen/JVM深入-JNI到底是个啥.md)  最后更新于2021-5-18  
 
 + 多线程和并发
   - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  最后更新于2021-1-2  
