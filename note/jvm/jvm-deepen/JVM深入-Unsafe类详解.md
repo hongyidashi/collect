@@ -520,3 +520,64 @@ Hydra
 
 在Unsafe的对象操作中，我们学习了通过`objectFieldOffset`方法获取对象属性偏移量并基于它对变量的值进行存取，但是它不适用于类中的静态属性，这时候就需要使用`staticFieldOffset`方法。在上面的代码中，只有在获取`Field`对象的过程中依赖到了`Class`，而获取静态变量的属性时不再依赖于`Class`。
 
+在上面的代码中首先创建一个`User`对象，这是因为如果一个类没有被实例化，那么它的静态属性也不会被初始化，最后获取的字段属性将是`null`。所以在获取静态属性前，需要调用`shouldBeInitialized`方法，判断在获取前是否需要初始化这个类。如果删除创建User对象的语句，运行结果会变为：
+
+```
+true
+null
+```
+
+2. 使用`defineClass`方法允许程序在运行时动态地创建一个类，方法定义如下：
+
+```java
+public native Class<?> defineClass(String name, byte[] b, int off, int len,
+                                   ClassLoader loader,ProtectionDomain protectionDomain);
+```
+
+在实际使用过程中，可以只传入字节数组、起始字节的下标以及读取的字节长度，默认情况下，类加载器（`ClassLoader`）和保护域（`ProtectionDomain`）来源于调用此方法的实例。下面的例子中实现了反编译生成后的class文件的功能：
+
+```java
+private static void defineTest() {
+    String fileName="F:\\workspace\\unsafe-test\\target\\classes\\com\\cn\\model\\User.class";
+    File file = new File(fileName);
+    try(FileInputStream fis = new FileInputStream(file)) {
+        byte[] content=new byte[(int)file.length()];
+        fis.read(content);
+        Class clazz = unsafe.defineClass(null, content, 0, content.length, null, null);
+        Object o = clazz.newInstance();
+        Object age = clazz.getMethod("getAge").invoke(o, null);
+        System.out.println(age);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+```
+
+在上面的代码中，首先读取了一个`class`文件并通过文件流将它转化为字节数组，之后使用`defineClass`方法动态的创建了一个类，并在后续完成了它的实例化工作，流程如下图所示，并且通过这种方式创建的类，会跳过JVM的所有安全检查：
+
+![png](images/unsafe-defineClass读取一个类流程图.png)
+
+除了`defineClass`方法外，Unsafe还提供了一个`defineAnonymousClass`方法：
+
+```java
+public native Class<?> defineAnonymousClass(Class<?> hostClass, byte[] data, Object[] cpPatches);
+```
+
+使用该方法可以用来动态的创建一个匿名类，在`Lambda`表达式中就是使用ASM动态生成字节码，然后利用该方法定义实现相应的函数式接口的匿名类。在jdk15发布的新特性中，在隐藏类（`Hidden classes`）一条中，指出将在未来的版本中弃用Unsafe的`defineAnonymousClass`方法。
+
+### 8. 系统信息
+
+Unsafe中提供的`addressSize`和`pageSize`方法用于获取系统信息，调用`addressSize`方法会返回系统指针的大小，如果在64位系统下默认会返回8，而32位系统则会返回4。调用pageSize方法会返回内存页的大小，值为2的整数幂。使用下面的代码可以直接进行打印：
+
+```
+private void systemTest() {
+    System.out.println(unsafe.addressSize());
+    System.out.println(unsafe.pageSize());
+}
+```
+
+这两个方法的应用场景比较少，在`java.nio.Bits`类中，在使用`pageCount`计算所需的内存页的数量时，调用了`pageSize`方法获取内存页的大小。另外，在使用`copySwapMemory`方法拷贝内存时，调用了`addressSize`方法，检测32位系统的情况。
+
+## 三、总结
+
+在本文中，我们首先介绍了Unsafe的基本概念、工作原理，并在此基础上，对它的API进行了说明与实践。相信大家通过这一过程，能够发现Unsafe在某些场景下，确实能够为我们提供编程中的便利。但是回到开头的话题，在使用这些便利时，确实存在着一些安全上的隐患，在我看来，一项技术具有不安全因素并不可怕，可怕的是它在使用过程中被滥用。尽管之前有传言说会在java9中移除Unsafe类，不过它还是照样已经存活到了jdk16，按照存在即合理的逻辑，只要使用得当，它还是能给我们带来不少的帮助，因此最后还是建议大家，在使用Unsafe的过程中一定要做到使用谨慎使用、避免滥用。
