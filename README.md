@@ -22,7 +22,7 @@
     - [TLAB](note/jvm/gc/TLAB.md)  最后更新于2021-2-5  
   - JVM深入  
     - [JVM深入-基础概念](note/jvm/jvm-deepen/JVM基础概念深入.md)  最后更新于2021-4-22  
-    - [VM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15  
+    - [JVM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15  
     - [JVM深入-Java对象内存布局](note/jvm/jvm-deepen/JVM深入-Java对象内存布局.md)  最后更新于2021-5-5  
     - [JVM深入-Synchronized锁升级](note/jvm/jvm-deepen/JVM深入-Synchronized锁升级.md)  最后更新于2021-5-9  
     - [JVM深入-Unsafe类详解](note/jvm/jvm-deepen/JVM深入-Unsafe类详解.md)  最后更新于2021-5-18  
