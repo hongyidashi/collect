@@ -367,3 +367,349 @@ public class GlobalTransactionalInterceptor implements ConfigurationChangeListen
 ```
 
 可以看到，这里是开始处理全局事务的地方。这里我们先不深究，接着往下看。
+
+### 2. 数据源代理
+
+项目中除了上面创建方法的代理，还要创建数据源的代理；然后把这个代理对象设置到`SqlSessionFactory`：
+
+```javav
+@Bean
+public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+    return new DataSourceProxy(dataSource);
+}
+
+@Bean
+public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+    SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+    sqlSessionFactoryBean.setDataSource(dataSourceProxy);
+    sqlSessionFactoryBean.setTransactionFactory(new JdbcTransactionFactory());
+    return sqlSessionFactoryBean.getObject();
+}
+```
+
+这里的重点是创建了`DataSourceProxy`，并把它设置到`Mybatis`中的`SqlSessionFactory`。
+
+我们知道，在`Mybatis`执行方法的时候，最终要创建`PreparedStatement`对象，然后执行`ps.execute()`返回SQL结果。
+
+这里有两点我们需要注意：
+
+- PreparedStatement的创建
+
+`PreparedStatement`对象是从`Connection`对象创建而来的，也许我们都写过：
+
+```java
+PreparedStatement pstmt = conn.prepareStatement(insert ........)
+```
+
+- Connection的创建
+
+`Connection`又是从哪里来的呢？这个我们不必迟疑，当然从数据源中才能拿到一个连接。
+
+不过我们已经把数据源`DataSource`对象已经被替换成了`Seata`中的`DataSourceProxy`对象。
+
+所以，`Connection`和`PreparedStatement`在创建的时候，都被搞成了`Seata`中的代理对象。
+
+不信你看嘛：
+
+```java
+public class DataSourceProxy extends AbstractDataSourceProxy implements Resource {
+    public ConnectionProxy getConnection() throws SQLException {
+    	Connection targetConnection = targetDataSource.getConnection();
+    	return new ConnectionProxy(this, targetConnection);
+    }
+}
+```
+
+然后调用`AbstractDataSourceProxy`来创建`PreparedStatement`：
+
+```java
+public abstract class AbstractConnectionProxy implements Connection {
+    @Override
+    public PreparedStatement prepareStatement(String sql) throws SQLException {
+        String dbType = getDbType();
+        // support oracle 10.2+
+        PreparedStatement targetPreparedStatement = null;
+        if (BranchType.AT == RootContext.getBranchType()) {
+            List<SQLRecognizer> sqlRecognizers = SQLVisitorFactory.get(sql, dbType);
+            if (sqlRecognizers != null && sqlRecognizers.size() == 1) {
+                SQLRecognizer sqlRecognizer = sqlRecognizers.get(0);
+                if (sqlRecognizer != null && sqlRecognizer.getSQLType() == SQLType.INSERT) {
+                    TableMeta tableMeta = TableMetaCacheFactory.getTableMetaCache(dbType).getTableMeta(getTargetConnection(),
+                            sqlRecognizer.getTableName(), getDataSourceProxy().getResourceId());
+                    String[] pkNameArray = new String[tableMeta.getPrimaryKeyOnlyName().size()];
+                    tableMeta.getPrimaryKeyOnlyName().toArray(pkNameArray);
+                    targetPreparedStatement = getTargetConnection().prepareStatement(sql,pkNameArray);
+                }
+            }
+        }
+        if (targetPreparedStatement == null) {
+            targetPreparedStatement = getTargetConnection().prepareStatement(sql);
+        }
+        return new PreparedStatementProxy(this, targetPreparedStatement, sql);
+    }
+}
+```
+
+看到这里，我们应该明白一件事：
+
+在执行`ps.execute()`的时候，则会调用到`PreparedStatementProxy.execute()`。
+
+理清了配置文件后面的逻辑，也许就掌握了它的脉络，再看代码的时候，可以知道从哪里下手。
+
+## 四、方法的执行
+
+上面已经说到，`ServiceImpl`已经是一个代理类，所以我们直接看`GlobalTransactionalInterceptor.invoke()`。
+
+它会调用到`TransactionalTemplate.execute()`，`TransactionalTemplate`是业务逻辑和全局事务的模板：
+
+```java
+public Object execute(TransactionalExecutor business) throws Throwable {
+    // 1. Get transactionInfo 获取事务信息，比如超时时间、事务名称
+    TransactionInfo txInfo = business.getTransactionInfo();
+    if (txInfo == null) {
+      throw new ShouldNeverHappenException("transactionInfo does not exist");
+    }
+    // 1.1 Get current transaction, if not null, the tx role is 'GlobalTransactionRole.Participant'.
+    // 1.1 获取当前全局事务，如果为空，则当前事务的角色是参与者
+    GlobalTransaction tx = GlobalTransactionContext.getCurrent();
+
+    // 1.2 Handle the transaction propagation. 获取事务的传播特性
+    Propagation propagation = txInfo.getPropagation();
+    SuspendedResourcesHolder suspendedResourcesHolder = null;
+    try {
+      switch (propagation) {
+        case NOT_SUPPORTED:
+          // If transaction is existing, suspend it.
+          if (existingTransaction(tx)) {
+            suspendedResourcesHolder = tx.suspend();
+          }
+          // Execute without transaction and return.
+          return business.execute();
+        case REQUIRES_NEW:
+          // If transaction is existing, suspend it, and then begin new transaction.
+          if (existingTransaction(tx)) {
+            suspendedResourcesHolder = tx.suspend();
+            tx = GlobalTransactionContext.createNew();
+          }
+          // Continue and execute with new transaction
+          break;
+        case SUPPORTS:
+          // If transaction is not existing, execute without transaction.
+          if (notExistingTransaction(tx)) {
+            return business.execute();
+          }
+          // Continue and execute with new transaction
+          break;
+        case REQUIRED:
+          // If current transaction is existing, execute with current transaction,
+          // else continue and execute with new transaction.
+          break;
+        case NEVER:
+          // If transaction is existing, throw exception.
+          if (existingTransaction(tx)) {
+            throw new TransactionException(
+              String.format("Existing transaction found for transaction marked with propagation 'never', xid = %s"
+                            , tx.getXid()));
+          } else {
+            // Execute without transaction and return.
+            return business.execute();
+          }
+        case MANDATORY:
+          // If transaction is not existing, throw exception.
+          if (notExistingTransaction(tx)) {
+            throw new TransactionException("No existing transaction found for transaction marked with propagation 'mandatory'");
+          }
+          // Continue and execute with current transaction.
+          break;
+        default:
+          throw new TransactionException("Not Supported Propagation:" + propagation);
+      }
+
+      // 1.3 If null, create new transaction with role 'GlobalTransactionRole.Launcher'.
+      // 如果 tx 为空，则创建一个新的全局事务
+      if (tx == null) {
+        tx = GlobalTransactionContext.createNew();
+      }
+
+      // set current tx config to holder
+      GlobalLockConfig previousConfig = replaceGlobalLockConfig(txInfo);
+
+      try {
+        // 2. If the tx role is 'GlobalTransactionRole.Launcher', send the request of beginTransaction to TC,
+        //    else do nothing. Of course, the hooks will still be triggered.
+        beginTransaction(txInfo, tx);
+
+        Object rs;
+        try {
+          // Do Your Business 执行业务
+          rs = business.execute();
+        } catch (Throwable ex) {
+          // 3. The needed business exception to rollback. 回滚
+          completeTransactionAfterThrowing(txInfo, tx, ex);
+          throw ex;
+        }
+
+        // 4. everything is fine, commit.
+        commitTransaction(tx);
+
+        return rs;
+      } finally {
+        //5. clear 清理资源
+        resumeGlobalLockConfig(previousConfig);
+        triggerAfterCompletion();
+        cleanUp();
+      }
+    } finally {
+      // If the transaction is suspended, resume it.
+      if (suspendedResourcesHolder != null) {
+        tx.resume(suspendedResourcesHolder);
+      }
+    }
+}
+```
+
+这里的代码很清晰，事务的流程也一目了然。
+
+1. 创建全局事务，并设置事务属性
+2. 开启一个事务
+3. 执行业务逻辑
+4. 如果发生异常，则回滚事务；否则提交事务
+5. 清理资源
+
+下面我们看看具体它是怎么做的：
+
+### 1. 开启事务
+
+从客户端的角度来看，开启事务就是告诉服务器说：我要开启一个全局事务了，请事务协调器TC先生分配一个全局事务ID给我。
+
+TC先生会根据应用名称、事务分组、事务名称等创建全局Session，并生成一个全局事务XID。
+
+然后客户端记录当前的事务状态为`Begin` ，并将XID绑定到当前线程。
+
+### 2. 执行业务逻辑
+
+开启事务之后，开始执行我们自己的业务逻辑。这就涉及到了数据库操作，上面我们说到`Seata`已经将`PreparedStatement`对象做了代理。所以在执行的时候将会调用到`PreparedStatementProxy.execute()`：
+
+```java
+public class PreparedStatementProxy extends AbstractPreparedStatementProxy implements PreparedStatement, ParametersHolder {
+    @Override
+    public boolean execute() throws SQLException {
+        return ExecuteTemplate.execute(this, (statement, args) -> statement.execute());
+    }
+}
+```
+
+在这里它会先根据SQL的类型生成不同的执行器。比如是一个`INSERT INTO`语句，那么就是`InsertExecutor`执行器。
+
+然后判断是不是自动提交的，执行相应方法。那么接着看`executeAutoCommitFalse()`：
+
+```java
+public abstract class AbstractDMLBaseExecutor{
+    protected T executeAutoCommitFalse(Object[] args) throws Exception {
+        if (!JdbcConstants.MYSQL.equalsIgnoreCase(getDbType()) && isMultiPk()) {
+          throw new NotSupportYetException("multi pk only support mysql!");
+        }
+        TableRecords beforeImage = beforeImage();
+        T result = statementCallback.execute(statementProxy.getTargetStatement(), args);
+        TableRecords afterImage = afterImage(beforeImage);
+        prepareUndoLog(beforeImage, afterImage);
+        return result;
+    }
+}
+```
+
+这里就是AT模式一阶段所做的事，拦截业务SQL，在数据保存前将其保存为`beforeImage`；然后执行业务SQL，在数据更新后再将其保存为`afterImage`。这些操作全部在一个本地事务中完成，保证了一阶段操作的原子性。
+
+我们以`INSERT INTO`为例，看看它是怎么做的：
+
+- beforeImage
+
+由于是新增操作，所以在执行之前，这条记录还没有，beforeImage只是一个空表记录。
+
+- 业务SQL
+
+执行原有的SQL语句，比如`INSERT INTO ORDER(ID,NAME)VALUE(?,?)`
+
+- afterImage
+
+它要做的事就是，把刚刚添加的那条记录从数据库中再查出来：
+
+```java
+@Override
+protected TableRecords afterImage(TableRecords beforeImage) throws SQLException {
+    Map<String, List<Object>> pkValues = getPkValues();
+    TableRecords afterImage = buildTableRecords(pkValues);
+    if (afterImage == null) {
+      throw new SQLException("Failed to build after-image for insert");
+    }
+    return afterImage;
+}
+```
+
+然后将`beforeImage`和`afterImage`构建成`UndoLog`对象，保存到数据库。重要的是，这些操作都是在同一个本地事务中进行的。我们看它的sqlList也能看出来。
+
+最后，我们看一下`UndoLog`在数据库中的记录是长这样的：
+
+```
+{
+	"@class": "io.seata.rm.datasource.undo.BranchUndoLog",
+	"xid": "192.168.216.1:8091:2016493467",
+	"branchId": 2016493468,
+	"sqlUndoLogs": ["java.util.ArrayList", [{
+		"@class": "io.seata.rm.datasource.undo.SQLUndoLog",
+		"sqlType": "INSERT",
+		"tableName": "t_order",
+		"beforeImage": {
+			"@class": "io.seata.rm.datasource.sql.struct.TableRecords$EmptyTableRecords",
+			"tableName": "t_order",
+			"rows": ["java.util.ArrayList", []]
+		},
+		"afterImage": {
+			"@class": "io.seata.rm.datasource.sql.struct.TableRecords",
+			"tableName": "t_order",
+			"rows": ["java.util.ArrayList", [{
+				"@class": "io.seata.rm.datasource.sql.struct.Row",
+				"fields": ["java.util.ArrayList", [{
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "id",
+					"keyType": "PrimaryKey",
+					"type": 4,
+					"value": 116
+				}, {
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "order_no",
+					"keyType": "NULL",
+					"type": 12,
+					"value": "c233d8fb-5e71-4fc1-bc95-6f3d86312db6"
+				}, {
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "user_id",
+					"keyType": "NULL",
+					"type": 12,
+					"value": "200548"
+				}, {
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "commodity_code",
+					"keyType": "NULL",
+					"type": 12,
+					"value": "HYD5620"
+				}, {
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "count",
+					"keyType": "NULL",
+					"type": 4,
+					"value": 10
+				}, {
+					"@class": "io.seata.rm.datasource.sql.struct.Field",
+					"name": "amount",
+					"keyType": "NULL",
+					"type": 8,
+					"value": 5000.0
+				}]]
+			}]]
+		}
+	}]]
+}
+
+```
+
