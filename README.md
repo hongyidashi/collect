@@ -83,7 +83,8 @@
   - NIO系列
     - [TPC](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3  
   - netty  
-    - [Netty模型架构](note/io/netty/Netty模型架构.md)  最后更新于2021-5-26  
+    - [Netty模型架构](note/io/netty/Netty模型架构.md)  最后更新于2021-5-27  
+    - [Netty原理-Reactor模型](note/io/netty/Netty模型架构.md)  最后更新于2021-5-27  
 
 + HTTP
   - [知识点](note/http/知识点.md)  最后更新于2020-12-23  
