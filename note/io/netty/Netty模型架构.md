@@ -1,5 +1,39 @@
 # Netty模型架构
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [一、Netty简介](#%E4%B8%80netty%E7%AE%80%E4%BB%8B)
+  - [1. JDK原生NIO程序的问题](#1-jdk%E5%8E%9F%E7%94%9Fnio%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%97%AE%E9%A2%98)
+  - [2. Netty的特点](#2-netty%E7%9A%84%E7%89%B9%E7%82%B9)
+  - [3. Netty常见使用常见](#3-netty%E5%B8%B8%E8%A7%81%E4%BD%BF%E7%94%A8%E5%B8%B8%E8%A7%81)
+- [二、Netty高性能设计](#%E4%BA%8Cnetty%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%BE%E8%AE%A1)
+  - [1. I/O模型](#1-io%E6%A8%A1%E5%9E%8B)
+    - [1. 阻塞I/O](#1-%E9%98%BB%E5%A1%9Eio)
+    - [2. I/O复用模型](#2-io%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B)
+    - [3. 基于buffer](#3-%E5%9F%BA%E4%BA%8Ebuffer)
+  - [2. 线程模型](#2-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+    - [1. 事件驱动模型](#1-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9E%8B)
+    - [2. Reactor线程模型](#2-reactor%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+    - [3. Netty线程模型](#3-netty%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+    - [4. 异步处理](#4-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86)
+- [三、Netty架构设计](#%E4%B8%89netty%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1)
+  - [1. 功能特性](#1-%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7)
+  - [2. 模块组件](#2-%E6%A8%A1%E5%9D%97%E7%BB%84%E4%BB%B6)
+    - [1. Bootstrap、ServerBootstrap](#1-bootstrapserverbootstrap)
+    - [2. Future、ChannelFuture](#2-futurechannelfuture)
+    - [3. Channel](#3-channel)
+    - [4. Selector](#4-selector)
+    - [5. NioEventLoop](#5-nioeventloop)
+    - [6. NioEventLoopGroup](#6-nioeventloopgroup)
+    - [7. ChannelHandler](#7-channelhandler)
+    - [8. ChannelHandlerContext](#8-channelhandlercontext)
+    - [9. ChannelPipline](#9-channelpipline)
+  - [3. 工作原理架构](#3-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%9E%B6%E6%9E%84)
+- [四、总结](#%E5%9B%9B%E6%80%BB%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 一、Netty简介
@@ -184,4 +218,243 @@ serverBootstrap.bind(port).addListener(future -> {
 ```
 
 相比传统阻塞I/O，执行I/O操作后线程会被阻塞住, 直到操作完成；异步处理的好处是不会造成线程阻塞，线程在I/O操作期间可以执行别的程序，在高并发情形下会更稳定和更高的吞吐量。
+
+## 三、Netty架构设计
+
+前面介绍完Netty相关一些理论介绍，下面从功能特性、模块组件、运作过程来介绍Netty的架构设计
+
+### 1. 功能特性
+
+![png](images/netty功能特性图.png)
+
+- 传输服务：支持BIO和NIO
+
+- 容器集成 支持OSGI、JBossMC、Spring、Guice容器
+
+- 协议支持 HTTP、Protobuf、二进制、文本、WebSocket等一系列常见协议都支持。 还支持通过实行编码解码逻辑来实现自定义协议
+
+- Core核心：可扩展事件模型、通用通信API、支持零拷贝的ByteBuf缓冲对象
+
+### 2. 模块组件
+
+#### 1. Bootstrap、ServerBootstrap
+
+Bootstrap意思是引导，一个Netty应用通常由一个Bootstrap开始，主要作用是配置整个Netty程序，串联各个组件，Netty中Bootstrap类是客户端程序的启动引导类，ServerBootstrap是服务端启动引导类。
+
+#### 2. Future、ChannelFuture
+
+正如前面介绍，在Netty中所有的IO操作都是异步的，不能立刻得知消息是否被正确处理，但是可以过一会等它执行完成或者直接注册一个监听，具体的实现就是通过Future和ChannelFutures，他们可以注册一个监听，当操作执行成功或失败时监听会自动触发注册的监听事件。
+
+#### 3. Channel
+
+Netty网络通信的组件，能够用于执行网络I/O操作。 Channel为用户提供：
+
+- 当前网络连接的通道的状态（例如是否打开？是否已连接？）
+- 网络连接的配置参数 （例如接收缓冲区大小）
+- 提供异步的网络I/O操作(如建立连接，读写，绑定端口)，异步调用意味着任何I/O调用都将立即返回，并且不保证在调用结束时所请求的I/O操作已完成。调用立即返回一个ChannelFuture实例，通过注册监听器到ChannelFuture上，可以I/O操作成功、失败或取消时回调通知调用方。
+- 支持关联I/O操作与对应的处理程序
+
+不同协议、不同的阻塞类型的连接都有不同的 Channel 类型与之对应，下面是一些常用的 Channel 类型
+
+- NioSocketChannel，异步的客户端 TCP Socket 连接
+- NioServerSocketChannel，异步的服务器端 TCP Socket 连接
+- NioDatagramChannel，异步的 UDP 连接
+- NioSctpChannel，异步的客户端 Sctp 连接
+- NioSctpServerChannel，异步的 Sctp 服务器端连接 
+
+这些通道涵盖了 UDP 和 TCP网络 IO以及文件 IO.
+
+#### 4. Selector
+
+Netty基于Selector对象实现I/O多路复用，通过 Selector, 一个线程可以监听多个连接的Channel事件, 当向一个Selector中注册Channel 后，Selector 内部的机制就可以自动不断地查询(select) 这些注册的Channel是否有已就绪的I/O事件(例如可读, 可写, 网络连接完成等)，这样程序就可以很简单地使用一个线程高效地管理多个 Channel 。
+
+#### 5. NioEventLoop
+
+NioEventLoop中维护了一个线程和任务队列，支持异步提交执行任务，线程启动时会调用NioEventLoop的run方法，执行I/O任务和非I/O任务：
+
+- I/O任务 即selectionKey中ready的事件，如accept、connect、read、write等，由processSelectedKeys方法触发。
+- 非IO任务 添加到taskQueue中的任务，如register0、bind0等任务，由runAllTasks方法触发。
+
+两种任务的执行时间比由变量ioRatio控制，默认为50，则表示允许非IO任务执行的时间与IO任务的执行时间相等。
+
+#### 6. NioEventLoopGroup
+
+NioEventLoopGroup，主要管理eventLoop的生命周期，可以理解为一个线程池，内部维护了一组线程，每个线程(NioEventLoop)负责处理多个Channel上的事件，而一个Channel只对应于一个线程。
+
+#### 7. ChannelHandler
+
+ChannelHandler是一个接口，处理I/O事件或拦截I/O操作，并将其转发到其ChannelPipeline(业务处理链)中的下一个处理程序。
+
+ChannelHandler本身并没有提供很多方法，因为这个接口有许多的方法需要实现，方便使用期间，可以继承它的子类：
+
+- ChannelInboundHandler用于处理入站I/O事件
+- ChannelOutboundHandler用于处理出站I/O操作
+
+或者使用以下适配器类：
+
+- ChannelInboundHandlerAdapter用于处理入站I/O事件
+- ChannelOutboundHandlerAdapter用于处理出站I/O操作
+- ChannelDuplexHandler用于处理入站和出站事件
+
+#### 8. ChannelHandlerContext
+
+保存Channel相关的所有上下文信息，同时关联一个ChannelHandler对象
+
+#### 9. ChannelPipline
+
+保存ChannelHandler的List，用于处理或拦截Channel的入站事件和出站操作。 ChannelPipeline实现了一种高级形式的拦截过滤器模式，使用户可以完全控制事件的处理方式，以及Channel中各个的ChannelHandler如何相互交互。
+
+下图引用Netty的Javadoc4.1中ChannelPipline的说明，描述了ChannelPipeline中ChannelHandler通常如何处理I/O事件。 I/O事件由ChannelInboundHandler或ChannelOutboundHandler处理，并通过调用ChannelHandlerContext中定义的事件传播方法（例如ChannelHandlerContext.fireChannelRead（Object）和ChannelOutboundInvoker.write（Object））转发到其最近的处理程序。
+
+```
+                                                 I/O Request
+                                            via Channel or
+                                        ChannelHandlerContext
+                                                      |
+  +---------------------------------------------------+---------------+
+  |                           ChannelPipeline         |               |
+  |                                                  \|/              |
+  |    +---------------------+            +-----------+----------+    |
+  |    | Inbound Handler  N  |            | Outbound Handler  1  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  |               |                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler N-1 |            | Outbound Handler  2  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  .               |
+  |               .                                   .               |
+  | ChannelHandlerContext.fireIN_EVT() ChannelHandlerContext.OUT_EVT()|
+  |        [ method call]                       [method call]         |
+  |               .                                   .               |
+  |               .                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler  2  |            | Outbound Handler M-1 |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  |               |                                  \|/              |
+  |    +----------+----------+            +-----------+----------+    |
+  |    | Inbound Handler  1  |            | Outbound Handler  M  |    |
+  |    +----------+----------+            +-----------+----------+    |
+  |              /|\                                  |               |
+  +---------------+-----------------------------------+---------------+
+                  |                                  \|/
+  +---------------+-----------------------------------+---------------+
+  |               |                                   |               |
+  |       [ Socket.read() ]                    [ Socket.write() ]     |
+  |                                                                   |
+  |  Netty Internal I/O Threads (Transport Implementation)            |
+  +-------------------------------------------------------------------+
+
+```
+
+入站事件由自下而上方向的入站处理程序处理，如图左侧所示。 入站Handler处理程序通常处理由图底部的I/O线程生成的入站数据。 通常通过实际输入操作（例如SocketChannel.read（ByteBuffer））从远程读取入站数据。
+
+出站事件由上下方向处理，如图右侧所示。 出站Handler处理程序通常会生成或转换出站传输，例如write请求。 I/O线程通常执行实际的输出操作，例如SocketChannel.write（ByteBuffer）。
+
+在 Netty 中每个 Channel 都有且仅有一个 ChannelPipeline 与之对应, 它们的组成关系如下:
+
+![png](images/Channel和ChannelPipeline关系图.png)
+
+一个 Channel 包含了一个 ChannelPipeline, 而 ChannelPipeline 中又维护了一个由 ChannelHandlerContext 组成的双向链表, 并且每个 ChannelHandlerContext 中又关联着一个 ChannelHandler。入站事件和出站事件在一个双向链表中，入站事件会从链表head往后传递到最后一个入站的handler，出站事件会从链表tail往前传递到最前一个出站的handler，两种类型的handler互不干扰。
+
+### 3. 工作原理架构
+
+初始化并启动Netty服务端过程如下：
+
+```java
+public static void main(String[] args) {
+    // 创建mainReactor
+    NioEventLoopGroup boosGroup = new NioEventLoopGroup();
+    // 创建工作线程组
+    NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+
+    final ServerBootstrap serverBootstrap = new ServerBootstrap();
+    serverBootstrap 
+      // 组装NioEventLoopGroup 
+      .group(boosGroup, workerGroup)
+      // 设置channel类型为NIO类型
+      .channel(NioServerSocketChannel.class)
+      // 设置连接配置参数
+      .option(ChannelOption.SO_BACKLOG, 1024)
+      .childOption(ChannelOption.SO_KEEPALIVE, true)
+      .childOption(ChannelOption.TCP_NODELAY, true)
+      // 配置入站、出站事件handler
+      .childHandler(new ChannelInitializer<NioSocketChannel>() {
+        @Override
+        protected void initChannel(NioSocketChannel ch) {
+          // 配置入站、出站事件channel
+          ch.pipeline().addLast(...);
+          ch.pipeline().addLast(...);
+        }
+      });
+
+    // 绑定端口
+    int port = 8080;
+    serverBootstrap.bind(port).addListener(future -> {
+      if (future.isSuccess()) {
+        System.out.println(new Date() + ": 端口[" + port + "]绑定成功!");
+      } else {
+        System.err.println("端口[" + port + "]绑定失败!");
+      }
+    });
+}
+```
+
+基本过程如下：
+
+1. 初始化创建2个NioEventLoopGroup，其中boosGroup用于Accetpt连接建立事件并分发请求， workerGroup用于处理I/O读写事件和业务逻辑
+2. 基于ServerBootstrap(服务端启动引导类)，配置EventLoopGroup、Channel类型，连接参数、配置入站、出站事件handler
+3. 绑定端口，开始工作
+
+结合上面的介绍的Netty Reactor模型，介绍服务端Netty的工作架构图：
+
+![png](images/Netty的工作架构示意图.png)
+
+server端包含1个Boss NioEventLoopGroup和1个Worker NioEventLoopGroup，NioEventLoopGroup相当于1个事件循环组，这个组里包含多个事件循环NioEventLoop，每个NioEventLoop包含1个selector和1个事件循环线程。
+
+每个Boss NioEventLoop循环执行的任务包含3步：
+
+1. 轮询accept事件
+
+2. 处理accept I/O事件，与Client建立连接，生成NioSocketChannel，并将NioSocketChannel注册到某个Worker NioEventLoop的Selector上
+3. 处理任务队列中的任务，runAllTasks。任务队列中的任务包括用户调用eventloop.execute或schedule执行的任务，或者其它线程提交到该eventloop的任务。
+
+每个Worker NioEventLoop循环执行的任务包含3步：
+
+1. 轮询read、write事件；
+2. 处理I/O事件，即read、write事件，在NioSocketChannel可读、可写事件发生时进行处理
+3. 处理任务队列中的任务，runAllTasks。
+
+其中任务队列中的task有3种典型使用场景：
+
+1. 用户程序自定义的普通任务
+
+```java
+ctx.channel().eventLoop().execute(new Runnable() {
+    @Override
+    public void run() {
+        //...
+    }
+});
+```
+
+2. 非当前reactor线程调用channel的各种方法 例如在推送系统的业务线程里面，根据用户的标识，找到对应的channel引用，然后调用write类方法向该用户推送消息，就会进入到这种场景。最终的write会提交到任务队列中后被异步消费。
+
+3. 用户自定义定时任务
+
+```java
+ctx.channel().eventLoop().schedule(new Runnable() {
+    @Override
+    public void run() {
+
+    }
+}, 60, TimeUnit.SECONDS);
+```
+
+## 四、总结
+
+现在稳定推荐使用的主流版本还是Netty4，Netty5 中使用了 ForkJoinPool，增加了代码的复杂度，但是对性能的改善却不明显，所以这个版本不推荐使用，官网也没有提供下载链接。
+
+Netty 入门门槛相对较高，其实是因为这方面的资料较少，并不是因为他有多难，大家其实都可以像搞透 Spring 一样搞透 Netty。在学习之前，建议先理解透整个框架原理结构，运行过程，可以少走很多弯路。
 
