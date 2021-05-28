@@ -87,6 +87,7 @@
     - [Netty基础-Reactor模型](note/io/netty/Netty基础-Reactor模型.md)  最后更新于2021-5-27  
     - [Netty基础-Netty线程模型](note/io/netty/Netty基础-Netty线程模型.md)  最后更新于2021-5-27  
     - [Netty基础-Netty核心api](note/io/netty/Netty基础-Netty核心api.md)  最后更新于2021-5-28  
+    - [Netty基础-Netty异步模型](note/io/netty/Netty基础-Netty异步模型.md)  最后更新于2021-5-28  
 
 + HTTP
   - [知识点](note/http/知识点.md)  最后更新于2020-12-23  
