@@ -20,6 +20,7 @@
   - GC
     - [G1垃圾收集器](note/jvm/gc/G1垃圾收集器.md)  最后更新于2021-1-29  
     - [TLAB](note/jvm/gc/TLAB.md)  最后更新于2021-2-5  
+    - [三色标记](note/jvm/gc/三色标记.md)  最后更新于2021-5-29  
   - JVM深入  
     - [JVM深入-基础概念](note/jvm/jvm-deepen/JVM基础概念深入.md)  最后更新于2021-4-22  
     - [JVM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15  
