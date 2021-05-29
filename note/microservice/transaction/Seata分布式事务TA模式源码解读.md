@@ -713,3 +713,19 @@ protected TableRecords afterImage(TableRecords beforeImage) throws SQLException 
 
 ```
 
+### 3. 提交
+
+如果执行业务没有异常，就进入二阶段提交。客户端向服务器发送Commit事件，同时将XID解绑。
+
+服务器端回复确认提交后，客户端将本地UndoLog数据清除。
+
+这里重要在`AsyncWorker.init()`方法，它会启动一个定时任务来执行`doBranchCommits`，来清除Log数据。
+
+### 4. 回滚
+
+如果发生异常，则进行二阶段回滚。
+
+先通过xid和branchId 找到UnDoLog这条记录，然后在解析里面的数据生成反向SQL，将刚才的执行结果给撤销。
+
+这块代码较长，大家自行参考`UndoLogManager.undo()`和`AbstractUndoExecutor.executeOn()`方法。
+
