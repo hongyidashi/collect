@@ -1,5 +1,23 @@
 # Seata分布式事务TA模式源码解读
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [一、原理](#%E4%B8%80%E5%8E%9F%E7%90%86)
+    - [1. 原理和设计](#1-%E5%8E%9F%E7%90%86%E5%92%8C%E8%AE%BE%E8%AE%A1)
+    - [2. AT模式](#2-at%E6%A8%A1%E5%BC%8F)
+- [二、服务端](#%E4%BA%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF)
+- [三、客户端配置](#%E4%B8%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE)
+    - [1. 事务扫描器](#1-%E4%BA%8B%E5%8A%A1%E6%89%AB%E6%8F%8F%E5%99%A8)
+    - [2. 数据源代理](#2-%E6%95%B0%E6%8D%AE%E6%BA%90%E4%BB%A3%E7%90%86)
+- [四、方法的执行](#%E5%9B%9B%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A7%E8%A1%8C)
+    - [1. 开启事务](#1-%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1)
+    - [2. 执行业务逻辑](#2-%E6%89%A7%E8%A1%8C%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
+    - [3. 提交](#3-%E6%8F%90%E4%BA%A4)
+    - [4. 回滚](#4-%E5%9B%9E%E6%BB%9A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 一、原理
