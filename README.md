@@ -101,6 +101,7 @@
   - [HTTP1.1](note/http/HTPP1.1.md)  最后更新于2021-4-3 
   - [HTTP2](note/http/HTTP2.md)  最后更新于2021-4-3  
   - [30张图解HTTP常见的面试题](note/http/30张图解HTTP常见的面试题.md)  最后更新于2021-5-29  
+  - [优化HTTP1.1](note/http/优化HTTP1.1.md)  最后更新于2021-6-2  
 
 + WebSocket
   - [知识点](note/websocket/知识点.md)  最后更新于2020-12-28  
