@@ -74,6 +74,7 @@
   - [问题合集](note/mysql/问题合集.md)  最后更新于2020-12-13  
   - [知识点](note/mysql/知识点.md)  最后更新于2021-2-3  
   - [面试题](note/mysql/面试题.md)  最后更新于2021-1-30  
+  - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1  
 
 + Redis
   - [知识点](note/redis/知识点.md)  最后更新于2020-12-15  
