@@ -126,6 +126,7 @@
   - [图解操作系统-IO多路复用](note/os/diagram/IO多路复用.md)  最后更新于2021-6-12  
   - [图解操作系统-Reactor和Proactor](note/os/diagram/Reactor和Proactor.md)  最后更新于2021-6-13  
   - [图解操作系统-Linux内核vsWindows内核](note/os/diagram/Linux内核vsWindows内核.md)  最后更新于2021-6-14  
+  - [图解操作系统-线程间共享资源](note/os/diagram/线程间共享资源.md)  最后更新于2021-6-15  
 
 ### 领域驱动设计-DDD
 + [DDD-面向对象思想](note/ddd/DDD-面向对象思想.md)  最后更新于2021-4-4  
