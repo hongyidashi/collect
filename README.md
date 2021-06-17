@@ -112,6 +112,7 @@
 + 图解计算机
   - [图解计算机-CPU执行程序过程](note/computer/diagram/CPU执行程序过程.md)  最后更新于2021-6-2  
   - [图解计算机-存储器的层次结构](note/computer/diagram/存储器的层次结构.md)  最后更新于2021-6-3  
+  - [图解计算机-CPU缓存一致性](note/computer/diagram/CPU缓存一致性.md)  最后更新于2021-6-17  
 
 ### 操作系统
 + 图解操作系统
