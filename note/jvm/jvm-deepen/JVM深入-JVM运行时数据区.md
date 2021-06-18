@@ -1,5 +1,25 @@
 # JVM深入-JVM运行时数据区
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [一、运行时数据区总览](#%E4%B8%80%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%80%BB%E8%A7%88)
+- [二、PC寄存器（程序计数器）](#%E4%BA%8Cpc%E5%AF%84%E5%AD%98%E5%99%A8%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8)
+    - [1. 介绍](#1-%E4%BB%8B%E7%BB%8D)
+    - [2. 作用](#2-%E4%BD%9C%E7%94%A8)
+    - [3. 面试题分析](#3-%E9%9D%A2%E8%AF%95%E9%A2%98%E5%88%86%E6%9E%90)
+- [三、虚拟机栈](#%E4%B8%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88)
+    - [栈的介绍](#%E6%A0%88%E7%9A%84%E4%BB%8B%E7%BB%8D)
+    - [2. 虚拟机栈介绍](#2-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E4%BB%8B%E7%BB%8D)
+    - [3. 栈帧的运行原理](#3-%E6%A0%88%E5%B8%A7%E7%9A%84%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86)
+    - [4. 局部变量表 Local Variables](#4-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8-local-variables)
+    - [5. 操作数栈 Operand Stack](#5-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88-operand-stack)
+    - [6. 动态链接 Dynamic Linking](#6-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-dynamic-linking)
+    - [7. 方法返回地址 Return Address](#7-%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%9D%80-return-address)
+    - [8. 一些附加信息](#8-%E4%B8%80%E4%BA%9B%E9%99%84%E5%8A%A0%E4%BF%A1%E6%81%AF)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 一、运行时数据区总览
@@ -62,7 +82,7 @@ JVM的多线程是通过CPU时间片轮转（即线程轮流切换并分配处�
 
 ## 三、虚拟机栈
 
-### 栈的介绍
+### 1. 栈的介绍
 
 由于跨平台性的设计，Java的指令都是根据栈来设计的，它遵循“先进先出、后进后出”的原则。它的优点就是跨平台、指令集小，编译器更容易实现。
 
@@ -119,7 +139,7 @@ Java虚拟机栈，早期也叫Java栈。每个线程在创建时都会创建一
 
 ![png](images/运行时数据区solt复用.png)
 
-**补充知识点：**变量按照在类中的位置可以分为成员变量和局部变量，其中成员变量又分为类变量和实例变量。
+**补充知识点**：变量按照在类中的位置可以分为成员变量和局部变量，其中成员变量又分为类变量和实例变量。
 
 1. 成员变量在使用前，都会默认初始化赋值，其中类变量是在类加载子系统的准备阶段进行默认赋值，在初始化阶段显示赋值；
 2. 实例变量会随着对象的创建，在堆空间中分配实例变量空间，并进行默认赋值；
