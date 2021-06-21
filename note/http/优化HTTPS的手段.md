@@ -1,5 +1,29 @@
 # 优化 HTTPS 的手段
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、分析性能损耗](#%E4%B8%80%E5%88%86%E6%9E%90%E6%80%A7%E8%83%BD%E6%8D%9F%E8%80%97)
+- [二、硬件优化](#%E4%BA%8C%E7%A1%AC%E4%BB%B6%E4%BC%98%E5%8C%96)
+- [三、软件优化](#%E4%B8%89%E8%BD%AF%E4%BB%B6%E4%BC%98%E5%8C%96)
+- [四、协议优化](#%E5%9B%9B%E5%8D%8F%E8%AE%AE%E4%BC%98%E5%8C%96)
+  - [1. 密钥交换算法优化](#1-%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96)
+  - [2. TLS 升级](#2-tls-%E5%8D%87%E7%BA%A7)
+- [五、证书优化](#%E4%BA%94%E8%AF%81%E4%B9%A6%E4%BC%98%E5%8C%96)
+  - [1. 证书传输优化](#1-%E8%AF%81%E4%B9%A6%E4%BC%A0%E8%BE%93%E4%BC%98%E5%8C%96)
+  - [2. 证书验证优化](#2-%E8%AF%81%E4%B9%A6%E9%AA%8C%E8%AF%81%E4%BC%98%E5%8C%96)
+    - [CRL](#crl)
+    - [OCSP](#ocsp)
+    - [OCSP Stapling](#ocsp-stapling)
+- [六、会话复用](#%E5%85%AD%E4%BC%9A%E8%AF%9D%E5%A4%8D%E7%94%A8)
+  - [1. Session ID](#1-session-id)
+  - [2. Session Ticket](#2-session-ticket)
+  - [3. Pre-shared Key](#3-pre-shared-key)
+- [七、总结](#%E4%B8%83%E6%80%BB%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
