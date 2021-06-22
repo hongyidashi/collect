@@ -1,5 +1,28 @@
 # InnoDB解决幻读的方案--LBCC&MVCC
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [一、事务](#%E4%B8%80%E4%BA%8B%E5%8A%A1)
+   - [1. 概念](#1-%E6%A6%82%E5%BF%B5)
+   - [2. 事务的特性：ACID](#2-%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%89%B9%E6%80%A7acid)
+   - [3. 事务的操作](#3-%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%93%8D%E4%BD%9C)
+   - [4. 隔离性引发的并发问题](#4-%E9%9A%94%E7%A6%BB%E6%80%A7%E5%BC%95%E5%8F%91%E7%9A%84%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98)
+   - [5. 事务的隔离级别](#5-%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB)
+- [二、LBCC&MVCC](#%E4%BA%8Clbccmvcc)
+   - [1. LBCC](#1-lbcc)
+      - [1. 记录锁（Record Locks）](#1-%E8%AE%B0%E5%BD%95%E9%94%81record-locks)
+      - [2. 间隙锁（GAP Locks）](#2-%E9%97%B4%E9%9A%99%E9%94%81gap-locks)
+      - [3. 临键锁（Next-Key Locks）](#3-%E4%B8%B4%E9%94%AE%E9%94%81next-key-locks)
+      - [4. 当前读](#4-%E5%BD%93%E5%89%8D%E8%AF%BB)
+      - [5. 总结](#5-%E6%80%BB%E7%BB%93)
+   - [2. MVCC](#2-mvcc)
+      - [1. 隐藏列](#1-%E9%9A%90%E8%97%8F%E5%88%97)
+      - [2. undo log](#2-undo-log)
+      - [3. Read View](#3-read-view)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 一、事务
