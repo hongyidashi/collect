@@ -1,23 +1,21 @@
+# ECDHE算法
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [ECDHE算法](#ecdhe%E7%AE%97%E6%B3%95)
-  - [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
-  - [一、离散对数](#%E4%B8%80%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0)
-  - [二、DH 算法](#%E4%BA%8Cdh-%E7%AE%97%E6%B3%95)
-  - [三、DHE 算法](#%E4%B8%89dhe-%E7%AE%97%E6%B3%95)
-  - [四、ECDHE 算法](#%E5%9B%9Becdhe-%E7%AE%97%E6%B3%95)
-  - [五、ECDHE 握手过程](#%E4%BA%94ecdhe-%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B)
-    - [1. TLS 第一次握手](#1-tls-%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%A1%E6%89%8B)
-    - [2. TLS 第二次握手](#2-tls-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8F%A1%E6%89%8B)
-    - [3. TLS 第三次握手](#3-tls-%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B)
-    - [4. TLS 第四次握手](#4-tls-%E7%AC%AC%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B)
-  - [六、总结](#%E5%85%AD%E6%80%BB%E7%BB%93)
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、离散对数](#%E4%B8%80%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0)
+- [二、DH 算法](#%E4%BA%8Cdh-%E7%AE%97%E6%B3%95)
+- [三、DHE 算法](#%E4%B8%89dhe-%E7%AE%97%E6%B3%95)
+- [四、ECDHE 算法](#%E5%9B%9Becdhe-%E7%AE%97%E6%B3%95)
+- [五、ECDHE 握手过程](#%E4%BA%94ecdhe-%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B)
+  - [1. TLS 第一次握手](#1-tls-%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%A1%E6%89%8B)
+  - [2. TLS 第二次握手](#2-tls-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8F%A1%E6%89%8B)
+  - [3. TLS 第三次握手](#3-tls-%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B)
+  - [4. TLS 第四次握手](#4-tls-%E7%AC%AC%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B)
+- [六、总结](#%E5%85%AD%E6%80%BB%E7%BB%93)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# ECDHE算法
 
 [TOC]
 
