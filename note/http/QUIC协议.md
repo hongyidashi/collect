@@ -1,5 +1,24 @@
 # QUIC协议
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、怎么用 QUIC 看 B 站视频?](#%E4%B8%80%E6%80%8E%E4%B9%88%E7%94%A8-quic-%E7%9C%8B-b-%E7%AB%99%E8%A7%86%E9%A2%91)
+- [二、转场](#%E4%BA%8C%E8%BD%AC%E5%9C%BA)
+- [三、美中不足的 HTTP/2](#%E4%B8%89%E7%BE%8E%E4%B8%AD%E4%B8%8D%E8%B6%B3%E7%9A%84-http2)
+    - [1. 队头阻塞](#1-%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E)
+    - [2. TCP 与 TLS 的握手时延迟](#2-tcp-%E4%B8%8E-tls-%E7%9A%84%E6%8F%A1%E6%89%8B%E6%97%B6%E5%BB%B6%E8%BF%9F)
+    - [3. 网络迁移需要重新连接](#3-%E7%BD%91%E7%BB%9C%E8%BF%81%E7%A7%BB%E9%9C%80%E8%A6%81%E9%87%8D%E6%96%B0%E8%BF%9E%E6%8E%A5)
+- [四、QUIC 协议的特点](#%E5%9B%9Bquic-%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%89%B9%E7%82%B9)
+    - [1. 无队头阻塞](#1-%E6%97%A0%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E)
+    - [2. 更快的连接建立](#2-%E6%9B%B4%E5%BF%AB%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B)
+    - [3. 连接迁移](#3-%E8%BF%9E%E6%8E%A5%E8%BF%81%E7%A7%BB)
+- [五、HTTP/3 协议](#%E4%BA%94http3-%E5%8D%8F%E8%AE%AE)
+- [六、总结](#%E5%85%AD%E6%80%BB%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
