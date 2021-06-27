@@ -59,6 +59,7 @@
     
   - 远程调用
     - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19  
+    - [微服务之间的最佳调用方式](note/microservice/rpc/微服务之间的最佳调用方式.md)  最后更新于2021-6-28  
     
   - 服务发现
     - [浅谈Kubernetes中的服务发现](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13    
