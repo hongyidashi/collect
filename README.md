@@ -84,7 +84,7 @@
   - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14  
 
 + Redis
-  - [知识点](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
+  - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
   - [Redis分布式锁五种方案](note/redis/Redis分布式锁五种方案.md)  最后更新于2021-6-7  
   
 ### 网络编程
@@ -96,7 +96,7 @@
   - [图解网络-TCP三次握手和四次挥手面试题](note/net/diagram/图解网络-TCP三次握手和四次挥手面试题.md)  最后更新于2021-6-29  
   - [图解网络-复杂的TCP](note/net/diagram/图解网络-复杂的TCP.md)  最后更新于2021-6-30  
   - [图解网络-IP基础知识](note/net/diagram/图解网络-IP基础知识.md)  最后更新于2021-7-2  
-  - [图解网络-TCP半连接队列和全连接队列](note/net/diagram/图解网络-TCP半连接队列和全连接队列.md)  最后更新于2021-7-2  
+  - [图解网络-TCP半连接队列和全连接队列](note/net/diagram/图解网络-TCP半连接队列和全连接队列.md)  最后更新于2021-7-5  
 
 + I/O
   - [知识点](note/io/知识点.md)  最后更新于2020-12-23
