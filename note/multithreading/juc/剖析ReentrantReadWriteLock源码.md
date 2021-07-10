@@ -1,5 +1,26 @@
 # 剖析ReentrantReadWriteLock源码
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、纵观全局](#%E4%B8%80%E7%BA%B5%E8%A7%82%E5%85%A8%E5%B1%80)
+    - [1. 读写锁规范](#1-%E8%AF%BB%E5%86%99%E9%94%81%E8%A7%84%E8%8C%83)
+    - [2. 读锁与写锁](#2-%E8%AF%BB%E9%94%81%E4%B8%8E%E5%86%99%E9%94%81)
+    - [3. AQS](#3-aqs)
+    - [4. Sync](#4-sync)
+    - [5. 公平与非公平策略](#5-%E5%85%AC%E5%B9%B3%E4%B8%8E%E9%9D%9E%E5%85%AC%E5%B9%B3%E7%AD%96%E7%95%A5)
+    - [6. ReentrantReadWriteLock全局图](#6-reentrantreadwritelock%E5%85%A8%E5%B1%80%E5%9B%BE)
+- [二、深入细节](#%E4%BA%8C%E6%B7%B1%E5%85%A5%E7%BB%86%E8%8A%82)
+    - [1. ReentrantReadWriteLock的创建](#1-reentrantreadwritelock%E7%9A%84%E5%88%9B%E5%BB%BA)
+    - [2. 获取写锁](#2-%E8%8E%B7%E5%8F%96%E5%86%99%E9%94%81)
+    - [3. 释放写锁](#3-%E9%87%8A%E6%94%BE%E5%86%99%E9%94%81)
+    - [4. 获取读锁](#4-%E8%8E%B7%E5%8F%96%E8%AF%BB%E9%94%81)
+    - [5. 释放读锁](#5-%E9%87%8A%E6%94%BE%E8%AF%BB%E9%94%81)
+- [三、小结](#%E4%B8%89%E5%B0%8F%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
@@ -164,4 +185,111 @@ WriteLock.lock调用链如下图
 - **写写互斥**
 - **写锁支持同一个线程重入**
 - **writerShouldBlock写锁是否阻塞实现取决公平与非公平的策略（FairSync和NonfairSync）**
+
+### 3. 释放写锁
+
+获取到写锁，临界区执行完，要记得释放写锁（**如果重入多次要释放对应的次数**），不然会阻塞其他线程的读写操作，调用`unlock`函数释放写锁（**Lock接口规范**）。
+
+WriteLock.unlock函数也是由Sync实现的（**FairSync或NonfairSync**）。
+
+![png](images/rrwl源码-释放写锁-1.png)
+
+`sync.release(1)`执行的是AQS中的独占式释放锁流程模板（Sync继承自AQS）。
+
+![png](images/rrwl源码-释放写锁-2.png)
+
+WriteLock.unlock调用链如下图
+
+![png](images/rrwl源码-WriteLock.unlock调用链.png)
+
+再来看看`tryRelease`函数，其他函数是AQS的释放独占式成功后的流程内容，不属于本文范畴，`tryRelease`函数代码如下
+
+![png](images/rrwl源码-释放写锁-3.png)
+
+为了易于理解，把它转成流程图
+
+![png](images/rrwl源码-释放写锁-流程图.png)
+
+因为同一个线程可以对相同的写锁重入多次，所以也要释放的相同的次数。
+
+### 4. 获取读锁
+
+我们遵守ReadWriteLock接口规范，调用`ReentrantReadWriteLock.readLock`函数获取读锁对象。
+
+![png](images/rrwl源码-获取读锁-1.png)
+
+获取到读锁对象后，遵守Lock接口规范，调用`lock`函数获取读锁。
+
+ReadLock.lock函数是由`Sync`实现的（**FairSync或NonfairSync**）。
+
+![png](images/rrwl源码-获取读锁-2.png)
+
+`sync.acquireShared(1)`函数执行的是AQS中的共享式获取锁流程模板（Sync继承自AQS）。
+
+![png](images/rrwl源码-获取读锁-3.png)
+
+ReadLock.lock调用链如下图
+
+![png](images/rrwl源码-ReadLock.lock调用链.png)
+
+我们只关注`tryAcquireShared`函数，doAcquireShared函数是AQS的获取共享式锁失败后的流程内容，不属于本文范畴，`tryAcquireShared`函数代码如下
+
+![png](images/rrwl源码-获取读锁-4.png)
+
+代码还挺多的，为了易于理解，把它转成流程图
+
+![png](images/rrwl源码-获取读锁-流程图.png)
+
+通过流程图，我们发现了一些要点
+
+- **读锁共享，读读不互斥**
+- **读锁可重入，每个获取读锁的线程都会记录对应的重入数**
+- **读写互斥，锁降级场景除外**
+- **支持锁降级，持有写锁的线程，可以获取读锁，但是后续要记得把读锁和写锁读释放**
+- **readerShouldBlock读锁是否阻塞实现取决公平与非公平的策略（FairSync和NonfairSync）**
+
+### 5. 释放读锁
+
+获取到读锁，执行完临界区后，要记得释放读锁（**如果重入多次要释放对应的次数**），不然会阻塞其他线程的写操作，通过调用`unlock`函数释放读锁（**Lock接口规范**）。
+
+ReadLock.unlock函数也是由Sync实现的（**FairSync或NonfairSync**）。
+
+![png](images/rrwl源码-释放读锁-1.png)
+
+`sync.releaseShared(1)`函数执行的是AQS中的共享式释放锁流程模板（Sync继承自AQS）。
+
+![png](images/rrwl源码-释放读锁-2.png)
+
+ReadLock.unlock调用链如下图
+
+![png](images/rrwl源码-ReadLock.unlock调用链.png)
+
+我们只关注`tryReleaseShared`函数，doReleaseShared函数是AQS的释放共享式锁成功后的流程内容，不属于本文范畴，`tryReleaseShared`函数代码如下
+
+![png](images/rrwl源码-释放读锁-3.png)
+
+为了易于理解，把它转成流程图
+
+![png](images/rrwl源码-释放读锁-流程图.png)
+
+这里有三点需要注意
+
+- **第一点：线程读锁的重入数与读锁数量是两个概念，线程读锁的重入数是每个线程获取同一个读锁的次数，读锁数量则是所有线程的读锁重入数总和。**
+- **第二点：AQS的共享式释放锁流程模板中，只有全部的读锁被释放了，才会去执行doReleaseShared函数**
+- **第三点：因为使用的是AQS共享式流程模板，如果CLH队列后面的线程节点都是因写锁阻塞的读锁线程节点，会传播唤醒**
+
+## 三、小结
+
+`ReentrantReadWriteLock`底层实现与`ReentrantLock`思路一致，它们都离不开`AQS`，都是声明一个继承`AQS`的`Sync`，并在`Sync`下扩展公平与非公平策略，后续的锁相关操作都委托给公平与非公平策略执行。
+
+我们还发现，在`AQS`中除了独占式模板，还有共享式模板，它们在多线程访问共享资源的流程会有所差异，就如`ReentrantReadWriteLock`中读锁使用共享式，写锁使用独占式。
+
+最后再捋一捋写锁与读锁的逻辑
+
+1. 读读不阻塞
+2. 写锁阻塞写之后的读写锁，但是不阻塞写锁之前的读锁线程
+3. 写锁会被写之前的读写锁阻塞
+4. 读锁节点唤醒会无条件传播唤醒CLH队列后面的读锁节点
+5. 写锁可以降级为读锁，防止更新丢失
+6. 读锁、写锁都支持重入
 
