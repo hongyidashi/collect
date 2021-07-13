@@ -20,6 +20,7 @@
         <module>registry-dependency</module>
         <module>registry-common</module>
         <module>server-demo2</module>
+        <module>algorithm-demo</module>
     </modules>
 
     <dependencyManagement>
