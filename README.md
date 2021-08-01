@@ -83,6 +83,7 @@
   - [面试题](note/mysql/面试题.md)  最后更新于2021-1-30  
   - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1  
   - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14  
+  - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1  
 
 + Redis
   - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
