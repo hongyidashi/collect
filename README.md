@@ -57,6 +57,7 @@
     - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25   
     - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25  
     - [Seata分布式事务TA模式源码解读](note/microservice/transaction/Seata分布式事务TA模式源码解读.md)  最后更新于2021-5-29  
+    - [分布式事务的七种解决方案](note/microservice/transaction/分布式事务的七种解决方案.md)  最后更新于2021-8-1  
     
   - 远程调用
     - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19  
@@ -88,6 +89,7 @@
 + Redis
   - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
   - [Redis分布式锁五种方案](note/redis/Redis分布式锁五种方案.md)  最后更新于2021-6-7  
+  - [Redis为什么这么快](note/redis/Redis为什么这么快.md)  最后更新于2021-8-2  
   
 ### 网络编程
 + 计算机网络
