@@ -1,5 +1,27 @@
 # Redis为什么这么快
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、基于内存实现](#%E4%B8%80%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AD%98%E5%AE%9E%E7%8E%B0)
+- [二、高效的数据结构](#%E4%BA%8C%E9%AB%98%E6%95%88%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+    - [1. SDS 简单动态字符串优势](#1-sds-%E7%AE%80%E5%8D%95%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BC%98%E5%8A%BF)
+    - [2. zipList 压缩列表](#2-ziplist-%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8)
+    - [3. quicklist](#3-quicklist)
+    - [4. skipList 跳跃表](#4-skiplist-%E8%B7%B3%E8%B7%83%E8%A1%A8)
+    - [5. 整数数组（intset）](#5-%E6%95%B4%E6%95%B0%E6%95%B0%E7%BB%84intset)
+- [三、单线程模型](#%E4%B8%89%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+- [四、I/O 多路复用模型](#%E5%9B%9Bio-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B)
+- [五、Redis 全局 hash 字典](#%E4%BA%94redis-%E5%85%A8%E5%B1%80-hash-%E5%AD%97%E5%85%B8)
+- [六、Hash 冲突怎么办？](#%E5%85%ADhash-%E5%86%B2%E7%AA%81%E6%80%8E%E4%B9%88%E5%8A%9E)
+- [七、Redis 如何实现持久化？宕机后如何恢复数据？](#%E4%B8%83redis-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%AE%95%E6%9C%BA%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE)
+- [八、Redis 主从架构数据同步](#%E5%85%ABredis-%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5)
+- [九、哨兵原理连环问](#%E4%B9%9D%E5%93%A8%E5%85%B5%E5%8E%9F%E7%90%86%E8%BF%9E%E7%8E%AF%E9%97%AE)
+- [十、Cluster 集群连环炮](#%E5%8D%81cluster-%E9%9B%86%E7%BE%A4%E8%BF%9E%E7%8E%AF%E7%82%AE)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
