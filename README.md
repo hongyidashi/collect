@@ -90,6 +90,7 @@
   - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
   - [Redis分布式锁五种方案](note/redis/Redis分布式锁五种方案.md)  最后更新于2021-6-7  
   - [Redis为什么这么快](note/redis/Redis为什么这么快.md)  最后更新于2021-8-3  
+  - [Redis高可用-Cluster集群](note/redis/Redis高可用-Cluster集群.md)  最后更新于2021-8-5  
   
 ### 网络编程
 + 计算机网络
