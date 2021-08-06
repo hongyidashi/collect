@@ -1,6 +1,4 @@
-package com.collect.algorithm.graph.traverse;
-
-import com.collect.algorithm.graph.Graph;
+package com.collect.algorithm.graph;
 
 import java.util.LinkedList;
 
@@ -74,6 +72,35 @@ public class GraphTraverse {
         dfs(graph, 0, new boolean[graph.size]);
         System.out.println("图的广度优先遍历：");
         bfs(graph, 0, new boolean[graph.size], new LinkedList<Integer>());
+    }
+
+    static class Graph {
+
+        public int size;
+        public Graph.Vertex[] vertices;
+        public LinkedList<Integer>[] adj;
+
+        public Graph(int size) {
+            this.size = size;
+            vertices = new Graph.Vertex[size];
+            adj = new LinkedList[size];
+            for (int i = 0; i < size; i++) {
+                vertices[i] = new Graph.Vertex(i);
+                adj[i] = new LinkedList<>();
+            }
+        }
+
+        /**
+         * 图顶点
+         */
+        public static class Vertex {
+            public int data;
+
+            public Vertex(int data) {
+                this.data = data;
+            }
+        }
+
     }
 
 }
