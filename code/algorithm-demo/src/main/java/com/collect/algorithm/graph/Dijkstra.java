@@ -16,8 +16,85 @@ public class Dijkstra {
         initGraph(graph);
         int[] distances = dijkstra(graph, 0);
         System.out.println(distances[6]);
+        System.out.println("输出完整路径：");
+        int[] prevs = dijkstraV2(graph, 0);
+        printPrevs(graph.vertexes, prevs, graph.vertexes.length- 1);
     }
 
+    /**
+     * 最短路径表
+     * @param graph
+     * @param startIndex
+     * @return
+     */
+    public static int[] dijkstraV2(Graph graph, int startIndex) {
+        // 图的顶点数量
+        int size = graph.vertexes.length;
+        // 距离表，存储起点到每一个顶点的临时距离
+        int[] distances = new int[size];
+        // 记录表，记录顶点遍历状态
+        boolean[] access = new boolean[size];
+        // 前置顶点表，存储从起点到每一个顶点的已知最短路径的前置节点
+        int[] prevs = new int[size];
+        // 初始化最短路径表，默认无穷大
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        // 遍历起点，刷新距离表
+        access[0] = true;
+        LinkedList<Edge> edgesFromStart = graph.adj[startIndex];
+        for (Edge edge : edgesFromStart) {
+            distances[edge.index] = edge.weight;
+            prevs[edge.index] = 0;
+        }
+
+        // 主循环，重复遍历最短距离顶点和刷新距离表的操作
+        for (int i = 0; i < size; i++) {
+            // 寻找最短距离的顶点
+            int minDistanceFromStart = Integer.MAX_VALUE;
+            int minDistanceIndex = -1;
+            for (int j = 1; j < size; j++) {
+                if (!access[j] && (distances[j] < minDistanceFromStart)) {
+                    minDistanceFromStart = distances[j];
+                    minDistanceIndex = j;
+                }
+            }
+
+            if (minDistanceIndex == -1) {
+                break;
+            }
+
+            // 遍历顶点，刷新距离表
+            access[minDistanceIndex] = true;
+            for (Edge edge : graph.adj[minDistanceIndex]) {
+                if (access[edge.index]) {
+                    continue;
+                }
+                int weight = edge.weight;
+                int preDistance = distances[edge.index];
+                if ((weight != Integer.MAX_VALUE) &&
+                        ((minDistanceFromStart + weight)) < preDistance) {
+                    distances[edge.index] = minDistanceFromStart + weight;
+                    prevs[edge.index] = minDistanceIndex;
+                }
+            }
+        }
+
+        return prevs;
+    }
+
+    private static void printPrevs(Vertex[] vertexes, int[] prev, int i) {
+        if (i > 0) {
+            printPrevs(vertexes, prev, prev[i]);
+        }
+
+        System.out.println(vertexes[i].data);
+    }
+
+    /**
+     * 输出最短距离
+     * @param graph
+     * @param startIndex
+     * @return
+     */
     public static int[] dijkstra(Graph graph, int startIndex) {
         // 图的顶点数量
         int size = graph.vertexes.length;
