@@ -85,6 +85,7 @@
   - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1  
   - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14  
   - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1  
+  - [Buffer Pool](note/mysql/BufferPool.md)  最后更新于2021-8-19  
 
 + Redis
   - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15  
