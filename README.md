@@ -30,6 +30,10 @@
     - [JVM深入-JNI到底是个啥](note/jvm/jvm-deepen/JVM深入-JNI到底是个啥.md)  最后更新于2021-5-18  
     - [JVM深入-JVM运行时数据区](note/jvm/jvm-deepen/JVM深入-JVM运行时数据区.md)  最后更新于2021-5-24  
 
+  - 面试题
+    - [JVM21问](note/jvm/interview/JVM21问.md)  最后更新于2021-9-3  
+  
+
 + 多线程和并发
   - [异步编程CompeletableFuture](note/multithreading/async/CompeletableFuture.md)  最后更新于2021-1-2  
   - [ForkJoinPool](note/multithreading/async/ForkJoinPool.md)  最后更新于2021-4-8  
