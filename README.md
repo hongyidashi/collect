@@ -31,7 +31,7 @@
     - [JVM深入-JVM运行时数据区](note/jvm/jvm-deepen/JVM深入-JVM运行时数据区.md)  最后更新于2021-5-24  
 
   - 面试题
-    - [JVM21问](note/jvm/interview/JVM21问.md)  最后更新于2021-9-3  
+    - [JVM21问](note/jvm/interview/JVM21问.md)  最后更新于2021-9-4  
   
 
 + 多线程和并发
