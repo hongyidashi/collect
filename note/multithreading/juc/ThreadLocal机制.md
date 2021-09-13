@@ -240,3 +240,74 @@ HashMap 是通过链表(红黑树)法来解决冲突，而 ThreadLocalMap 是通
 
 但是这样设计就可能产生内存泄漏。
 
+> 那什么叫内存泄漏？
+
+就是指：程序中已经无用的内存无法被释放，造成系统内存的浪费。
+
+当 Entry 中的 key 即 ThreadLocal 对象被回收了之后，会发生 Entry 中 key 为 null 的情况，其实这个 Entry 就已经没用了，但是又无法被回收，因为有 Thread->ThreadLocalMap ->Entry 这条强引用在，这样没用的内存无法被回收就是内存泄露。
+
+> 那既然会有内存泄漏还这样实现？
+
+这里就要填一填上面的坑了，也就是涉及到的关于 `expungeStaleEntry`即清理过期的 Entry 的操作。
+
+设计者当然知道会出现这种情况，所以在多个地方都做了清理无用 Entry ，即 key 已经被回收的 Entry 的操作。
+
+比如通过 key 查找 Entry 的时候，如果下标无法直接命中，那么就会向后遍历数组，此时遇到 key 为 null 的 Entry 就会清理掉，再贴一下这个方法：
+
+![png](images/tl-清理无用的key.png)
+
+这个方法也很简单，我们来看一下它的实现：
+
+![png](images/tl-expungeStaleEntry.png)
+
+所以在查找 Entry 的时候，就会顺道清理无用的 Entry ，这样就能防止一部分的内存泄露啦！
+
+还有像扩容的时候也会清理无用的 Entry：
+
+![png](images/tl-扩容清理无用key.png)
+
+其它还有，我就不贴了，反正知晓设计者是做了一些操作来回收无用的 Entry 的即可。
+
+## 五、ThreadLocal 的最佳实践
+
+当然，等着这些操作被动回收不是最好的方法，假设后面没人调用 get 或者调用 get 都直接命中或者不会发生扩容，那无用的 Entry 岂不是一直存在了吗？所以上面说只能防止一部分的内存泄露。
+
+所以，最佳实践是用完了之后，调用一下 remove 方法，手工把 Entry 清理掉，这样就不会发生内存泄漏了！
+
+```java
+void yesDosth {
+ threadlocal.set(xxx);
+ try {
+  // do sth
+ } finally {
+  threadlocal.remove();
+ }
+}
+```
+
+这就是使用 Threadlocal 的一个正确姿势啦，即不需要的时候，显示的 remove 掉。
+
+当然，如果不是线程池使用方式的话，其实不用关系内存泄漏，反正线程执行完了就都回收了，但是一般我们都是使用线程池的，可能只是你没感觉到。
+
+比如你用了 tomcat ，其实请求的执行用的就是 tomcat 的线程池，这就是隐式使用。
+
+还有一个问题，关于 withInitial 也就是初始化值的方法。
+
+由于类似 tomcat 这种隐式线程池的存在，即线程第一次调用执行 Threadlocal 之后，如果没有显示调用 remove 方法，则这个 Entry 还是存在的，那么下次这个线程再执行任务的时候，不会再调用 withInitial 方法，也就是说会拿到上一次执行的值。
+
+但是你以为执行任务的是新线程，会初始化值，然而它是线程池里面的老线程，这就和预期不一致了，所以这里需要注意。
+
+## 六、InheritableThreadLocal
+
+这玩意可以理解为就是可以把父线程的 threadlocal 传递给子线程，所以如果要这样传递就用 InheritableThreadLocal ，不要用 threadlocal。
+
+原理其实很简单，在 Thread 中已经包含了这个成员：
+
+![png](images/tl-tl中的InheritableThreadLocal.png)
+
+在父线程创建子线程的时候，子线程的构造函数可以得到父线程，然后判断下父线程的 InheritableThreadLocal 是否有值，如果有的话就拷过来。
+
+![png](images/tl-InheritableThreadLocal作用.png)
+
+这里要注意，只会在线程创建的时会拷贝 InheritableThreadLocal 的值，之后父线程如何更改，子线程都不会受其影响。
+

@@ -43,7 +43,7 @@
   - [16张图解开AbstractQueuedSynchronizer](note/multithreading/juc/16张图解开AbstractQueuedSynchronizer.md)  最后更新于2021-5-19  
   - [为什么Java线程没有Running状态](note/multithreading/interview/为什么Java线程没有Running状态.md)  最后更新于2021-5-20  
   - [剖析ReentrantReadWriteLock源码](note/multithreading/juc/剖析ReentrantReadWriteLock源码.md)  最后更新于2021-7-6  
-  - [ThreadLocal机制](note/multithreading/juc/ThreadLocal机制.md)  最后更新于2021-9-13  
+  - [ThreadLocal机制](note/multithreading/juc/ThreadLocal机制.md)  最后更新于2021-9-14  
 
 + 代码优化
   - [代码优化细节](note/optimization/代码优化细节.md)  最后更新于2021-5-12
