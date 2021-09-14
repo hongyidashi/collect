@@ -1,5 +1,18 @@
 # ThreadLocal机制
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、为什么需要 ThreadLocal](#%E4%B8%80%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-threadlocal)
+- [二、应该如何设计 ThreadLocal](#%E4%BA%8C%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1-threadlocal)
+- [三、从源码看ThreadLocal 的原理](#%E4%B8%89%E4%BB%8E%E6%BA%90%E7%A0%81%E7%9C%8Bthreadlocal-%E7%9A%84%E5%8E%9F%E7%90%86)
+- [四、ThreadLocal 内存泄露之为什么要用弱引用](#%E5%9B%9Bthreadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B9%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%BC%B1%E5%BC%95%E7%94%A8)
+- [五、ThreadLocal 的最佳实践](#%E4%BA%94threadlocal-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+- [六、InheritableThreadLocal](#%E5%85%ADinheritablethreadlocal)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
