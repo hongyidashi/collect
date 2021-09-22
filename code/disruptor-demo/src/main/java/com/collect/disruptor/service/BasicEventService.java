@@ -10,8 +10,6 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
@@ -38,8 +36,6 @@ public class BasicEventService {
 
     @PostConstruct
     private void init() {
-        Executor executor = Executors.newCachedThreadPool();
-
         // 实例化
         disruptor = new Disruptor<>(new StringEventFactory(),
                 BUFFER_SIZE,

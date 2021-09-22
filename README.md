@@ -83,7 +83,8 @@
 
 + 开箱即用类
   - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑  
-  - [高性能队列-Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22  
+  - [Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22  
+  - [Disruptor-Disruptor类分析](note/other-frame/disruptor-Disruptor类分析.md)  最后更新于2021-9-22  
 
 ### 数据库
 + MySQL
