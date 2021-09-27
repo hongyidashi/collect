@@ -102,7 +102,7 @@
     - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1
     - [Buffer Pool](note/mysql/BufferPool.md)  最后更新于2021-8-19
     - [innodb是如何存数据的](note/mysql/innodb是如何存数据的.md)  最后更新于2021-9-2
-    - [MySQL日志15连问](note/mysql/iMySQL日志15连问.md)  最后更新于2021-9-27
+    - [MySQL日志15连问](note/mysql/iMySQL日志15连问.md)  最后更新于2021-9-28
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
