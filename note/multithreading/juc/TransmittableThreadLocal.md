@@ -1,5 +1,18 @@
 # TransmittableThreadLocal
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、如何设计](#%E4%B8%80%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1)
+- [二、如何实现](#%E4%BA%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0)
+- [三、TransmittableThreadLocal 的实现](#%E4%B8%89transmittablethreadlocal-%E7%9A%84%E5%AE%9E%E7%8E%B0)
+- [四、一些用法](#%E5%9B%9B%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95)
+- [五、总结](#%E4%BA%94%E6%80%BB%E7%BB%93)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 [TOC]
 
 ## 零、开篇
@@ -18,14 +31,14 @@
 
 ```java
 private void init(ThreadGroup g,Runnable target,String name,
-                  long stackSize,AccessControlContext acc,
-                  boolean inheritThreadLocals){
-  // 省略部分...
-  if(inheritThreadLocals&&parent.inheritableThreadLocals!=null)
-    this.inheritableThreadLocals=
-    ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
-  // 省略部分...
-}
+        long stackSize,AccessControlContext acc,
+        boolean inheritThreadLocals){
+        // 省略部分...
+        if(inheritThreadLocals&&parent.inheritableThreadLocals!=null)
+        this.inheritableThreadLocals=
+        ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
+        // 省略部分...
+        }
 ```
 
 就这样简单地把父线程的 ThreadLocal 数据传递给子线程了。
@@ -74,18 +87,18 @@ executorService.submit(task);
 ```java
 // 获取父线程的threadlocal
 Object parent=THREAD_LOCAL.get();
-Runnable task=()->{
-  // 获取子线程的threadlocal
-  Object sub=THREAD_LOCAL.get();
-  try{
-    // 把threadlocal的值设置为父线程的
-    THREAD_LOCAL.set(parent);
-    // do sth...
-  }finally{
-    // 最后把子线程原来的threadlocal塞回去...
-    THREAD_LOCAL.set(sub);
-  }
-};
+        Runnable task=()->{
+        // 获取子线程的threadlocal
+        Object sub=THREAD_LOCAL.get();
+        try{
+        // 把threadlocal的值设置为父线程的
+        THREAD_LOCAL.set(parent);
+        // do sth...
+        }finally{
+        // 最后把子线程原来的threadlocal塞回去...
+        THREAD_LOCAL.set(sub);
+        }
+        };
 ```
 
 这样虽然可以实现，但是可操作性太差，耦合性太高。
@@ -98,29 +111,29 @@ Runnable task=()->{
 
 ```java
 public MyRunnable(Runnable runable){
-  this.threadlocalCopy=copyFatherThreadlocal();
-  this.runable=runable;
-}
+        this.threadlocalCopy=copyFatherThreadlocal();
+        this.runable=runable;
+        }
 
 public void run(){
-  // 塞入父threadlocal，并返回当前线程原先threadlocal
-  Object backup=setThreadlocal(threadlocalCopy)；
-    try{
-      // 执行被装饰的任务逻辑
-      runable.run()；
-    }finally{
-      // 复原当前线程的上下文
-      restore(backup);
-    }
-}
+        // 塞入父threadlocal，并返回当前线程原先threadlocal
+        Object backup=setThreadlocal(threadlocalCopy)；
+        try{
+        // 执行被装饰的任务逻辑
+        runable.run()；
+        }finally{
+        // 复原当前线程的上下文
+        restore(backup);
+        }
+        }
 ```
 
 使用方式如下：
 
 ```java
 Runnable task=()->{...};
-MyRunnable myRunnable=new MyRunnable(task);
-executorService.submit(myRunnable);
+        MyRunnable myRunnable=new MyRunnable(task);
+        executorService.submit(myRunnable);
 ```
 
 你看，这不就实现我们上面的设计了嘛！
@@ -162,28 +175,28 @@ private static final ThreadLocal<WeakHashMap<MyThreadlocal<Object>, ?>> holder =
 ```java
 @Override
 public final void set(T value){
-  // 调用 ThreadLocal 的 set
-  super.set(value);
-  // 把当前的 MyThreadlocal 对象塞入 hold 中
-  addThisToHolder();
-}
+        // 调用 ThreadLocal 的 set
+        super.set(value);
+        // 把当前的 MyThreadlocal 对象塞入 hold 中
+        addThisToHolder();
+        }
 private void addThisToHolder(){
-  if(!holder.get().containsKey(this)){
-    holder.get().put((MyThreadlocal<Object>)this,null);
-  }
-}
+        if(!holder.get().containsKey(this)){
+        holder.get().put((MyThreadlocal<Object>)this,null);
+        }
+        }
 ```
 
 你看这样就把所有用到的 MyThreadlocal 塞到 holder 中了，然后再来看看 copyFatherThreadlocal 应该如何实现。
 
 ```java
- private static HashMap<MyThreadlocal<Object>,Object> copyFatherThreadlocal(){
-   HashMap<MyThreadlocal<Object>,Object>fatherMap=new HashMap<MyThreadlocal<Object>,Object>();
-   for(MyThreadlocal<Object> threadLocal:MyThreadlocal.holder.get().keySet()){
-     fatherMap.put(threadLocal,threadLocal.copyValue());
-   }
-   return fatherMap;
- }
+ private static HashMap<MyThreadlocal<Object>,Object>copyFatherThreadlocal(){
+        HashMap<MyThreadlocal<Object>,Object>fatherMap=new HashMap<MyThreadlocal<Object>,Object>();
+        for(MyThreadlocal<Object> threadLocal:MyThreadlocal.holder.get().keySet()){
+        fatherMap.put(threadLocal,threadLocal.copyValue());
+        }
+        return fatherMap;
+        }
 ```
 
 逻辑很简单，就是一个 map 遍历拷贝。
@@ -216,25 +229,25 @@ threadlocalCopy 保存。
 ![png](images/ttl-ttl使用演示.png)
 
 ```java
-private final static TransmittableThreadLocal<String> TTL = new TransmittableThreadLocal<>();
-private final static ThreadLocal<String> TL = new ThreadLocal<>();
-private final static ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(10);
+private final static TransmittableThreadLocal<String> TTL=new TransmittableThreadLocal<>();
+private final static ThreadLocal<String> TL=new ThreadLocal<>();
+private final static ExecutorService EXECUTOR_SERVICE=Executors.newFixedThreadPool(10);
 
-public static void main(String[] args) {
-  TTL.set("主线程 ThreadLocal");
-  TL.set("主线程 ThreadLocal");
-  Runnable task = () -> {
-    System.out.println("TTL:" + TTL.get());
-    System.out.println("TL:" + TL.get());
-  };
-  EXECUTOR_SERVICE.execute(task);
-  EXECUTOR_SERVICE.execute(TtlRunnable.get(task));
-}
+public static void main(String[]args){
+        TTL.set("主线程 ThreadLocal");
+        TL.set("主线程 ThreadLocal");
+        Runnable task=()->{
+        System.out.println("TTL:"+TTL.get());
+        System.out.println("TL:"+TL.get());
+        };
+        EXECUTOR_SERVICE.execute(task);
+        EXECUTOR_SERVICE.execute(TtlRunnable.get(task));
+        }
 ```
 
 使用起来很简单对吧？
 
-TTL 对标上面的 YesThreadLocal ，差别在于它继承的是 InheritableThreadLocal，因为这样直接 new TTL 也会拥有父子线程本地变量的传递能力。
+TTL 对标上面的 MyThreadLocal ，差别在于它继承的是 InheritableThreadLocal，因为这样直接 new TTL 也会拥有父子线程本地变量的传递能力。
 
 ```java
 public class TransmittableThreadLocal<T> extends InheritableThreadLocal<T>
@@ -246,3 +259,199 @@ public class TransmittableThreadLocal<T> extends InheritableThreadLocal<T>
 
 可以看到 get 和 set 其实就是复用父类 ThreadLocal 的方法，关键就在于 `addThisToHolder`，就是我上面分析的将当前使用的 TTL 对象加到 holder 里面。
 
+```java
+private void addThisToHolder(){
+        if(!((WeakHashMap)holder.get()).containsKey(this)){
+        ((WeakHashMap)holder.get()).put(this,(Object)null);
+        }
+        }
+```
+
+所以，在父线程赋值即执行 set 操作之后，父线程里的 holder 就存储了当前的 TTL 对象了，即上面演示代码的 ttl.set() 操作。
+
+然后重点就移到了`TtlRunnable.get` 上了，根据上面的理解我们知道这里是要进行一个装饰的操作，这个 get 代码也比较简单，核心就是 new 一个 TtlRunnable 包装了原始的 task。
+
+```java
+public static TtlRunnable get(@Nullable Runnable runnable,boolean releaseTtlValueReferenceAfterRun,boolean idempotent){
+        if(null==runnable)return null;
+
+        if(runnable instanceof TtlEnhanced){
+        // avoid redundant decoration, and ensure idempotency
+        if(idempotent)return(TtlRunnable)runnable;
+        else throw new IllegalStateException("Already TtlRunnable!");
+        }
+        return new TtlRunnable(runnable,releaseTtlValueReferenceAfterRun);
+        }
+```
+
+那我们来看一下它的构造方法：
+
+```java
+private TtlRunnable(@NonNull Runnable runnable,boolean releaseTtlValueReferenceAfterRun){
+        this.capturedRef=new AtomicReference<Object>(capture());
+        this.runnable=runnable;
+        this.releaseTtlValueReferenceAfterRun=releaseTtlValueReferenceAfterRun;
+        }
+```
+
+这个 capturedRef 其实就是父线程本地变量的拷贝，然后 `capture()` 其实就等同于`copyFatherThreadlocal()`
+
+再来看一下 TtlRunnable 装饰的 run 方法：
+
+```java
+public void run(){
+// 获取父类的
+final Object captured=capturedRef.get();
+        if(captured==null||releaseTtlValueReferenceAfterRun&&!capturedRef.compareAndSet(captured,null)){
+        throw new IllegalStateException("TTL value reference is released after run!");
+        }
+
+// 将父类的塞入当前线程，并返回当前线程的
+final Object backup=replay(captured);
+        try{
+        runnable.run();
+        }finally{
+        // 恢复当前线程的
+        restore(backup);
+        }
+        }
+```
+
+逻辑很清晰的四步骤：
+
+1. 拿到父类本地变量拷贝
+2. 赋值给当前线程（线程池内的某线程），并保存之前的本地变量
+3. 执行逻辑
+4. 复原当前线程之前的本地变量
+
+我们再来分析一下 `capture()` 方法，即如何拷贝的。
+
+在 TTL 中是专门定义了一个静态工具类 Transmitter 来实现上面的 capture、 replay、restore 操作。
+
+![png](images/ttl-capture逻辑截图.png)
+
+可以看到 capture 的逻辑其实就是返回一个快照，而这个快照就是遍历 holder 获取所有存储在 holder 里面的 TTL ，返回一个新的 map，还是很简单的吧！
+
+> 这里还有个 captureThreadLocalValues ，这个是为兼容那些无法将 ThreadLocal 类变更至 TTL ，但是又想复制传递 ThreadLocal 的值而使用的，可以先忽略。
+
+我们再来看看 replay，即如何将父类的本地变量赋值给当前线程的。
+
+```java
+public static Object replay(@NonNull Object captured){
+final Snapshot capturedSnapshot=(Snapshot)captured;
+        return new Snapshot(replayTtlValues(capturedSnapshot.ttl2Value),replayThreadLocalValues(capturedSnapshot.threadLocal2Value));
+        }
+
+private static HashMap<TransmittableThreadLocal<Object>,Object>replayTtlValues(@NonNull HashMap<TransmittableThreadLocal<Object>,Object>captured){
+        HashMap<TransmittableThreadLocal<Object>,Object>backup=new HashMap<TransmittableThreadLocal<Object>,Object>();
+
+        for(final Iterator<TransmittableThreadLocal<Object>>iterator=holder.get().keySet().iterator();iterator.hasNext();){
+        TransmittableThreadLocal<Object> threadLocal=iterator.next();
+
+        // 遍历当前线程存储的TTL，做一个备份，等下次恢复使用
+        // backup
+        backup.put(threadLocal,threadLocal.get());
+
+        // clear the TTL values that is not in captured
+        // avoid the extra TTL values after replay when run task
+        if(!captured.containsKey(threadLocal)){
+        // 如果当前线程有父线程没有的TTL，先remove，防止污染上下文
+        iterator.remove();
+        threadLocal.superRemove();
+        }
+        }
+
+        // set TTL values to captured
+        // 将父线程的TTL拷贝到当前线程
+        setTtlValuesTo(captured);
+
+        // call beforeExecute callback
+        doExecuteCallback(true);
+
+        // 返回备份
+        return backup;
+        }
+```
+
+逻辑还是很清晰的，先备份，再拷贝覆盖，最后会返回备份，拷贝覆盖的代码 `setTtlValuesTo` 很简单:
+
+```java
+private static void setTtlValuesTo(@NonNull HashMap<TransmittableThreadLocal<Object>,Object>ttlValues){
+        for(Map.Entry<TransmittableThreadLocal<Object>,Object>entry:ttlValues.entrySet()){
+        TransmittableThreadLocal<Object> threadLocal=entry.getKey();
+        threadLocal.set(entry.getValue());
+        }
+        }
+```
+
+就是 for 循环进行了一波 set ，从这里也可以得知为什么上面需要移除父线程没有的 TTL，因为这里只是进行了 set。如果不 remove
+当前线程的本地变量，那就不是完全继承自父线程的本地变量了，可能掺杂着之前的本地变量，也就是不干净了，防止这种干扰，所以还是 remove 了为妙。
+
+最后我们看下 restore 操作：
+
+```java
+public static void restore(@NonNull Object backup){
+final Snapshot backupSnapshot=(Snapshot)backup;
+        restoreTtlValues(backupSnapshot.ttl2Value);
+        restoreThreadLocalValues(backupSnapshot.threadLocal2Value);
+        }
+
+private static void restoreTtlValues(@NonNull HashMap<TransmittableThreadLocal<Object>,Object>backup){
+        // call afterExecute callback
+        doExecuteCallback(false);
+
+        for(final Iterator<TransmittableThreadLocal<Object>>iterator=holder.get().keySet().iterator();iterator.hasNext();){
+        TransmittableThreadLocal<Object> threadLocal=iterator.next();
+
+        // clear the TTL values that is not in backup
+        // avoid the extra TTL values after restore
+        if(!backup.containsKey(threadLocal)){
+        // 和 replay 反向操作，把backup没有的remove了，保持上下文干净
+        iterator.remove();
+        threadLocal.superRemove();
+        }
+        }
+
+        // restore TTL values
+        // 恢复之前上下文
+        setTtlValuesTo(backup);
+        }
+```
+
+至此想必对 TTL 的原理应该都很清晰了吧！
+
+## 四、一些用法
+
+上面我们展示的只是其中一个用法也就是利用 `TtlRunnable.get` 来包装 Runnable。
+
+TTL 还提供了线程池的修饰方法，即 TtlExecutors，比如可以这样使用：
+
+```
+ ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(1));
+```
+
+其实原理也很简单，装饰了一下线程池提交任务的方法，里面实现了 `TtlRunnable.get` 的包装
+
+还有一种使用方式更加透明，即利用 Java Agent 来修饰 JDK 的线程池实现类，这种方式在使用上基本就是无感知了。
+
+在 Java 的启动参数加上：-javaagent:path/to/transmittable-thread-local-2.x.y.jar 即可，然后就正常的使用就行，原生的线程池实现类已经悄悄的被改了！
+
+```java
+TransmittableThreadLocal<String> ttl=new TransmittableThreadLocal<>();
+        ExecutorService executorService=Executors.newFixedThreadPool(1);
+        Runnable task=new RunnableTask();
+        executorService.submit(task);
+```
+
+## 五、总结
+
+好了，有关 TTL 的原理和用法解释的都差不多了。
+
+总结下来的核心操作就是 CRR（Capture/Replay/Restore），拷贝快照、重放快照、复原上下文。
+
+可能有些人会疑惑为什么需要复原，线程池的线程每次执行的时候，如果用了 TTL 那执行的线程都会被覆盖上下文，没必要复原对吧？
+
+其实也有人向作者提了这个疑问，回答是：
+
+- 线程池满了且线程池拒绝策略使用的是『CallerRunsPolicy』，这样执行的线程就变成当前线程了，那肯定是要复原的，不然上下文就没了。
+- 使用ForkJoinPool（包含并行执行Stream与CompletableFuture，底层使用ForkJoinPool）的场景，展开的ForkJoinTask会在调用线程中直接执行。

@@ -2,6 +2,7 @@ package com.collect.multithreading.ttl;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.TtlRunnable;
+import com.alibaba.ttl.threadpool.TtlExecutors;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,6 +28,8 @@ public class TTLDemo {
         };
         EXECUTOR_SERVICE.execute(task);
         EXECUTOR_SERVICE.execute(TtlRunnable.get(task));
+
+        ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(1));
     }
 
 }
