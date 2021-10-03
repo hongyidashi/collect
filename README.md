@@ -117,7 +117,7 @@
     - [Redis配置文件-之二](note/redis/Redis配置文件-之二.md)  最后更新于2021-9-6
 
 + Elasticsearch
-    - [Elasticsearch如何做到快速检索](note/redis/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
+    - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
 
 ### 网络编程
 
@@ -185,7 +185,7 @@
     - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
     - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
 
-### Kubenetes
+### Kubernetes
 
 - [k8s面试题](note/k8s/k8s面试题.md)  最后更新于2021-6-25
 
