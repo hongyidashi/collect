@@ -104,7 +104,7 @@
     - [Buffer Pool](note/mysql/BufferPool.md)  最后更新于2021-8-19
     - [innodb是如何存数据的](note/mysql/innodb是如何存数据的.md)  最后更新于2021-9-2
     - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
-    - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-1
+    - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
