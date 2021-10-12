@@ -17,6 +17,7 @@
     - [伪共享](note/javase/falsesharing.md)  最后更新于2021-3-11
     - [JDK自带的观察者模式](note/javase/JDK自带的观察者模式实现.md)  最后更新于2021-4-10
     - [Function使用技巧](note/javase/Function使用技巧.md)  最后更新于2021-9-25
+    - [Java基础面试题](note/javase/Java基础面试题.md)  最后更新于2021-10-12
 
 ### Java高级
 
@@ -132,8 +133,8 @@
     - [图解网络-IP基础知识](note/net/diagram/图解网络-IP基础知识.md)  最后更新于2021-7-2
     - [图解网络-TCP半连接队列和全连接队列](note/net/diagram/图解网络-TCP半连接队列和全连接队列.md)  最后更新于2021-7-5
     - [图解网络-TCP面向字节流协议](note/net/diagram/图解网络-TCP面向字节流协议.md)  最后更新于2021-10-5
-        - [重放攻击](note/net/other/重放攻击.md)  最后更新于2021-7-31
-        - [CDN基础](note/net/other/CDN基础.md)  最后更新于2021-10-4
+    - [重放攻击](note/net/other/重放攻击.md)  最后更新于2021-7-31
+    - [CDN基础](note/net/other/CDN基础.md)  最后更新于2021-10-4
 
 + I/O
     - [知识点](note/io/知识点.md)  最后更新于2020-12-23
