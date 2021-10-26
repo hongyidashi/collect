@@ -61,6 +61,7 @@
     - [知识点](note/spring/知识点.md)  最后更新于2021-2-4
     - [spring使用技巧](note/spring/spring使用技巧.md)  最后更新于2021-3-14
     - [spring事务管理](note/spring/spring事务管理.md)  最后更新于2021-6-23
+    - [spring事务管理-传播特性](note/spring/spring事务管理-传播特性.md)  最后更新于2021-10-26
 
 + Spring Security
     - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
