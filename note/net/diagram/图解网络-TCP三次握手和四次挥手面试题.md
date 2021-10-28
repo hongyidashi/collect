@@ -19,19 +19,19 @@
 
 1. TCP 基本认识
 
-![png](images/TPC面试题-提纲-TCP 基本认识.png)
+![png](images/TPC面试题-提纲-TCP基本认识.png)
 
 2. TCP 连接建立
 
-![png](images/TPC面试题-提纲-TCP 连接建立.png)
+![png](images/TPC面试题-提纲-TCP连接建立.png)
 
 3. TCP 连接断开
 
-![png](images/TPC面试题-提纲-TCP 连接断开.png)
+![png](images/TPC面试题-提纲-TCP连接断开.png)
 
 4. Socket 编程
 
-![png](images/TPC面试题-提纲-Socket 编程.png)
+![png](images/TPC面试题-提纲-Socket编程.png)
 
 ## 一、TCP 基本认识
 
@@ -39,7 +39,7 @@
 
 我们先来看看 TCP 头的格式，标注颜色的表示与本文关联比较大的字段，其他字段不做详细阐述。
 
-![png](images/TPC面试题-TCP 头格式.png)
+![png](images/TPC面试题-TCP头格式.png)
 
 **序列号**：在建立连接时由计算机生成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。**用来解决网络包乱序问题。**
 
@@ -56,7 +56,7 @@
 
 `IP` 层是「不可靠」的，它不保证网络包的交付、不保证网络包的按序交付、也不保证网络包中的数据的完整性。
 
-![png](images/TPC面试题-OSI 参考模型与 TCP:IP 的关系.png)
+![png](images/TPC面试题-OSI参考模型与TCP:IP的关系.png)
 
 如果需要保障网络数据包的可靠性，那么就需要由上层（传输层）的 `TCP` 协议来负责。
 
@@ -74,9 +74,10 @@ TCP 是**面向连接的、可靠的、基于字节流**的传输层通信协议
 
 我们来看看 RFC 793 是如何定义「连接」的：
 
-*Connections:* 
+*Connections:*
 
-*The reliability and flow control mechanisms described above require that TCPs initialize and maintain certain status information for each data stream.*  
+*The reliability and flow control mechanisms described above require that TCPs initialize and maintain certain status
+information for each data stream.*
 
 *The combination of this information, including sockets, sequence numbers, and window sizes, is called a connection.*
 
@@ -107,7 +108,7 @@ TCP 四元组可以唯一的确定一个连接，四元组包括如下：
 
 因此，客户端 IP 和 端口是可变的，其理论值计算公式如下:
 
-![png](images/TPC面试题-TCP 的最大连接数.png)
+![png](images/TPC面试题-TCP的最大连接数.png)
 
 对 IPv4，客户端的 IP 数最多为 `2` 的 `32` 次方，客户端的端口数最多为 `2` 的 `16` 次方，也就是服务端单机最大 TCP 连接数，约为 `2` 的 `48` 次方。
 
@@ -122,7 +123,7 @@ UDP 不提供复杂的控制机制，利用 IP 提供面向「无连接」的通
 
 UDP 协议真的非常简，头部只有 `8` 个字节（ 64 位），UDP 的头部格式如下：
 
-![png](images/TPC面试题-UDP 的头部格式.png)
+![png](images/TPC面试题-UDP的头部格式.png)
 
 - 目标和源端口：主要是告诉 UDP 协议应该把报文发给哪个进程。
 - 包长度：该字段保存了 UDP 首部的长度跟数据的长度之和。
@@ -194,21 +195,24 @@ UDP 协议真的非常简，头部只有 `8` 个字节（ 64 位），UDP 的头
 
 TCP 是面向连接的协议，所以使用 TCP 前必须先建立连接，而**建立连接是通过三次握手而进行的。**
 
-![png](images/TPC面试题-TCP 三次握手.png)
+![png](images/TPC面试题-TCP三次握手.png)
 
 - 一开始，客户端和服务端都处于 `CLOSED` 状态。先是服务端主动监听某个端口，处于 `LISTEN` 状态
 
 ![png](images/TPC面试题-第一个报文.png)
 
-- 客户端会随机初始化序号（`client_isn`），将此序号置于 TCP 首部的「序号」字段中，同时把 `SYN` 标志位置为 `1` ，表示 `SYN` 报文。接着把第一个 SYN 报文发送给服务端，表示向服务端发起连接，该报文不包含应用层数据，之后客户端处于 `SYN-SENT` 状态。
+- 客户端会随机初始化序号（`client_isn`），将此序号置于 TCP 首部的「序号」字段中，同时把 `SYN` 标志位置为 `1` ，表示 `SYN` 报文。接着把第一个 SYN
+  报文发送给服务端，表示向服务端发起连接，该报文不包含应用层数据，之后客户端处于 `SYN-SENT` 状态。
 
 ![png](images/TPC面试题-第二个报文.png)
 
-- 服务端收到客户端的 `SYN` 报文后，首先服务端也随机初始化自己的序号（`server_isn`），将此序号填入 TCP 首部的「序号」字段中，其次把 TCP 首部的「确认应答号」字段填入 `client_isn + 1`, 接着把 `SYN` 和 `ACK` 标志位置为 `1`。最后把该报文发给客户端，该报文也不包含应用层数据，之后服务端处于 `SYN-RCVD` 状态。
+- 服务端收到客户端的 `SYN` 报文后，首先服务端也随机初始化自己的序号（`server_isn`），将此序号填入 TCP 首部的「序号」字段中，其次把 TCP 首部的「确认应答号」字段填入 `client_isn + 1`,
+  接着把 `SYN` 和 `ACK` 标志位置为 `1`。最后把该报文发给客户端，该报文也不包含应用层数据，之后服务端处于 `SYN-RCVD` 状态。
 
 ![png](images/TPC面试题-第三个报文.png)
 
-- 客户端收到服务端报文后，还要向服务端回应最后一个应答报文，首先该应答报文 TCP 首部 `ACK` 标志位置为 `1` ，其次「确认应答号」字段填入 `server_isn + 1` ，最后把报文发送给服务端，这次报文可以携带客户到服务器的数据，之后客户端处于 `ESTABLISHED` 状态。
+- 客户端收到服务端报文后，还要向服务端回应最后一个应答报文，首先该应答报文 TCP 首部 `ACK` 标志位置为 `1` ，其次「确认应答号」字段填入 `server_isn + 1`
+  ，最后把报文发送给服务端，这次报文可以携带客户到服务器的数据，之后客户端处于 `ESTABLISHED` 状态。
 - 服务器收到客户端的应答报文后，也进入 `ESTABLISHED` 状态。
 
 从上面的过程可以发现**第三次握手是可以携带数据的，前两次握手是不可以携带数据的**，这也是面试常问的题。
@@ -219,7 +223,7 @@ TCP 是面向连接的协议，所以使用 TCP 前必须先建立连接，而**
 
 TCP 的连接状态查看，在 Linux 可以通过 `netstat -napt` 命令查看。
 
-![png](images/TPC面试题-TCP 连接状态查看.png)
+![png](images/TPC面试题-TCP连接状态查看.png)
 
 > 为什么是三次握手？不是两次、四次？
 
@@ -243,7 +247,8 @@ TCP 的连接状态查看，在 Linux 可以通过 `netstat -napt` 命令查看�
 
 我们来看看 RFC 793 指出的 TCP 连接使用三次握手的**首要原因**：
 
-*The principle reason for the three-way handshake is to prevent old duplicate connection initiations from causing confusion.*
+*The principle reason for the three-way handshake is to prevent old duplicate connection initiations from causing
+confusion.*
 
 简单来说，三次握手的**首要原因是为了防止旧的重复连接初始化造成混乱。**
 
@@ -272,7 +277,8 @@ TCP 协议的通信双方， 都必须维护一个「序列号」， 序列号�
 - 接收方可以根据数据包的序列号按序接收；
 - 可以标识发送出去的数据包中， 哪些是已经被对方收到的；
 
-可见，序列号在 TCP 连接中占据着非常重要的作用，所以当客户端发送携带「初始序列号」的 `SYN` 报文的时候，需要服务端回一个 `ACK` 应答报文，表示客户端的 SYN 报文已被服务端成功接收，那当服务端发送「初始序列号」给客户端的时候，依然也要得到客户端的应答回应，**这样一来一回，才能确保双方的初始序列号能被可靠的同步。**
+可见，序列号在 TCP 连接中占据着非常重要的作用，所以当客户端发送携带「初始序列号」的 `SYN` 报文的时候，需要服务端回一个 `ACK` 应答报文，表示客户端的 SYN
+报文已被服务端成功接收，那当服务端发送「初始序列号」给客户端的时候，依然也要得到客户端的应答回应，**这样一来一回，才能确保双方的初始序列号能被可靠的同步。**
 
 ![png](images/TPC面试题-四次握手与三次握手.png)
 
@@ -282,7 +288,8 @@ TCP 协议的通信双方， 都必须维护一个「序列号」， 序列号�
 
 *原因三：避免资源浪费*
 
-如果只有「两次握手」，当客户端的 `SYN` 请求连接在网络中阻塞，客户端没有接收到 `ACK` 报文，就会重新发送 `SYN` ，由于没有第三次握手，服务器不清楚客户端是否收到了自己发送的建立连接的 `ACK` 确认信号，所以每收到一个 `SYN` 就只能先主动建立一个连接，这会造成什么情况呢？
+如果只有「两次握手」，当客户端的 `SYN` 请求连接在网络中阻塞，客户端没有接收到 `ACK` 报文，就会重新发送 `SYN` ，由于没有第三次握手，服务器不清楚客户端是否收到了自己发送的建立连接的 `ACK`
+确认信号，所以每收到一个 `SYN` 就只能先主动建立一个连接，这会造成什么情况呢？
 
 如果客户端的 `SYN` 阻塞了，重复发送多次 `SYN` 报文，那么服务器在收到请求后就会**建立多个冗余的无效链接，造成不必要的资源浪费。**
 
@@ -325,7 +332,8 @@ RFC1948 中提出了一个较好的初始化序列号 ISN 随机生成算法。
 
 如果TCP 的整个报文（头部 + 数据）交给 IP 层进行分片，会有什么异常呢？
 
-当 IP 层有一个超过 `MTU` 大小的数据（TCP 头部 + TCP 数据）要发送，那么 IP 层就要进行分片，把数据分片成若干片，保证每一个分片都小于 MTU。把一份 IP 数据报进行分片以后，由目标主机的 IP 层来进行重新组装后，在交给上一层 TCP 传输层。
+当 IP 层有一个超过 `MTU` 大小的数据（TCP 头部 + TCP 数据）要发送，那么 IP 层就要进行分片，把数据分片成若干片，保证每一个分片都小于 MTU。把一份 IP 数据报进行分片以后，由目标主机的 IP
+层来进行重新组装后，在交给上一层 TCP 传输层。
 
 这看起来井然有序，但这存在隐患的，**那么当如果一个 IP 分片丢失，整个 IP 报文的所有分片都得重传**。
 
@@ -337,7 +345,7 @@ RFC1948 中提出了一个较好的初始化序列号 ISN 随机生成算法。
 
 所以，为了达到最佳的传输效能 TCP 协议在**建立连接的时候通常要协商双方的 MSS 值**，当 TCP 层发现数据超过 MSS 时，则就先会进行分片，当然由它形成的 IP 包的长度也就不会大于 MTU ，自然也就不用 IP 分片了。
 
-![png](images/TPC面试题-握手阶段协商 MSS.png)
+![png](images/TPC面试题-握手阶段协商MSS.png)
 
 经过 TCP 层分片后，如果一个 TCP 分片丢失后，**进行重发时也是以 MSS 为单位**，而不用重传所有的分片，大大增加了重传的效率。
 
@@ -345,9 +353,10 @@ RFC1948 中提出了一个较好的初始化序列号 ISN 随机生成算法。
 
 *SYN 攻击*
 
-我们都知道 TCP 连接建立是需要三次握手，假设攻击者短时间伪造不同 IP 地址的 `SYN` 报文，服务端每接收到一个 `SYN` 报文，就进入`SYN_RCVD` 状态，但服务端发送出去的 `ACK + SYN` 报文，无法得到未知 IP 主机的 `ACK` 应答，久而久之就会**占满服务端的 SYN 接收队列（未连接队列）**，使得服务器不能为正常用户服务。
+我们都知道 TCP 连接建立是需要三次握手，假设攻击者短时间伪造不同 IP 地址的 `SYN` 报文，服务端每接收到一个 `SYN` 报文，就进入`SYN_RCVD` 状态，但服务端发送出去的 `ACK + SYN` 报文，无法得到未知
+IP 主机的 `ACK` 应答，久而久之就会**占满服务端的 SYN 接收队列（未连接队列）**，使得服务器不能为正常用户服务。
 
-![png](images/TPC面试题-SYN 攻击.png)
+![png](images/TPC面试题-SYN攻击.png)
 
 *避免 SYN 攻击方式一*
 
@@ -390,7 +399,7 @@ net.ipv4.tcp_abort_on_overflow
 
 - 如果应用程序过慢时，就会导致「 Accept 队列」被占满。
 
-![png](images/TPC面试题-SYN-Accpet-受到 SYN 攻击.png)
+![png](images/TPC面试题-SYN-Accpet-受到SYN攻击.png)
 
 受到 SYN 攻击：
 
@@ -402,7 +411,7 @@ net.ipv4.tcp_abort_on_overflow
 net.ipv4.tcp_syncookies = 1
 ```
 
-![png](images/TPC面试题-SYN-Accpet-tcp_syncookies 应对 SYN 攻击.png)
+![png](images/TPC面试题-SYN-Accpet-tcp_syncookies应对SYN攻击.png)
 
 当 「 SYN 队列」满之后，后续服务器收到 SYN 包，不进入「 SYN 队列」；
 
@@ -420,7 +429,7 @@ net.ipv4.tcp_syncookies = 1
 
 双方都可以主动断开连接，断开连接后主机中的「资源」将被释放。
 
-![png](images/TPC面试题-TCP 四次挥手.png)
+![png](images/TPC面试题-TCP四次挥手.png)
 
 - 客户端打算关闭连接，此时会发送一个 TCP 首部 `FIN` 标志位被置为 `1` 的报文，也即 `FIN` 报文，之后客户端进入 `FIN_WAIT_1` 状态。
 - 服务端收到该报文后，就向客户端发送 `ACK` 应答报文，接着服务端进入 `CLOSED_WAIT` 状态。
@@ -445,7 +454,8 @@ net.ipv4.tcp_syncookies = 1
 
 > 为什么 TIME_WAIT 等待的时间是 2MSL？
 
-`MSL` 是 Maximum Segment Lifetime，**报文最大生存时间**，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为 TCP 报文基于是 IP 协议的，而 IP 头中有一个 `TTL` 字段，是 IP 数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减 1，当此值为 0 则数据报将被丢弃，同时发送 ICMP 报文通知源主机。
+`MSL` 是 Maximum Segment Lifetime，**报文最大生存时间**，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为 TCP 报文基于是 IP 协议的，而 IP 头中有一个 `TTL` 字段，是
+IP 数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减 1，当此值为 0 则数据报将被丢弃，同时发送 ICMP 报文通知源主机。
 
 MSL 与 TTL 的区别：MSL 的单位是时间，而 TTL 是经过路由跳数。所以 **MSL 应该要大于等于 TTL 消耗为 0 的时间**，以确保报文已被自然消亡。
 
@@ -453,7 +463,8 @@ TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是：网络中可能存在
 
 比如，如果被动关闭方没有收到断开连接的最后的 ACK 报文，就会触发超时重发 Fin 报文，另一方接收到 FIN 后，会重发 ACK 给被动关闭方， 一来一去正好 2 个 MSL。
 
-`2MSL` 的时间是从**客户端接收到 FIN 后发送 ACK 开始计时的**。如果在 TIME-WAIT 时间内，因为客户端的 ACK 没有传输到服务端，客户端又接收到了服务端重发的 FIN 报文，那么 **2MSL 时间将重新计时**。
+`2MSL` 的时间是从**客户端接收到 FIN 后发送 ACK 开始计时的**。如果在 TIME-WAIT 时间内，因为客户端的 ACK 没有传输到服务端，客户端又接收到了服务端重发的 FIN 报文，那么 **2MSL 时间将重新计时**
+。
 
 在 Linux 系统里 `2MSL` 默认是 `60` 秒，那么一个 `MSL` 也就是 `30` 秒。**Linux 系统停留在 TIME_WAIT 的时间为固定的 60 秒**。
 
@@ -483,7 +494,8 @@ TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是：网络中可能存在
 
 在 RFC 793 指出 TIME-WAIT 另一个重要的作用是：
 
-*TIME-WAIT - represents waiting for enough time to pass to be sure the remote TCP received the acknowledgment of its connection termination request.*
+*TIME-WAIT - represents waiting for enough time to pass to be sure the remote TCP received the acknowledgment of its
+connection termination request.*
 
 也就是说，TIME-WAIT 作用是**等待足够的时间以确保最后的 ACK 能让被动关闭方接收，从而帮助其正常关闭。**
 
@@ -571,7 +583,8 @@ setsockopt(s, SOL_SOCKET, SO_LINGER, &so_linger,sizeof(so_linger));
 
 TCP 有一个机制是**保活机制**。这个机制的原理是这样的：
 
-定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测报文，该探测报文包含的数据非常少，如果连续几个探测报文都没有得到响应，则认为当前的 TCP 连接已经死亡，系统内核将错误信息通知给上层应用程序。
+定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测报文，该探测报文包含的数据非常少，如果连续几个探测报文都没有得到响应，则认为当前的 TCP
+连接已经死亡，系统内核将错误信息通知给上层应用程序。
 
 在 Linux 内核可以有对应的参数可以设置保活时间、保活探测的次数、保活探测的时间间隔，以下都为默认值：
 
@@ -601,7 +614,7 @@ net.ipv4.tcp_keepalive_probes=9
 
 > 针对 TCP 应该如何 Socket 编程？
 
-![png](images/TPC面试题-基于 TCP 协议的客户端和服务器工作.png)
+![png](images/TPC面试题-基于TCP协议的客户端和服务器工作.png)
 
 - 服务端和客户端初始化 `socket`，得到文件描述符；
 - 服务端调用 `bind`，将绑定在 IP 地址和端口;
@@ -625,7 +638,7 @@ Linux内核中会维护两个队列：
 - 未完成连接队列（SYN 队列）：接收到一个 SYN 建立连接请求，处于 SYN_RCVD 状态；
 - 已完成连接队列（Accpet 队列）：已完成 TCP 三次握手过程，处于 ESTABLISHED 状态；
 
-![png](images/TPC面试题-SYN 队列 与 Accpet 队列.png)
+![png](images/TPC面试题-SYN队列与Accpet队列.png)
 
 ```
 int listen (int socketfd, int backlog)
@@ -645,8 +658,10 @@ int listen (int socketfd, int backlog)
 ![png](images/TPC面试题-客户端连接服务端.png)
 
 - 客户端的协议栈向服务器端发送了 SYN 包，并告诉服务器端当前发送序列号 client_isn，客户端进入 SYNC_SENT 状态；
-- 服务器端的协议栈收到这个包之后，和客户端进行 ACK 应答，应答的值为 client_isn+1，表示对 SYN 包 client_isn 的确认，同时服务器也发送一个 SYN 包，告诉客户端当前我的发送序列号为 server_isn，服务器端进入 SYNC_RCVD 状态；
-- 客户端协议栈收到 ACK 之后，使得应用程序从 `connect` 调用返回，表示客户端到服务器端的单向连接建立成功，客户端的状态为 ESTABLISHED，同时客户端协议栈也会对服务器端的 SYN 包进行应答，应答数据为 server_isn+1；
+- 服务器端的协议栈收到这个包之后，和客户端进行 ACK 应答，应答的值为 client_isn+1，表示对 SYN 包 client_isn 的确认，同时服务器也发送一个 SYN 包，告诉客户端当前我的发送序列号为
+  server_isn，服务器端进入 SYNC_RCVD 状态；
+- 客户端协议栈收到 ACK 之后，使得应用程序从 `connect` 调用返回，表示客户端到服务器端的单向连接建立成功，客户端的状态为 ESTABLISHED，同时客户端协议栈也会对服务器端的 SYN 包进行应答，应答数据为
+  server_isn+1；
 - 应答包到达服务器端后，服务器端协议栈使得 `accept` 阻塞调用返回，这个时候服务器端到客户端的单向连接也建立成功，服务器端也进入 ESTABLISHED 状态。
 
 从上面的描述过程，我们可以得知**客户端 connect 成功返回是在第二次握手，服务端 accept 成功返回是在三次握手成功之后。**
@@ -655,10 +670,11 @@ int listen (int socketfd, int backlog)
 
 我们看看客户端主动调用了 `close`，会发生什么？
 
-![png](images/TPC面试题-客户端调用 close 过程.png)
+![png](images/TPC面试题-客户端调用close过程.png)
 
 - 客户端调用 `close`，表明客户端没有数据需要发送了，则此时会向服务端发送 FIN 报文，进入 FIN_WAIT_1 状态；
-- 服务端接收到了 FIN 报文，TCP 协议栈会为 FIN 包插入一个文件结束符 `EOF` 到接收缓冲区中，应用程序可以通过 `read` 调用来感知这个 FIN 包。这个 `EOF` 会被**放在已排队等候的其他已接收的数据之后**，这就意味着服务端需要处理这种异常情况，因为 EOF 表示在该连接上再无额外数据到达。此时，服务端进入 CLOSE_WAIT 状态；
+- 服务端接收到了 FIN 报文，TCP 协议栈会为 FIN 包插入一个文件结束符 `EOF` 到接收缓冲区中，应用程序可以通过 `read` 调用来感知这个 FIN 包。这个 `EOF` 会被**放在已排队等候的其他已接收的数据之后**
+  ，这就意味着服务端需要处理这种异常情况，因为 EOF 表示在该连接上再无额外数据到达。此时，服务端进入 CLOSE_WAIT 状态；
 - 接着，当处理完数据后，自然就会读到 `EOF`，于是也调用 `close` 关闭它的套接字，这会使得会发出一个 FIN 包，之后处于 LAST_ACK 状态；
 - 客户端接收到服务端的 FIN 包，并发送 ACK 确认包给服务端，此时客户端将进入 TIME_WAIT 状态；
 - 服务端收到 ACK 确认包后，就进入了最后的 CLOSE 状态；
