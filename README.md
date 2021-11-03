@@ -82,6 +82,9 @@
     - 服务发现
         - [浅谈Kubernetes中的服务发现](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13
 
+    - 熔断降级
+        - [熔断降级原理](note/microservice/fuse/熔断降级原理.md)  最后更新于2021-11-10
+
     - 其他
         - [微服务拆分之道](note/microservice/other/微服务拆分之道.md)  最后更新于2021-6-20
 
