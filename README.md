@@ -122,6 +122,7 @@
     - [一致性哈希算法-简单版](note/redis/一致性哈希算法-简单版.md)  最后更新于2021-8-18
     - [Redis配置文件-之一](note/redis/Redis配置文件-之一.md)  最后更新于2021-9-6
     - [Redis配置文件-之二](note/redis/Redis配置文件-之二.md)  最后更新于2021-9-6
+    - [Redis实战-Bitmap实现统计](note/redis/Redis实战-Bitmap实现统计.md)  最后更新于2021-11-11
 
 + Elasticsearch
     - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
