@@ -124,6 +124,7 @@
     - [Redis配置文件-之二](note/redis/Redis配置文件-之二.md)  最后更新于2021-9-6
     - [Redis实战-Bitmap实现统计](note/redis/Redis实战-Bitmap实现统计.md)  最后更新于2021-11-11
     - [Redis实战-巧用数据类型实现亿级数据统计](note/redis/Redis实战-巧用数据类型实现亿级数据统计.md)  最后更新于2021-11-12
+    - [Redis实战-Geo数据类型实现附近的人](note/redis/Redis实战-Geo数据类型实现附近的人.md)  最后更新于2021-11-14
 
 + Elasticsearch
     - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
