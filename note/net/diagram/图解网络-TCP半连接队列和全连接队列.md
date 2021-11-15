@@ -46,7 +46,8 @@
 - 半连接队列，也称 SYN 队列；
 - 全连接队列，也称 accepet 队列。
 
-服务端收到客户端发起的 SYN 请求后，**内核会把该连接存储到半连接队列**，并向客户端响应 SYN+ACK，接着客户端会返回 ACK，服务端收到第三次握手的 ACK 后，**内核会把连接从半连接队列移除，然后创建新的完全的连接，并将其添加到 accept 队列，等待进程调用 accept 函数时把连接取出来。**
+服务端收到客户端发起的 SYN 请求后，**内核会把该连接存储到半连接队列**，并向客户端响应 SYN+ACK，接着客户端会返回 ACK，服务端收到第三次握手的 ACK 后，**
+内核会把连接从半连接队列移除，然后创建新的完全的连接，并将其添加到 accept 队列，等待进程调用 accept 函数时把连接取出来。**
 
 ![png](images/TPC队列-半连接队列与全连接队列.png)
 
@@ -102,7 +103,7 @@
 
 **当超过了 TCP 最大全连接队列，服务端则会丢掉后续进来的 TCP 连接**，丢掉的 TCP 连接的个数会被统计起来，我们可以使用 netstat -s 命令来查看：
 
-![png](images/TPC队列-netstat -s 命令.png)
+![png](images/TPC队列-netstat-s命令.png)
 
 上面看到的 41150 times ，表示全连接队列溢出的次数，注意这个是累计值。可以隔几秒钟执行下，如果这个数字一直在增加的话肯定全连接队列偶尔满了。
 
@@ -118,14 +119,16 @@
 
 tcp_abort_on_overflow 共有两个值分别是 0 和 1，其分别表示：
 
-- 0 ：表示如果全连接队列满了，那么 server 扔掉 client  发过来的 ack ；
+- 0 ：表示如果全连接队列满了，那么 server 扔掉 client 发过来的 ack ；
 - 1 ：表示如果全连接队列满了，那么 server 发送一个 `reset` 包给 client，表示废掉这个握手过程和这个连接；
 
-如果要想知道客户端连接不上服务端，是不是服务端 TCP 全连接队列满的原因，那么可以把 tcp_abort_on_overflow 设置为 1，这时如果在客户端异常中可以看到很多 `connection reset by peer` 的错误，那么就可以证明是由于服务端 TCP 全连接队列溢出的问题。
+如果要想知道客户端连接不上服务端，是不是服务端 TCP 全连接队列满的原因，那么可以把 tcp_abort_on_overflow 设置为 1，这时如果在客户端异常中可以看到很多 `connection reset by peer`
+的错误，那么就可以证明是由于服务端 TCP 全连接队列溢出的问题。
 
 通常情况下，应当把 tcp_abort_on_overflow 设置为 0，因为这样更有利于应对突发流量。
 
-举个例子，当 TCP 全连接队列满导致服务器丢掉了 ACK，与此同时，客户端的连接状态却是 ESTABLISHED，进程就在建立好的连接上发送请求。只要服务器没有为请求回复 ACK，请求就会被多次**重发**。如果服务器上的进程只是**短暂的繁忙造成 accept 队列满，那么当 TCP 全连接队列有空位时，再次接收到的请求报文由于含有 ACK，仍然会触发服务器端成功建立连接。**
+举个例子，当 TCP 全连接队列满导致服务器丢掉了 ACK，与此同时，客户端的连接状态却是 ESTABLISHED，进程就在建立好的连接上发送请求。只要服务器没有为请求回复 ACK，请求就会被多次**重发**。如果服务器上的进程只是**
+短暂的繁忙造成 accept 队列满，那么当 TCP 全连接队列有空位时，再次接收到的请求报文由于含有 ACK，仍然会触发服务器端成功建立连接。**
 
 所以，tcp_abort_on_overflow 设为 0 可以提高连接建立的成功率，只有你非常肯定 TCP 全连接队列会长期溢出时，才能设置为 1 以尽快通知客户端。
 
@@ -175,7 +178,7 @@ tcp_abort_on_overflow 共有两个值分别是 0 和 1，其分别表示：
 
 从上面的执行结果，可以发现全连接队列使用增长的很快，但是一直都没有超过最大值，所以就不会溢出，那么 `netstat -s` 就不会有 TCP 全连接队列溢出个数的显示：
 
-![png](images/TPC队列-netstat -s 命令2.png)
+![png](images/TPC队列-netstat-s命令2.png)
 
 ## 三、实战 - TCP 半连接队列溢出
 
@@ -187,7 +190,7 @@ tcp_abort_on_overflow 共有两个值分别是 0 和 1，其分别表示：
 
 于是，我们可以使用如下命令计算当前 TCP 半连接队列长度：
 
-![png](images/TPC队列-计算当前 TCP 半连接队列长度.png)
+![png](images/TPC队列-计算当前TCP半连接队列长度.png)
 
 > 如何模拟 TCP 半连接队列溢出场景？
 
@@ -211,11 +214,11 @@ tcp_abort_on_overflow 共有两个值分别是 0 和 1，其分别表示：
 
 当服务端受到 SYN 攻击后，连接服务端 ssh 就会断开了，无法再连上。只能在服务端主机上执行查看当前 TCP 半连接队列大小：
 
-![png](images/TPC队列-计算当前 TCP 半连接队列长度2.png)
+![png](images/TPC队列-计算当前TCP半连接队列长度2.png)
 
 同时，还可以通过 netstat -s 观察半连接队列溢出的情况：
 
-![png](images/TPC队列-netstat -s 命令3.png)
+![png](images/TPC队列-netstat-s命令3.png)
 
 上面输出的数值是**累计值**，表示共有多少个 TCP 连接因为半连接队列溢出而被丢弃。**隔几秒执行几次，如果有上升的趋势，说明当前存在半连接队列溢出的现象**。
 
@@ -288,7 +291,8 @@ max_qlen_log 是**理论**半连接队列最大值，并不一定代表服务端
 2. 若全连接队列满了，且没有重传 SYN+ACK 包的连接请求多于 1 个，则会丢弃；
 3. **如果没有开启 tcp_syncookies，并且 max_syn_backlog 减去 当前半连接队列长度小于 (max_syn_backlog >> 2)，则会丢弃；**
 
-假设条件 1 当前半连接队列的长度 「没有超过」理论的半连接队列最大值  max_qlen_log，那么如果条件 3 成立，则依然会丢弃 SYN 包，也就会使得服务端处于 SYN_REVC 状态的最大个数不会是理论值 max_qlen_log。
+假设条件 1 当前半连接队列的长度 「没有超过」理论的半连接队列最大值 max_qlen_log，那么如果条件 3 成立，则依然会丢弃 SYN 包，也就会使得服务端处于 SYN_REVC 状态的最大个数不会是理论值
+max_qlen_log。
 
 似乎很难理解，我们继续接着做实验，实验见真知。
 
@@ -308,11 +312,12 @@ max_qlen_log 是**理论**半连接队列最大值，并不一定代表服务端
 
 服务端执行如下命令，查看处于 SYN_RECV 状态的最大个数：
 
-![png](images/TPC队列-netstat -s 命令4.png)
+![png](images/TPC队列-netstat-s命令4.png)
 
 可以发现，服务端处于 SYN_RECV 状态的最大个数并不是 max_qlen_log 变量的值。
 
-这就是前面所说的原因：**如果当前半连接队列的长度 「没有超过」理论半连接队列最大值  max_qlen_log，那么如果条件 3 成立，则依然会丢弃 SYN 包，也就会使得服务端处于 SYN_REVC 状态的最大个数不会是理论值 max_qlen_log。**
+这就是前面所说的原因：**如果当前半连接队列的长度 「没有超过」理论半连接队列最大值 max_qlen_log，那么如果条件 3 成立，则依然会丢弃 SYN 包，也就会使得服务端处于 SYN_REVC 状态的最大个数不会是理论值
+max_qlen_log。**
 
 我们来分析一波条件 3 :
 
@@ -324,7 +329,8 @@ max_qlen_log 是**理论**半连接队列最大值，并不一定代表服务端
 
 所以，服务端处于 SYN_RECV 状态的最大个数分为如下两种情况：
 
-1. 如果「当前半连接队列」**没超过**「理论半连接队列最大值」，但是**超过** max_syn_backlog - (max_syn_backlog >> 2)，那么处于 SYN_RECV 状态的最大个数就是 max_syn_backlog - (max_syn_backlog >> 2)；
+1. 如果「当前半连接队列」**没超过**「理论半连接队列最大值」，但是**超过** max_syn_backlog - (max_syn_backlog >> 2)，那么处于 SYN_RECV 状态的最大个数就是
+   max_syn_backlog - (max_syn_backlog >> 2)；
 
 2. 如果「当前半连接队列」**超过**「理论半连接队列最大值」，那么处于 SYN_RECV 状态的最大个数就是「理论半连接队列最大值」。
 
@@ -338,11 +344,11 @@ max_qlen_log 是**理论**半连接队列最大值，并不一定代表服务端
 
 > 如果 SYN 半连接队列已满，只能丢弃连接吗？
 
-并不是这样，**开启 syncookies 功能就可以在不使用 SYN 半连接队列的情况下成功建立连接**，在前面我们源码分析也可以看到这点，当开启了  syncookies 功能就不会丢弃连接。
+并不是这样，**开启 syncookies 功能就可以在不使用 SYN 半连接队列的情况下成功建立连接**，在前面我们源码分析也可以看到这点，当开启了 syncookies 功能就不会丢弃连接。
 
 syncookies 是这么做的：服务器根据当前状态计算出一个值，放在己方发出的 SYN+ACK 报文中发出，当客户端返回 ACK 报文时，取出该值验证，如果合法，就认为连接建立成功，如下图所示。
 
-![png](images/TPC队列-开启 syncookies 功能.png)
+![png](images/TPC队列-开启syncookies功能.png)
 
 syncookies 参数主要有以下三个值：
 
@@ -352,7 +358,7 @@ syncookies 参数主要有以下三个值：
 
 那么在应对 SYN 攻击时，只需要设置为 1 即可：
 
-![png](images/TPC队列-syncookies 参数设置为1.png)
+![png](images/TPC队列-syncookies参数设置为1.png)
 
 > 如何防御 SYN 攻击？
 
@@ -364,7 +370,8 @@ syncookies 参数主要有以下三个值：
 
 *方式一：增大半连接队列*
 
-在前面源码和实验中，得知**要想增大半连接队列，我们得知不能只单纯增大 tcp_max_syn_backlog 的值，还需一同增大 somaxconn 和 backlog，也就是增大全连接队列**。否则，只单纯增大 tcp_max_syn_backlog 是无效的。
+在前面源码和实验中，得知**要想增大半连接队列，我们得知不能只单纯增大 tcp_max_syn_backlog 的值，还需一同增大 somaxconn 和 backlog，也就是增大全连接队列**。否则，只单纯增大
+tcp_max_syn_backlog 是无效的。
 
 增大 tcp_max_syn_backlog 和 somaxconn 的方法是修改 Linux 内核参数：
 
@@ -372,7 +379,7 @@ syncookies 参数主要有以下三个值：
 
 增大 backlog 的方式，每个 Web 服务都不同，比如 Nginx 增大 backlog 的方法如下：
 
-![png](images/TPC队列-Nginx 增大 backlog.png)
+![png](images/TPC队列-Nginx增大backlog.png)
 
 最后，改变了如上这些参数后，要重启 Nginx 服务，因为半连接队列和全连接队列都是在 listen() 初始化的。
 
@@ -380,7 +387,7 @@ syncookies 参数主要有以下三个值：
 
 开启 tcp_syncookies 功能的方式也很简单，修改 Linux 内核参数：
 
-![png](images/TPC队列-开启 tcp_syncookies 功能.png)
+![png](images/TPC队列-开启tcp_syncookies功能.png)
 
 *方式三：减少 SYN+ACK 重传次数*
 
@@ -388,5 +395,5 @@ syncookies 参数主要有以下三个值：
 
 那么针对 SYN 攻击的场景，我们可以减少 SYN+ACK 的重传次数，以加快处于 SYN_REVC 状态的 TCP 连接断开。
 
-![png](images/TPC队列-减少 SYN+ACK 重传次数.png)
+![png](images/TPC队列-减少SYN+ACK重传次数.png)
 
