@@ -54,49 +54,7 @@
 
 + 代码优化
     - [代码优化细节](note/optimization/代码优化细节.md)  最后更新于2021-5-12
-
-### 框架
-
-+ Spring
-    - [知识点](note/spring/知识点.md)  最后更新于2021-2-4
-    - [Spring使用技巧](note/spring/spring使用技巧.md)  最后更新于2021-3-14
-    - [Spring事务管理](note/spring/spring事务管理.md)  最后更新于2021-6-23
-    - [Spring事务管理-传播特性](note/spring/spring事务管理-传播特性.md)  最后更新于2021-10-26
-    - [Spring-AOP](note/spring/Spring-AOP.md)  最后更新于2021-11-2
-
-+ Spring Security
-    - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
-    - [知识点](note/security/知识点.md)  最后更新于2021-1-19
-
-+ 微服务
-    - 分布式事务
-        - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25
-        - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25
-        - [Seata分布式事务TA模式源码解读](note/microservice/transaction/Seata分布式事务TA模式源码解读.md)  最后更新于2021-5-29
-        - [分布式事务的七种解决方案](note/microservice/transaction/分布式事务的七种解决方案.md)  最后更新于2021-8-1
-
-    - 远程调用
-        - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19
-        - [微服务之间的最佳调用方式](note/microservice/rpc/微服务之间的最佳调用方式.md)  最后更新于2021-6-28
-
-    - 服务发现
-        - [浅谈Kubernetes中的服务发现](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13
-
-    - 熔断降级
-        - [熔断降级原理](note/microservice/fuse/熔断降级原理.md)  最后更新于2021-11-10
-
-    - 其他
-        - [微服务拆分之道](note/microservice/other/微服务拆分之道.md)  最后更新于2021-6-20
-
-+ 中间件
-    - 消息队列
-        - [知识点](note/middleware/mq/知识点.md)  最后更新于2020-12-28
-        - [面试角度学习Kafka](note/middleware/mq/面试角度学习Kafka.md)  最后更新于2021-4-28
-
-+ 开箱即用类
-    - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑
-    - [Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22
-    - [Disruptor-Disruptor类分析](note/other-frame/disruptor-Disruptor类分析.md)  最后更新于2021-9-22
+    - [聊聊接口性能优化的11个小技巧](note/optimization/聊聊接口性能优化的11个小技巧.md)  最后更新于2021-11-28
 
 ### 数据库
 
@@ -112,6 +70,7 @@
     - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
     - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
     - [MySQL是这样执行的](note/mysql/MySQL是这样执行的.md)  最后更新于2021-10-4
+    - [explain-索引优化](note/mysql/index/explain-索引优化.md)  TODO
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
@@ -126,9 +85,13 @@
     - [Redis实战-巧用数据类型实现亿级数据统计](note/redis/Redis实战-巧用数据类型实现亿级数据统计.md)  最后更新于2021-11-12
     - [Redis实战-Geo数据类型实现附近的人](note/redis/Redis实战-Geo数据类型实现附近的人.md)  最后更新于2021-11-14
     - [Redis缓存使用技巧和设计方案](note/redis/Redis缓存使用技巧和设计方案.md)  最后更新于2021-11-28
+    - [Redis分布式锁的8大坑](note/redis/Redis分布式锁的8大坑.md)  TODO
 
 + Elasticsearch
     - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
+
++ 分库分表
+    - [为什么要分库分表](note/ss/为什么要分库分表.md)  TODO
 
 ### 网络编程
 
@@ -199,6 +162,50 @@
     - [图解操作系统-申请内存](note/os/diagram/申请内存.md)  最后更新于2021-6-16
     - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
     - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
+
+### 框架
+
++ Spring
+    - [知识点](note/spring/知识点.md)  最后更新于2021-2-4
+    - [Spring使用技巧](note/spring/spring使用技巧.md)  最后更新于2021-3-14
+    - [Spring事务管理](note/spring/spring事务管理.md)  最后更新于2021-6-23
+    - [Spring事务管理-传播特性](note/spring/spring事务管理-传播特性.md)  最后更新于2021-10-26
+    - [Spring-AOP](note/spring/Spring-AOP.md)  最后更新于2021-11-2
+    - [Spring大事务问题到底要如何解决](note/spring/Spring大事务问题到底要如何解决.md)  TODO
+
++ Spring Security
+    - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
+    - [知识点](note/security/知识点.md)  最后更新于2021-1-19
+
++ 微服务
+    - 分布式事务
+        - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25
+        - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25
+        - [Seata分布式事务TA模式源码解读](note/microservice/transaction/Seata分布式事务TA模式源码解读.md)  最后更新于2021-5-29
+        - [分布式事务的七种解决方案](note/microservice/transaction/分布式事务的七种解决方案.md)  最后更新于2021-8-1
+
+    - 远程调用
+        - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19
+        - [微服务之间的最佳调用方式](note/microservice/rpc/微服务之间的最佳调用方式.md)  最后更新于2021-6-28
+
+    - 服务发现
+        - [浅谈Kubernetes中的服务发现](note/microservice/discovery/浅谈Kubernetes中的服务发现.md)  最后更新于2021-5-13
+
+    - 熔断降级
+        - [熔断降级原理](note/microservice/fuse/熔断降级原理.md)  最后更新于2021-11-10
+
+    - 其他
+        - [微服务拆分之道](note/microservice/other/微服务拆分之道.md)  最后更新于2021-6-20
+
++ 中间件
+    - 消息队列
+        - [知识点](note/middleware/mq/知识点.md)  最后更新于2020-12-28
+        - [面试角度学习Kafka](note/middleware/mq/面试角度学习Kafka.md)  最后更新于2021-4-28
+
++ 开箱即用类
+    - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑
+    - [Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22
+    - [Disruptor-Disruptor类分析](note/other-frame/disruptor-Disruptor类分析.md)  最后更新于2021-9-22
 
 ### Kubernetes
 
