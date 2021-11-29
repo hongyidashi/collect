@@ -1,5 +1,27 @@
 # explain-索引优化
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、explain介绍](#%E4%B8%80explain%E4%BB%8B%E7%BB%8D)
+- [二、explain详解](#%E4%BA%8Cexplain%E8%AF%A6%E8%A7%A3)
+    - [1. id列](#1-id%E5%88%97)
+    - [2. select_type列](#2-select_type%E5%88%97)
+    - [2. table列](#2-table%E5%88%97)
+    - [3. partitions列](#3-partitions%E5%88%97)
+    - [4. type列](#4-type%E5%88%97)
+    - [5. possible_keys列](#5-possible_keys%E5%88%97)
+    - [6. key列](#6-key%E5%88%97)
+    - [7. key_len列](#7-key_len%E5%88%97)
+    - [8. ref列](#8-ref%E5%88%97)
+    - [9. rows列](#9-rows%E5%88%97)
+    - [10. filtered列](#10-filtered%E5%88%97)
+    - [11. Extra列](#11-extra%E5%88%97)
+- [三、索引优化的过程](#%E4%B8%89%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 [TOC]
 
 ## 零、开篇
@@ -76,7 +98,9 @@ explainable_stmt: {
 用一条简单的sql看看使用`explain`关键字的效果：
 
 ```sql
-explain select * from test1;
+explain
+select *
+from test1;
 ```
 
 执行结果：
@@ -108,7 +132,10 @@ explain select * from test1;
 执行sql如下：
 
 ```sql
-explain select * from test1 t1 inner join test1 t2 on t1.id=t2.id
+explain
+select *
+from test1 t1
+         inner join test1 t2 on t1.id = t2.id
 ```
 
 结果：
@@ -130,7 +157,10 @@ explain select * from test1 t1 inner join test1 t2 on t1.id=t2.id
 执行sql如下：
 
 ```sql
-explain select * from test1 t1 where t1.id = (select id from  test1 t2 where  t2.id=2);
+explain
+select *
+from test1 t1
+where t1.id = (select id from test1 t2 where t2.id = 2);
 ```
 
 结果：
@@ -149,9 +179,10 @@ explain select * from test1 t1 where t1.id = (select id from  test1 t2 where  t2
 
 ```sql
 explain
-select t1.* from test1 t1
-inner join (select max(id) mid from test1 group by id) t2
-on t1.id=t2.mid
+select t1.*
+from test1 t1
+         inner join (select max(id) mid from test1 group by id) t2
+                    on t1.id = t2.mid
 ```
 
 结果：
@@ -191,8 +222,6 @@ on t1.id=t2.mid
 
 下面看看这些SELECT类型具体是怎么出现的：
 
-
-
 1. SIMPLE
 
    执行sql如下：
@@ -205,59 +234,63 @@ on t1.id=t2.mid
 
 ![png](images/1-执行结果5.png)
 
-​		它只在简单SELECT查询中出现，不包含子查询和UNION，这种类型比较直观就不多说了。
+​ 它只在简单SELECT查询中出现，不包含子查询和UNION，这种类型比较直观就不多说了。
 
 2. PRIMARY 和 SUBQUERY
 
-​		执行sql如下：
+​ 执行sql如下：
 
 ```sql
-explain select * from test1 t1 where t1.id = (select id from  test1 t2 where  t2.id=2);
+explain
+select *
+from test1 t1
+where t1.id = (select id from test1 t2 where t2.id = 2);
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果6.png)
 
-​		我们看到这条嵌套查询的sql中，最外层的t1表是PRIMARY类型，而最里面的子查询t2表是SUBQUERY类型。
+​ 我们看到这条嵌套查询的sql中，最外层的t1表是PRIMARY类型，而最里面的子查询t2表是SUBQUERY类型。
 
 3. DERIVED
 
-​		执行sql如下：
+​ 执行sql如下：
 
 ```sql
 explain
-select t1.* from test1 t1
-inner join (select max(id) mid from test1 group by id) t2
-on t1.id=t2.mid
+select t1.*
+from test1 t1
+         inner join (select max(id) mid from test1 group by id) t2
+                    on t1.id = t2.mid
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果7.png)
 
-​		最后一条记录就是衍生表，它一般是FROM列表中包含的子查询，这里是sql中的分组子查询。
+​ 最后一条记录就是衍生表，它一般是FROM列表中包含的子查询，这里是sql中的分组子查询。
 
 4. UNION 和 UNION RESULT
 
-​		执行sql如下：
+​ 执行sql如下：
 
 ```sql
 explain
-select * from test1
+select *
+from test1
 union
-select* from test2
+select*
+from test2
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果8.png)
 
-​		test2表是UNION关键字之后的查询，所以被标记为UNION，test1是最主要的表，被标记为PRIMARY。而<union1,2>表示id=1和id=2的表union，其结果被标记为UNION RESULT。
+​ test2表是UNION关键字之后的查询，所以被标记为UNION，test1是最主要的表，被标记为PRIMARY。而<union1,2>表示id=1和id=2的表union，其结果被标记为UNION RESULT。
 
-​		UNION 和 UNION RESULT一般会成对出现。
-
-
+​ UNION 和 UNION RESULT一般会成对出现。
 
 此外，回答上面的问题：**id列的值允许为空吗？**
 
@@ -317,13 +350,16 @@ system > const > eq_ref > ref > range > index > ALL
 
 3. eq_ref
 
-​		常用于主键或唯一索引扫描。执行sql如下：
+​ 常用于主键或唯一索引扫描。执行sql如下：
 
 ```sql
-explain select * from test2 t1 inner join test2 t2 on t1.id=t2.id;
+explain
+select *
+from test2 t1
+         inner join test2 t2 on t1.id = t2.id;
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果10.png)
 
@@ -333,49 +369,59 @@ explain select * from test2 t1 inner join test2 t2 on t1.id=t2.id;
 
 4. ref
 
-​		常用于非主键和唯一索引扫描。执行sql如下：
+​ 常用于非主键和唯一索引扫描。执行sql如下：
 
 ```sql
-explain select * from test2 where code = '001';
+explain
+select *
+from test2
+where code = '001';
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果11.png)
 
 5. range
 
-​		常用于范围查询，比如：between ... and 或 In 等操作，执行sql如下：
+​ 常用于范围查询，比如：between ... and 或 In 等操作，执行sql如下：
 
 ```sql
-explain select * from test2 where id between 1 and 2;
+explain
+select *
+from test2
+where id between 1 and 2;
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果12.png)
 
 6. index
 
-​		全索引扫描。执行sql如下：
+​ 全索引扫描。执行sql如下：
 
 ```sql
-explain select code from test2;
+explain
+select code
+from test2;
 ```
 
-​	结果：
+​ 结果：
 
 ![png](images/1-执行结果13.png)
 
 7. ALL
 
-​		全表扫描。执行sql如下：
+​ 全表扫描。执行sql如下：
 
 ```sql
-explain select * from test2;
+explain
+select *
+from test2;
 ```
 
-​		结果：
+​ 结果：
 
 ![png](images/1-执行结果14.png)
 
@@ -412,7 +458,9 @@ code和name字段使用了联合索引。
 执行sql如下：
 
 ```sql
-explain select code from test1;
+explain
+select code
+from test1;
 ```
 
 结果：
@@ -431,11 +479,11 @@ explain select code from test1;
 
 决定key_len值的三个因素：
 
- 1.字符集
+1.字符集
 
- 2.长度
+2.长度
 
- 3.是否为空 
+3.是否为空
 
 常用的字符编码占用字节数量如下：
 
@@ -472,10 +520,12 @@ mysql常用字段占用字节数：
 执行sql如下：
 
 ```sql
-explain select code  from test1;
+explain
+select code
+from test1;
 ```
 
-结果： 
+结果：
 
 ![png](images/1-执行结果16.png)
 
@@ -496,3 +546,123 @@ explain select code from test1 where code='001';
 ![png](images/1-执行结果17.png)
 
 上图中使用了联合索引：idx_code_name，如果索引全匹配key_len应该是183，但实际上却是92，这就说明没有使用所有的索引，索引使用不充分。
+
+### 8. ref列
+
+该列表示索引命中的列或者常量。
+
+执行sql如下：
+
+```sql
+explain
+select *
+from test1 t1
+         inner join test1 t2 on t1.id = t2.id
+where t1.code = '001';
+```
+
+结果：
+
+![png](images/1-执行结果18.png)
+
+我们看到表t1命中的索引是const(常量)，而t2命中的索引是列sue库的t1表的id字段。
+
+### 9. rows列
+
+该列表示MySQL认为执行查询必须检查的行数。
+
+![png](images/1-执行结果19.png)
+
+对于InnoDB表，此数字是估计值，可能并不总是准确的。
+
+### 10. filtered列
+
+该列表示按表条件过滤的表行的估计百分比。最大值为100，这表示未过滤行。值从100减小表示过滤量增加。
+
+![png](images/1-执行结果20.png)
+
+rows显示了检查的估计行数，rows × filtered显示了与下表连接的行数。例如，如果 rows为1000且 filtered为50.00（50％），则与下表连接的行数为1000×50％= 500。
+
+### 11. Extra列
+
+该字段包含有关MySQL如何解析查询的其他信息，这列还是挺重要的，但是里面包含的值太多，就不一一介绍了，只列举几个常见的。
+
+1. **Impossible WHERE**
+
+   表示WHERE后面的条件一直都是false，
+
+   执行sql如下：
+
+   ```sql
+   explain select code from test1 where 'a' = 'b';
+   ```
+
+   结果：
+
+![png](images/1-执行结果21.png)
+
+2. **Using filesort**
+
+​ 表示按文件排序，一般是在指定的排序和索引排序不一致的情况才会出现。
+
+​ 执行sql如下：
+
+```sql
+explain
+select code
+from test1
+order by name desc;
+```
+
+​ 结果：
+
+![png](images/1-执行结果22.png)
+
+3. **Using index**
+
+​ 表示是否用了覆盖索引，说白了它表示是否所有获取的列都走了索引。
+
+![png](images/1-执行结果23.png)
+
+4. **Using temporary**
+
+​ 表示是否使用了临时表，一般多见于order by 和 group by语句。
+
+​ 执行sql如下：
+
+```sql
+explain
+select name
+from test1
+group by name;
+```
+
+​ 结果：
+
+![png](images/1-执行结果24.png)
+
+5. **Using where**
+
+​ 表示使用了where条件过滤。
+
+6. **Using join buffer**
+
+   	表示是否使用连接缓冲。来自较早联接的表被部分读取到联接缓冲区中，然后从缓冲区中使用它们的行来与当前表执行联接。
+
+## 三、索引优化的过程
+
+1. 先用慢查询日志定位具体需要优化的sql
+2. 使用explain执行计划查看索引使用情况
+3. 重点关注：
+
+- key（查看有没有使用索引）
+
+- key_len（查看索引使用是否充分）
+- type（查看索引类型）
+- Extra（查看附加信息：排序、临时表、where条件为false等）
+
+  一般情况下根据这4列就能找到索引问题。
+
+4. 根据上1步找出的索引问题优化sql
+4. 再回到第2步
+

@@ -70,7 +70,7 @@
     - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
     - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
     - [MySQL是这样执行的](note/mysql/MySQL是这样执行的.md)  最后更新于2021-10-4
-    - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-29
+    - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-30
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
