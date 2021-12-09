@@ -85,7 +85,7 @@
     - [Redis实战-巧用数据类型实现亿级数据统计](note/redis/Redis实战-巧用数据类型实现亿级数据统计.md)  最后更新于2021-11-12
     - [Redis实战-Geo数据类型实现附近的人](note/redis/Redis实战-Geo数据类型实现附近的人.md)  最后更新于2021-11-14
     - [Redis缓存使用技巧和设计方案](note/redis/Redis缓存使用技巧和设计方案.md)  最后更新于2021-11-28
-    - [Redis分布式锁的8大坑](note/redis/Redis分布式锁的8大坑.md)  最后更新于2021-12-2
+    - [Redis分布式锁的8大坑](note/redis/Redis分布式锁的8大坑.md)  最后更新于2021-12-10
 
 + Elasticsearch
     - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
