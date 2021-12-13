@@ -187,7 +187,7 @@ HashMap 是通过链表(红黑树)法来解决冲突，而 ThreadLocalMap 是通
 
 至于代码中的`expungeStaleEntry`我们等下再分析，先来看下 `ThreadLocalMap#set` 方法，看看
 
-![png](images/tl-ThreadLocalMap%23set.png)
+![png](images/tl-ThreadLocalMap-set.png)
 
 可以看到 set 的逻辑也很清晰。
 
