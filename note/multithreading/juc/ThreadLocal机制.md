@@ -163,7 +163,7 @@ public class Thread implements Runnable {
 
 此时就进入 `ThreadLocal#get`方法中了，这里就可以得知为什么不同的线程对同一个 ThreadLocal 对象调用 get 方
 
-![png](images/tl-ThreadLocal%23get.png)
+![png](images/tl-ThreadLocal-get.png)
 
 这个中文注释想必很清晰了吧！
 
