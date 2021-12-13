@@ -1,18 +1,47 @@
 # Innodb到底是怎么加锁的
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、事务锁到底是什么](#%E4%B8%80%E4%BA%8B%E5%8A%A1%E9%94%81%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88)
+- [二、准备工作](#%E4%BA%8C%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)
+- [三、加锁受哪些因素影响](#%E4%B8%89%E5%8A%A0%E9%94%81%E5%8F%97%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0%E5%BD%B1%E5%93%8D)
+    - [1. 扫描区间](#1-%E6%89%AB%E6%8F%8F%E5%8C%BA%E9%97%B4)
+    - [2. 精确匹配](#2-%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D)
+    - [3. 唯一性搜索](#3-%E5%94%AF%E4%B8%80%E6%80%A7%E6%90%9C%E7%B4%A2)
+- [四、row_search_mvcc](#%E5%9B%9Brow_search_mvcc)
+- [五、语句到底是怎么加锁的](#%E4%BA%94%E8%AF%AD%E5%8F%A5%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%8A%A0%E9%94%81%E7%9A%84)
+    - [0. 对普通的SELECT的处理和意向锁的添加](#0-%E5%AF%B9%E6%99%AE%E9%80%9A%E7%9A%84select%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E6%84%8F%E5%90%91%E9%94%81%E7%9A%84%E6%B7%BB%E5%8A%A0)
+    - [1. 定位扫描区间的第一条记录](#1-%E5%AE%9A%E4%BD%8D%E6%89%AB%E6%8F%8F%E5%8C%BA%E9%97%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E6%9D%A1%E8%AE%B0%E5%BD%95)
+    - [2. 对于ORDER BY ... DESC条件形成的扫描区间的第一条记录的处理](#2-%E5%AF%B9%E4%BA%8Eorder-by--desc%E6%9D%A1%E4%BB%B6%E5%BD%A2%E6%88%90%E7%9A%84%E6%89%AB%E6%8F%8F%E5%8C%BA%E9%97%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E6%9D%A1%E8%AE%B0%E5%BD%95%E7%9A%84%E5%A4%84%E7%90%86)
+    - [3. 真正的加锁流程才开始——对Infimum和Supremum记录的处理](#3-%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8A%A0%E9%94%81%E6%B5%81%E7%A8%8B%E6%89%8D%E5%BC%80%E5%A7%8B%E5%AF%B9infimum%E5%92%8Csupremum%E8%AE%B0%E5%BD%95%E7%9A%84%E5%A4%84%E7%90%86)
+    - [4. 真正的加锁流程才开始——对精确匹配的特殊处理](#4-%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8A%A0%E9%94%81%E6%B5%81%E7%A8%8B%E6%89%8D%E5%BC%80%E5%A7%8B%E5%AF%B9%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%B9%E6%AE%8A%E5%A4%84%E7%90%86)
+    - [5. 真正的加锁流程才开始——这回真的开始了](#5-%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8A%A0%E9%94%81%E6%B5%81%E7%A8%8B%E6%89%8D%E5%BC%80%E5%A7%8B%E8%BF%99%E5%9B%9E%E7%9C%9F%E7%9A%84%E5%BC%80%E5%A7%8B%E4%BA%86)
+    - [6. 判断索引条件下推的条件是否成立](#6-%E5%88%A4%E6%96%AD%E7%B4%A2%E5%BC%95%E6%9D%A1%E4%BB%B6%E4%B8%8B%E6%8E%A8%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%98%AF%E5%90%A6%E6%88%90%E7%AB%8B)
+    - [7. 回表对记录加锁](#7-%E5%9B%9E%E8%A1%A8%E5%AF%B9%E8%AE%B0%E5%BD%95%E5%8A%A0%E9%94%81)
+    - [8. row_search_mvcc返回，判断是否已经到达边界](#8-row_search_mvcc%E8%BF%94%E5%9B%9E%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E5%88%B0%E8%BE%BE%E8%BE%B9%E7%95%8C)
+    - [9. 然后，再处理下一条记录](#9-%E7%84%B6%E5%90%8E%E5%86%8D%E5%A4%84%E7%90%86%E4%B8%8B%E4%B8%80%E6%9D%A1%E8%AE%B0%E5%BD%95)
+- [六、还有一些释放锁的场景](#%E5%85%AD%E8%BF%98%E6%9C%89%E4%B8%80%E4%BA%9B%E9%87%8A%E6%94%BE%E9%94%81%E7%9A%84%E5%9C%BA%E6%99%AF)
+- [七、总结一下](#%E4%B8%83%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 零、开篇
 
 不知道从什么时候开始，下边这个**错误的**观点开始被广泛的流传：
 
 > 在使用加锁读的方式读取使用InnoDB存储引擎的表时，当在执行查询时没有使用到索引时，行锁会被转换为表锁。
 
-这里强调一点，对于任何`INSERT`、`DELETE`、`UPDATE`、`SELECT ... LOCK IN SHARE MODE`、`SELECT ... FOR UPDATE`语句来说，InnoDB存储引擎都不会加表级别的S锁或者X锁（我们这里不讨论表级意向锁的添加），只会加行级锁。所以即使对于全表扫描的加锁读语句来说，也只会对表中的记录进行加锁，而不是直接加一个表锁。
+这里强调一点，对于任何`INSERT`、`DELETE`、`UPDATE`、`SELECT ... LOCK IN SHARE MODE`、`SELECT ... FOR UPDATE`
+语句来说，InnoDB存储引擎都不会加表级别的S锁或者X锁（我们这里不讨论表级意向锁的添加），只会加行级锁。所以即使对于全表扫描的加锁读语句来说，也只会对表中的记录进行加锁，而不是直接加一个表锁。
 
 另外，很多小伙伴都会问：“这个语句加什么锁”，其实这是一个伪命题，因为一个语句需要加什么锁受到很多方面的影响，如果有人问你某某语句会加什么锁，那你可以直接回怼：**真不专业**！
 
 我们稍后给大家详细分析一下影响加锁的因素都有哪些，以及从源码的角度看一下InnoDB到底是如何加锁的，希望小伙伴看完后会惊呼：**真tm的简单！**
 
-不过在进行讨论前我们需要申明一下，我们讨论的只是InnoDB加的事务锁，即为了避免`脏写`、`脏读`、`不可重复读`、`幻读`这些现象带来的一致性问题而加的锁，并不是为了在多线程访问共享内存区域时而加的锁（比方说两个不同事务所在的线程想读写同一个页面时，需要进行加锁保护），也不包括server层添加的MDL锁。
+不过在进行讨论前我们需要申明一下，我们讨论的只是InnoDB加的事务锁，即为了避免`脏写`、`脏读`、`不可重复读`、`幻读`
+这些现象带来的一致性问题而加的锁，并不是为了在多线程访问共享内存区域时而加的锁（比方说两个不同事务所在的线程想读写同一个页面时，需要进行加锁保护），也不包括server层添加的MDL锁。
 
 本文所参考的源码版本为`5.7.22`。
 
@@ -28,11 +57,12 @@
 
 其中的type_mode是用于区分这个锁结构到底是行锁还是表锁，如果是表锁的话是意向锁、直接对表加锁、还是AUTO-INC锁，如果是行锁的话，具体是正经记录锁、gap锁还是next-key锁。
 
-> 小贴士：  
-> 
+> 小贴士：
+>
 > 在InnoDB的实现中，InnoDB的行锁是与记录一一对应的。即使是对于gap锁来说，在实现上也是为某条记录生成一个锁结构，然后该锁结构的类型是gap锁而已，并不是专门为某个区间生成一个锁结构。该gap锁的功能就是每当有别的事务插入记录时，会检查一下待插入记录的下一条记录上是否已经有一个gap锁的锁结构，如果有的话就进入阻塞状态。
 
-我们平时所说的**加锁**就是在内存中生成这样的一个锁结构（除了生成锁结构，还有一种称作`隐式锁`的加锁方式，不用生成锁结构）。当然，如果为1条记录加锁就要生成一个锁结构，那岂不是太浪费了！设计InnoDB的大叔提出了一种优化方案，即同一个事务，在同一个页面上加的相同类型的锁都放在同一个锁结构里。
+我们平时所说的**加锁**就是在内存中生成这样的一个锁结构（除了生成锁结构，还有一种称作`隐式锁`
+的加锁方式，不用生成锁结构）。当然，如果为1条记录加锁就要生成一个锁结构，那岂不是太浪费了！设计InnoDB的大叔提出了一种优化方案，即同一个事务，在同一个页面上加的相同类型的锁都放在同一个锁结构里。
 
 各种类型的锁是如果通过type_mode区分、各种锁都有什么作用，以及如何减少生成锁结构的细节我们这里就不展开了，那又要花费超长的篇。我们下边来看具体的加锁细节。
 
@@ -41,19 +71,21 @@
 为了故事的顺利发展，我们先创建一个表`hero`：
 
 ```sql
-CREATE TABLE hero (
-    number INT,
-    name VARCHAR(100),
+CREATE TABLE hero
+(
+    number  INT,
+    name    VARCHAR(100),
     country varchar(100),
     PRIMARY KEY (number),
-    KEY idx_name (name)
+    KEY     idx_name ( name)
 ) Engine=InnoDB CHARSET=utf8;
 ```
 
 然后向这个表里插入几条记录：
 
 ```sql
-INSERT INTINSERT INTO hero VALUES
+INSERT
+INTINSERT INTO hero VALUES
     (1, 'l刘备', '蜀'),
     (3, 'z诸葛亮', '蜀'),
     (8, 'c曹操', '魏'),
@@ -90,7 +122,10 @@ INSERT INTINSERT INTO hero VALUES
 比方说下边这个查询：
 
 ```sql
-SELECT * FROM hero WHERE name <=  'l刘备' AND country = '魏';
+SELECT *
+FROM hero
+WHERE name <= 'l刘备'
+  AND country = '魏';
 ```
 
 MySQL可以使用下边两种方式来执行上述查询：
@@ -101,12 +136,16 @@ MySQL可以使用下边两种方式来执行上述查询：
 
 优化器会计算上述二种方式哪个成本更低，选用成本更低的那种来执行查询。
 
-当优化器使用二级索引执行查询时，我们把`(-∞, 'l刘备']`称作`扫描区间`，意味着需要扫描name列值在这个区间中的所有二级索引记录，我们也可以把形成这个扫描区间的条件`name <= 'l刘备'`称作是形成这个扫描区间的`边界条件`；当优化器使用全表扫描执行查询时，我们把`(-∞, +∞)`称作`扫描区间`，意味着需要扫描number值在这个区间中的所有聚簇索引记录。
+当优化器使用二级索引执行查询时，我们把`(-∞, 'l刘备']`称作`扫描区间`，意味着需要扫描name列值在这个区间中的所有二级索引记录，我们也可以把形成这个扫描区间的条件`name <= 'l刘备'`称作是形成这个扫描区间的`边界条件`
+；当优化器使用全表扫描执行查询时，我们把`(-∞, +∞)`称作`扫描区间`，意味着需要扫描number值在这个区间中的所有聚簇索引记录。
 
 在执行一个查询的过程中，可能会用到多个扫描区间，如下所示：
 
 ```sql
-SELECT * FROM hero WHERE name < 'l刘备' OR name > 'x荀彧';
+SELECT *
+FROM hero
+WHERE name < 'l刘备'
+   OR name > 'x荀彧';
 ```
 
 如果优化器采用二级索引idx_name执行上述查询时，那么对应的扫描区间就是`(-∞, l刘备)`以及`('x荀彧', +∞)`，即需要扫描name值在上述两个扫描区间中的记录。
@@ -124,7 +163,10 @@ SELECT * FROM hero WHERE name < 'l刘备' OR name > 'x荀彧';
 对于形成扫描区间的边界条件来说，如果是等值匹配的条件，我们就把对这个扫描区间的匹配模式称作`精确匹配`。比方说：
 
 ```sql
-SELECT * FROM hero WHERE name = 'l刘备' AND country = '魏';
+SELECT *
+FROM hero
+WHERE name = 'l刘备'
+  AND country = '魏';
 ```
 
 如果使用二级索引idx_name执行上述查询时，扫描区间就是`['l刘备', 'l刘备']`，形成这个扫描区间的边界条件就是`name = 'l刘备'`。我们就把在使用二级索引idx_name执行上述查询时的匹配模式称作`精确匹配`。
@@ -132,7 +174,10 @@ SELECT * FROM hero WHERE name = 'l刘备' AND country = '魏';
 而对于下边这个查询来说
 
 ```sql
-SELECT * FROM hero WHERE name <=  'l刘备' AND country = '魏';
+SELECT *
+FROM hero
+WHERE name <= 'l刘备'
+  AND country = '魏';
 ```
 
 显然就不是`精确匹配`了。
@@ -153,7 +198,8 @@ SELECT * FROM hero WHERE name <=  'l刘备' AND country = '魏';
 
 4. 如果使用的索引是唯一二级索引，那么在搜索时不能搜索某个索引列为NULL的记录（因为对于唯一二级索引来说，是可以存储多个值为NULL的记录的）。
 
-上边几点都比较好理解，我们稍微解释一下第3点。比方说我们为某个表的a、b两列建立了一个唯一二级索引`uk_a_b(a, b)`，那么对于搜索条件`a=1`形成的扫描区间来说，不能保证该扫描区间最多只包含一条记录；对于搜索条件`a=1 AND b= 1`形成的扫描区间来说，才可以保证该扫描区间中仅包含1条记录（不包括记录的delete_flag=1的记录）。
+上边几点都比较好理解，我们稍微解释一下第3点。比方说我们为某个表的a、b两列建立了一个唯一二级索引`uk_a_b(a, b)`，那么对于搜索条件`a=1`
+形成的扫描区间来说，不能保证该扫描区间最多只包含一条记录；对于搜索条件`a=1 AND b= 1`形成的扫描区间来说，才可以保证该扫描区间中仅包含1条记录（不包括记录的delete_flag=1的记录）。
 
 ## 四、row_search_mvcc
 
@@ -165,8 +211,8 @@ SELECT * FROM hero WHERE name <=  'l刘备' AND country = '魏';
 
 - server层判断记录是否符合搜索条件，如果符合则发送给客户端，不符合则跳过。继续向InnoDB要下一条记录。
 
-> 小贴士：  
-> 
+> 小贴士：
+>
 > 此处将记录发送给客户端其实是发送到本地的网络缓冲区，缓冲区大小由net_buffer_length控制，默认是16KB大小。等缓冲区满了才真正发送网络包到客户端。
 
 - InnoDB根据记录的单向链表以及页面之间的双向链表找到下一条记录（如果定位的是二级索引记录并有回表需求则回表获取完整的聚簇索引记录），返回给server层。
@@ -181,15 +227,17 @@ SELECT * FROM hero WHERE name <=  'l刘备' AND country = '魏';
 
 可以看到这个函数长到吓人，有一千多行。
 
-> 小贴士：  
-> 
+> 小贴士：
+>
 > 不知道你们公司有没有在一个函数中把业务逻辑写到一千多行的同事，如果有的话你想不想打他。
 
 在`row_search_mvcc`里，对一条记录进行诸如多版本的可见性判断，要不要对记录进行加锁的判断，要是加锁的话加什么锁的选择，完成记录从InnoDB的存储格式到server层存储格式的转换等等等等十分繁杂的工作。
 
 其实对于UPDATE、DELETE语句来说，执行它们前都需要先在B+树中定位到相应的记录，所以它们也会调用`row_search_mvcc`。
 
-InnoDB对记录的加锁操作主要是在`row_search_mvcc`中的，像`SELECT ... LOCK IN SHARE MODE`、`SELECT ... FOR UPDATE`、`UPDATE`、`DELETE`这样的语句都会调用`row_search_mvcc`完成加锁操作。`SELECT ... LOCK IN SHARE MODE`会为记录添加S型锁，`SELECT ... FOR UPDATE`、`UPDATE`、`DELETE`会为记录添加X型锁。
+InnoDB对记录的加锁操作主要是在`row_search_mvcc`中的，像`SELECT ... LOCK IN SHARE MODE`、`SELECT ... FOR UPDATE`、`UPDATE`、`DELETE`
+这样的语句都会调用`row_search_mvcc`完成加锁操作。`SELECT ... LOCK IN SHARE MODE`会为记录添加S型锁，`SELECT ... FOR UPDATE`、`UPDATE`、`DELETE`
+会为记录添加X型锁。
 
 InnoDB每当读取一条记录时，都会调用一次`row_search_mvcc`，在做了足够长的铺垫之后，我们终于可以看一下在`row_search_mvcc`函数中是怎么对某条记录进行加锁的。
 
@@ -205,9 +253,11 @@ InnoDB每当读取一条记录时，都会调用一次`row_search_mvcc`，在做
 
 ![png](images/1-set_also_gap_locks发生变化.png)
 
-即如果当前执行的是SELECT ... LOCK IN SHARE MODE或者SELECT ... FOR UPDATE这样的加锁读语句（非DELETE或UPDATE语句），并且隔离级别不大于READ COMMITTED 时，将`set_also_gap_locks`设置为FALSE。
+即如果当前执行的是SELECT ... LOCK IN SHARE MODE或者SELECT ... FOR UPDATE这样的加锁读语句（非DELETE或UPDATE语句），并且隔离级别不大于READ COMMITTED
+时，将`set_also_gap_locks`设置为FALSE。
 
-其中`prebuilt->select_lock_type`表示加锁的类型，`LOCK_NONE`表示不加锁，`LOCK_S`表示加S锁（比方说执行SELECT ... LOCK IN SHARE MODE时），`LOCK_X`表示加X锁（比方说执行SELECT ... FOR UPDATE、DELETE、UPDATE时）。
+其中`prebuilt->select_lock_type`表示加锁的类型，`LOCK_NONE`表示不加锁，`LOCK_S`表示加S锁（比方说执行SELECT ... LOCK IN SHARE MODE时），`LOCK_X`
+表示加X锁（比方说执行SELECT ... FOR UPDATE、DELETE、UPDATE时）。
 
 ### 0. 对普通的SELECT的处理和意向锁的添加
 
@@ -219,8 +269,8 @@ InnoDB每当读取一条记录时，都会调用一次`row_search_mvcc`，在做
 
 - 标号1的箭头是对普通的SELECT的处理，在查询开启前需要生成ReadView。
 
-> 小贴士：  
-> 
+> 小贴士：
+>
 > 具体的讲就是对于Repeatable Read隔离级别来说，只在首次执行SELECT语句时生成Readview，之后的SELECT语句都复用这个ReadView；对于Read Committed隔离级别来说，每次执行SELECT语句时都会生成一个ReadView。这一点并不是在上边截图中的代码里实现的。
 
 - 标号2的箭头是对加锁读的语句的处理，在首次读取记录（prebuilt->sql_stat_start表示是否是首次读取）前，需要添加表级别的意向锁（IS或IX锁）。
@@ -242,10 +292,16 @@ InnoDB每当读取一条记录时，都会调用一次`row_search_mvcc`，在做
 但是对于下边这个查询来说：
 
 ```sql
-SELECT * FROM hero WHERE name < 's孙权' AND country = '魏' ORDER BY name DESC FOR UPDATE ;
+SELECT *
+FROM hero
+WHERE name < 's孙权'
+  AND country = '魏'
+ORDER BY name DESC FOR UPDATE;
 ```
 
-如果优化器决定使用二级索引idx_name执行上述查询的话，那么对应的扫描区间就是`(-∞, 's孙权')`。由于上述查询要求记录是按照从大到小的顺序返回给用户，所以InnoDB定位到扫描区间中的第一条记录应该是该扫描区间中最右边的那条记录，也就是键值最大的那条记录（在执行`btr_pcur_open_with_no_init`时就定位到最右边的那条记录），我们看一下idx_name二级索引示意图：
+如果优化器决定使用二级索引idx_name执行上述查询的话，那么对应的扫描区间就是`(-∞, 's孙权')`
+。由于上述查询要求记录是按照从大到小的顺序返回给用户，所以InnoDB定位到扫描区间中的第一条记录应该是该扫描区间中最右边的那条记录，也就是键值最大的那条记录（在执行`btr_pcur_open_with_no_init`
+时就定位到最右边的那条记录），我们看一下idx_name二级索引示意图：
 
 ![png](images/1-idx_name二级索引示意图.png)
 
@@ -257,10 +313,216 @@ SELECT * FROM hero WHERE name < 's孙权' AND country = '魏' ORDER BY name DESC
 
 其中`sel_set_rec_lock`就是对一条记录进行加锁的函数。
 
-可以看到，对于加锁读来说，在隔离级别不小于`REPEATABLE READ`并且也没有开启`innodb_locks_unsafe_for_binlog`系统变量的情况下，会对扫描区间中最右边的那条记录的下一条记录加一个类型为`LOCK_GAP`的锁，这个类型为`LOCK_GAP`的锁其实就是`gap锁`。
+可以看到，对于加锁读来说，在隔离级别不小于`REPEATABLE READ`并且也没有开启`innodb_locks_unsafe_for_binlog`
+系统变量的情况下，会对扫描区间中最右边的那条记录的下一条记录加一个类型为`LOCK_GAP`的锁，这个类型为`LOCK_GAP`的锁其实就是`gap锁`。
 
-在本例中，假设事务的隔离级别是REPATABLE　READ。扫描区间`(-∞, 's孙权')`中最右边的那条记录就是name值为`'l刘备'`的二级索引记录，接下来就应该为该记录的下一条记录，也就是name值为`'s孙权'`的二级索引记录加一个`gap`锁。
+在本例中，假设事务的隔离级别是REPATABLE READ。扫描区间`(-∞, 's孙权')`中最右边的那条记录就是name值为`'l刘备'`的二级索引记录，接下来就应该为该记录的下一条记录，也就是name值为`'s孙权'`
+的二级索引记录加一个`gap`锁。
 
-> 小贴士：  
-> 
+> 小贴士：
+>
 > 大家可以读一下上述代码的注释，其实这样加锁主要是为了阻止幻读。另外，这一步骤的加锁仅仅针对从右向左的扫描区间中的最右边的那条记录，之后扫描该扫描区间中的其他记录时就不做这一步的操作了。
+
+### 3. 真正的加锁流程才开始——对Infimum和Supremum记录的处理
+
+步骤1是用来定位扫描区间中的第一条记录，针对一个扫描区间只执行1次。
+
+步骤2是针对从右向左扫描的扫描区间中最右边的那条记录的下一条记录进行加锁，针对一个扫描区间也执行1次。
+
+从第3步骤开始以及往后的步骤，扫描区间中的每一条记录都要经历。
+
+先看一下如果当前记录是`Infimum记录`或者`Supremum记录`时的处理：
+
+![png](images/1-加锁.png)
+
+从上边的代码中可以看出，如果当前读取的记录是`Infimum记录`，则啥也不做，直接去读下一条记录。
+
+如果当前读取的记录是`Supremum记录`，则在下边这些条件成立的时候就会为记录添加一个类型为`LOCK_ORDINARY`的锁，其实也就是`next-key锁`：
+
+- set_also_gap_locks是TRUE（这个变量只在前边设置过，当隔离级别不大于READ COMMITTED的SELECT语句的加锁读会设置为FALSE，否则为TRUE）
+
+- 未开启`innodb_locks_unsafe_for_binlog`系统变量并且事务的隔离级别不小于REPEATABLE READ。
+
+- 本次读取属于加锁读
+
+- 所使用的不是空间索引。
+
+其实由于`Supremum记录`本身是一条伪记录，别的事务并不会更新或删除它，所以给它添加`next-key锁`起到的效果和给它添加`gap锁`是一样的。
+
+> 小贴士：
+>
+> Infimum记录和Supremum记录是InnoDB自动为B+树中的每个页面都添加的两条虚拟记录，也可以被称作伪记录。Infimum记录和Supremum记录分别占用13字节的存储空间，被放置在页面中固定的位置。其中Infimum记录被看作最小的记录，Supremum记录被看作最大的记录，Infimum记录属于页面中的记录单向链表的头节点，Supremum记录属于页面中的记录单向链表的尾节点。
+
+### 4. 真正的加锁流程才开始——对精确匹配的特殊处理
+
+如果当前记录不是`Infimum记录`或者`Supremum记录`，下边进入对匹配模式是`精确匹配`的一个特殊处理：
+
+![png](images/1-对精确匹配的特殊处理.png)
+
+可以看到，对于匹配模式是`精确匹配`的扫描区间来说，如果执行本次`row_search_mvcc`获取到的记录不在扫描区间中（0 != cmp_dtuple_rec(search_tuple, rec, offsets)
+），则需要进行一些特殊处理，即：
+
+对于加锁读来说，如果事务的隔离级别不小于Repeatable Read并且未开启`innodb_locks_unsafe_for_binlog`系统变量，那么就对该记录加一个`gap锁`
+，并且直接返回（代码中直接跳转到`normal_return`处），就不进行后续的加锁操作了。
+
+我们举一个例子，比方说当前事务的隔离级别为Repeatable Read，执行如下语句：
+
+```sql
+SELECT *
+FROM hero
+WHERE name = 's孙权' FOR UPDATE;
+```
+
+如果使用二级索引idx_name执行上述查询，那么对应的扫描区间就是`['s孙权', 's孙权']`。该语句会首先对name值是`'s孙权'`
+的记录进行加锁，不过该记录是在扫描区间中的，上述代码并不处理这种正常情况，关于正常情况的加锁我们稍后分析。
+
+当读取完`'s孙权'`的记录后，InnoDB会根据记录的next_record属性找到下一条二级索引记录，即name值为`'x荀彧'`的二级索引记录，该记录不在扫描区间`['s孙权', 's孙权']`
+中，即符合 `0 != cmp_dtuple_rec(search_tuple, rec, offsets)`条件，那么就执行上述代码的加锁流程 —— 对name值为`'x荀彧'`的二级索引记录加一个gap锁。另外，`err`
+被赋值为`DB_RECORD_NOT_FOUND`，这意味着向server层报告当前扫描区间的记录都已经扫描完了，server层在收到这个信息后就会停止向Innodb索要下一条记录的请求，即结束本扫描区间的查询。
+
+> 小贴士：
+>
+> 这一步骤是对精确匹配的扫描区间的一个特殊处理，即当server层收到InnoDB返回的扫描区间的最后一条记录，server层仍会向InnoDB索要下一条记录。InnoDB仍会沿着记录所在的链表向后读取，此次读取到的记录就不在扫描区间中了，如例子中的name值为'x荀彧'的二级索引记录就不在扫描区间['s孙权', 's孙权']中。如果这是一个精确匹配的扫描区间，那么就进行如步骤4所示的特殊处理，如果不是的话，就继续执行第5步，也就是走正常的加锁流程。
+
+### 5. 真正的加锁流程才开始——这回真的开始了
+
+![png](images/1-真正加锁.png)
+
+我们在代码中画了2个红框，这两个红框是对记录是不对记录加`gap锁`的场景。我们具体看一下。
+
+对于`1号红框`来说：
+
+- set_also_gap_locks是FALSE（这个变量只在前边设置过，当隔离级别不大于READ COMMITTED的SELECT语句的加锁读会设置为FALSE，否则为TRUE）
+
+- 开启`innodb_locks_unsafe_for_binlog`系统变量
+
+- 事务的隔离级别不大于READ COMMITTED
+
+- 唯一性搜索并且该记录的delete_flag不为1
+
+- 该索引是空间索引
+
+也就是说只要上边任意一个条件成立，该记录就不应该被加`gap锁`，而应该添加`正经记录锁`。其余情况就应该加`next-key锁`（gap锁和正经记录锁的合体）了。
+
+紧接着`2号红框`就又叙述了一个不加`gap锁`的场景：
+
+**对于`>= 主键`的这种边界条件来说，如果当前记录恰好是开始边界，就仅需对该记录加正经记录锁，而不需添加gap锁。**
+
+`1号红框`的内容比较好理解，我们举个例子看一下`2号红框`是在说什么。比方说下边这个查询：
+
+```sql
+SELCT
+* FROM hero WHERE number >= 8 FOR
+UPDATE;
+```
+
+我们假设这个语句在隔离级别为REPEATABLE READ。
+
+很显然，优化器会扫描`[8, +∞)`的聚簇索引记录。首先要通过B+树定位到扫描区间`[8, +∞)`的第一条记录，也就是number值为8的聚簇索引记录，这条记录就是扫描区间`[8, +∞)`的开始边界记录。按理说在REPEATABLE
+READ隔离级别下应该添加`next-key锁`，但由于`2号红框`中代码的存在，仅会给number值为8的聚簇索引记录添加`正经记录锁`。
+
+> 小贴士：
+>
+> 2号方框的优化主要是基于“主键值是唯一的”这条约束，在一个事务执行了上述查询之后，其他事务是不能插入number值为8的记录的，这也用不着gap锁了。
+
+除了`1号方框`和`2号方框`的场景，其余场景都给记录加`next-key锁`就好喽～
+
+### 6. 判断索引条件下推的条件是否成立
+
+如果是使用二级索引执行查询，并且有索引条件下推（Index Condition Pushdown，简称ICP）的条件的话，判断下推的条件是否成立：
+
+![png](images/1-判断索引条件下推的条件是否成立.png)
+
+这里大家特别注意一下，在使用二级索引执行查询，对于非精确匹配的扫描区间来说，形成扫描区间的边界条件也会被当作ICP条件下推到存储引擎判断，比方说下边这个查询：
+
+```sql
+mysql
+> EXPLAIN
+SELECT *
+FROM hero
+WHERE name > 's孙权'
+  AND name < 'z诸葛亮' FOR UPDATE;
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+
+| id | select_type | table | partitions | type  | possible_keys | key      | key_len | ref  | rows | filtered | Extra                 |
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+
+|  1 | SIMPLE      | hero  | NULL       | range | idx_name      | idx_name | 303     | NULL |    1 |   100.00 | Using index condition |
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+
+1 row in set, 1 warning (0.03 sec)
+```
+
+可以看到优化器决定使用idx_name执行上述查询，对应的扫描区间就是`('s孙权', 'z诸葛亮')`，形成这个扫描区间的边界条件就是`name > 's孙权' AND name < 'z诸葛亮'`
+。在执行计划的Extra列中出现了`Using index condition`，表明将边界条件`name > 's孙权' AND name < 'z诸葛亮'`作为ICP条件下推到了存储引擎。
+
+不下推不要紧，一下推的话`row_search_idx_cond_check`就会判断当前记录是否已经不在扫描区间中了，如果不在扫描区间中的话，该函数就会返回`ICP_OUT_OF_RANGE`。这样的话，`err`
+被赋值为`DB_RECORD_NOT_FOUND`，这意味着向server层报告当前扫描区间的记录都已经扫描完了，server层在收到这个信息后就会停止向Innodb索要下一条记录的请求，即结束本扫描区间的查询。
+
+当然，如果本次查询没有ICP条件，`row_search_idx_cond_check`直接返回`ICP_MATCH`，那就没有上述的麻烦事儿，继续向下走。
+
+### 7. 回表对记录加锁
+
+如果`row_search_mvcc`读取的是二级索引记录，则还需进行回表，找到相应的聚簇索引记录后需对该聚簇索引记录加一个`正经记录锁`：
+
+![png](images/1-回表对记录加锁1.png)
+
+其中，`row_sel_get_clust_rec_for_mysql`便是用于回表的函数，对聚簇索引进行加锁的逻辑在该函数中实现，我们这里就不展开了。
+
+需要注意的是，即使是对于覆盖索引的场景下，如果我们想对记录加X型锁（也就是使用SELECT ... FOR UPDATE、DELETE、UPDATE语句时）时，也需要对二级索引记录执行回表操作，并给相应的聚簇索引记录添加`正经记录锁`。
+
+![png](images/1-回表对记录加锁2.png)
+
+### 8. row_search_mvcc返回，判断是否已经到达边界
+
+每当处理完一条记录后，还需要判断一下这条记录还在不在扫描区间中，判断的代码如下：
+
+![png](images/1-判断是否已经到达边界.png)
+
+如果当前记录还在扫描区间中，就给server层正常返回，如果不在了，就给server层返回一个`HA_ERR_END_OF_FILE`
+信息，表示当前扫描区间的记录都已经扫描完了，server层在收到这个信息后就会停止向Innodb索要下一条记录的请求，即结束本扫描区间的查询。
+
+> 小贴士：
+>
+> 之前在处理精确匹配以及ICP条件时可能把err变量赋值为DB_RECORD_NOT_FOUND，其实后续代码会将这种情况也转换为给server层返回HA_ERR_END_OF_FILE信息。
+
+### 9. 然后，再处理下一条记录
+
+server层收到InnoDB的一条记录后，如果收到InnoDB通知的本扫描区间已经扫描完毕的信息，则结束本扫描区间的查询；否则继续向InnoDB要下一条记录，也就是需要继续执行一遍`row_search_mvcc`函数了。
+
+不过此时并不是定位扫描区间中的第一条记录，而是根据记录所在的链表去取下一条记录即可，所以直接从步骤3开始执行就好了，又开始了新的一条记录的加锁流程。。。
+
+循环往复，直到server层收到本扫描区间所有记录都扫描完了的信息为止。
+
+## 六、还有一些释放锁的场景
+
+大家在`步骤8`判断当前记录是否已经不再扫描区间中时可以看到，如果当前记录不在扫描区间中，会执行一个`unlock_row`的函数，这个函数主要是用于在隔离级别不大于READ
+COMMITTED时释放当前记录上的锁（如果是二级索引记录还要释放相应的聚簇索引记录上的锁）。
+
+释放锁的场景并不是只有这么一个，在`row_search_mvcc`中也有几处释放锁的场景，我们这里就不多唠叨了。
+
+## 七、总结一下
+
+其实大家再回头看`row_search_mvcc`里的关于加锁的代码就会发现，其实流程还是很简单的：
+
+1. 定位扫描区间的第一条记录。
+
+2. 如果扫描区间是从右到左扫描，那么需要给扫描区间最右边的记录的下一条记录添加一个gap锁（在隔离级别不小于`REPEATABLE READ`并且也没有开启`innodb_locks_unsafe_for_binlog`
+   系统变量的情况下）。
+
+3. 对于`Infimum记录`是不加锁的，对于`Supremum记录`加`next-key锁`（在隔离级别不小于`REPEATABLE READ`并且也没有开启`innodb_locks_unsafe_for_binlog`
+   系统变量的情况下）。
+
+4. 对于精确匹配的扫描区间来说，当扫描区间中的记录都被读完后，需对扫描区间后的第一条记录加一个gap锁即可，并且向server层返回可**结束本扫描区间的查询**的信息（在隔离级别不小于`REPEATABLE READ`
+   并且也没有开启`innodb_locks_unsafe_for_binlog`系统变量的情况下）。
+
+5. 事务的隔离级别不大于READ COMMITTED，开启`innodb_locks_unsafe_for_binlog`系统变量，唯一性搜索并且该记录的delete_flag不为1，对于`>= 主键`
+   的这种边界条件来说，当前记录恰好是开始边界记录，则对记录加`正经记录锁`，否则添加`next-key锁`。
+
+6. 判断ICP(索引下推)条件是否成立。如果当前记录是二级索引记录，并且已经不在扫描区间中，则向server层返回可**结束本扫描区间的查询**的信息。
+
+7. 如果对二级索引记录进行加锁，还需要对相应的聚簇索引记录加`正经记录锁`（使用覆盖索引，并且加S型锁的记录可跳过此步骤）。
+
+8. 判断当前记录是否已不在扫描区间中，如果不在的话，则向server返回可**结束本扫描区间的查询**的信息。
+
+9. 如果server层收到可**结束本扫描区间的查询**的信息，则结束本扫描区间的查询，否则继续向InnoDB要下一条记录，InnoDB根据记录所在的链表获取到下一条记录后，从`步骤3`开始新一轮的轮回。
+
+好了，到现在为止大家应该明白为什么最开始说的即使是全表扫描的加锁读，加的也是行锁而不是表锁了。在使用InnoDB存储引擎时，当进行全表扫描时，其实就是相当于扫描主键值在(-∞, +∞)
+这个扫描区间中的聚簇索引记录，针对每一条聚簇索引记录，都需要执行一次`row_search_mvcc`函数，都需要进行如上所述的各种判断，最后决定给扫描的记录加什么锁。

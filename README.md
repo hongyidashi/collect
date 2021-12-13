@@ -71,7 +71,7 @@
     - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
     - [MySQL是这样执行的](note/mysql/MySQL是这样执行的.md)  最后更新于2021-10-4
     - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-30
-    - [Innodb到底是怎么加锁的](note/mysql/lock/Innodb到底是怎么加锁的.md)  最后更新于2021-12-13
+    - [Innodb到底是怎么加锁的](note/mysql/lock/Innodb到底是怎么加锁的.md)  最后更新于2021-12-14
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
