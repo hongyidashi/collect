@@ -1,6 +1,7 @@
 # ThreadLocal机制
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
@@ -75,7 +76,6 @@ public class YesThreadLocal {
         }
     }
 }
-
 ```
 
 输出结果如下：
@@ -161,9 +161,9 @@ public class Thread implements Runnable {
 
 这就要从上面的 `threadLocalName.get()`说起，不记得这个代码的滑上去看下示例，其实就是调用 ThreadLocal 的 get 方法。
 
-此时就进入 `ThreadLocal#get`方法中了，这里就可以得知为什么不同的线程对同一个 ThreadLocal 对象调用 get 方法竟然能得到不同的值了。
+此时就进入 `ThreadLocal#get`方法中了，这里就可以得知为什么不同的线程对同一个 ThreadLocal 对象调用 get 方
 
-![png](images/tl-ThreadLocal#get.png)
+![png](images/tl-ThreadLocal%23get.png)
 
 这个中文注释想必很清晰了吧！
 
@@ -185,9 +185,9 @@ HashMap 是通过链表(红黑树)法来解决冲突，而 ThreadLocalMap 是通
 
 可以看到，这种 hash 冲突的解决效率其实不高，但是一般 ThreadLocal 也不会太多，所以用这种简单的办法解决即可。
 
-至于代码中的`expungeStaleEntry`我们等下再分析，先来看下 `ThreadLocalMap#set` 方法，看看写入的怎样实现的，来看看 hash 冲突的解决方法是否和上面说的一致。
+至于代码中的`expungeStaleEntry`我们等下再分析，先来看下 `ThreadLocalMap#set` 方法，看看
 
-![png](images/tl-ThreadLocalMap#set.png)
+![png](images/tl-ThreadLocalMap%23set.png)
 
 可以看到 set 的逻辑也很清晰。
 
@@ -323,4 +323,3 @@ void yesDosth {
 ![png](images/tl-InheritableThreadLocal作用.png)
 
 这里要注意，只会在线程创建的时会拷贝 InheritableThreadLocal 的值，之后父线程如何更改，子线程都不会受其影响。
-
