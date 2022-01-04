@@ -195,6 +195,7 @@
 
     - 熔断降级
         - [熔断降级原理](note/microservice/fuse/熔断降级原理.md)  最后更新于2021-11-10
+        - [微服务和API网关限流熔断实现关键逻辑思路](note/microservice/fuse/微服务和API网关限流熔断实现关键逻辑思路.md)  最后更新于2022-1-5
 
     - 其他
         - [微服务拆分之道](note/microservice/other/微服务拆分之道.md)  最后更新于2021-6-20
