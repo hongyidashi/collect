@@ -219,7 +219,7 @@
 
 ### 项目构建
 + maven
-    -[Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)最后更新于2022-3-5
+    - [Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md) 最后更新于2022-3-5
 
 ### 领域驱动设计-DDD
 
