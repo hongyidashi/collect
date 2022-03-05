@@ -74,6 +74,7 @@
     - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-30
     - [Innodb到底是怎么加锁的](note/mysql/lock/Innodb到底是怎么加锁的.md)  最后更新于2021-12-14
     - [聊聊数据页变成索引这件事](note/mysql/index/聊聊数据页变成索引这件事.md)  最后更新于2022-3-5
+    - [读写分离从库读到新值主库读到旧值](note/mysql/ms/读写分离从库读到新值主库读到旧值.md)  最后更新于2022-3-5
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
