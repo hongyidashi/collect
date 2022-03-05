@@ -217,6 +217,10 @@
 
 - [k8s面试题](note/k8s/k8s面试题.md)  最后更新于2021-6-25
 
+### 项目构建
++ maven
+    -[Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)最后更新于2022-3-5
+
 ### 领域驱动设计-DDD
 
 + [DDD-面向对象思想](note/ddd/DDD-面向对象思想.md)  最后更新于2021-4-4  
