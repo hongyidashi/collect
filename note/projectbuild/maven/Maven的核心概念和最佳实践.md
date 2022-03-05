@@ -1,5 +1,17 @@
 # Maven的核心概念和最佳实践
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [一、开篇](#%E4%B8%80%E5%BC%80%E7%AF%87)
+- [二、仓库](#%E4%BA%8C%E4%BB%93%E5%BA%93)
+- [三、工程结构](#%E4%B8%89%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84)
+- [四、Maven POM](#%E5%9B%9Bmaven-pom)
+- [五、构建生命周期](#%E4%BA%94%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F)
+- [六、工程实践](#%E5%85%AD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 一、开篇
 
 Maven 是项目管理和构建工具。
