@@ -24,7 +24,7 @@
 
 发车！
 
-![png](images/R&P-Reactor 和 Proactor-提纲.png)
+![png](images/R&P-Reactor和Proactor-提纲.png)
 
 ## 一、演进
 
@@ -117,7 +117,7 @@ Reactor 模式是灵活多变的，可以应对不同的业务场景，灵活在
 
 我们来看看「**单 Reactor 单进程**」的方案示意图：
 
-![png](images/R&P-单 Reactor 单进程.png)
+![png](images/R&P-单Reactor单进程.png)
 
 可以看到进程里有 **Reactor、Acceptor、Handler** 这三个对象：
 
@@ -151,7 +151,7 @@ Redis 是由 C 语言实现的，它采用的正是「单 Reactor 单进程」�
 
 闻其名不如看其图，先来看看「单 Reactor 多线程」方案的示意图如下：
 
-![png](images/R&P-单 Reactor 多线程.png)
+![png](images/R&P-单Reactor多线程.png)
 
 详细说一下这个方案：
 
@@ -184,7 +184,7 @@ Redis 是由 C 语言实现的，它采用的正是「单 Reactor 单进程」�
 
 老规矩，闻其名不如看其图。多 Reactor 多进程 / 线程方案的示意图如下（以线程为例）：
 
-![png](images/R&P-Reactor 多进程 : 线程.png)
+![png](images/R&P-Reactor多进程:线程.png)
 
 方案详细说明如下：
 
@@ -214,11 +214,11 @@ Redis 是由 C 语言实现的，它采用的正是「单 Reactor 单进程」�
 
 注意，**阻塞等待的是「内核数据准备好」和「数据从内核态拷贝到用户态」这两个过程**。过程如下图：
 
-![png](images/R&P-阻塞 I:O.png)
+![png](images/R&P-阻塞I:O.png)
 
 知道了阻塞 I/O ，来看看**非阻塞 I/O**，非阻塞的 read 请求在数据未准备好的情况下立即返回，可以继续往下执行，此时应用程序不断轮询内核，直到数据准备好，内核将数据拷贝到应用程序缓冲区，`read` 调用才可以获取到结果。过程如下图：
 
-![png](images/R&P-非阻塞 I:O.png)
+![png](images/R&P-非阻塞I:O.png)
 
 注意，**这里最后一次 read 调用，获取数据的过程，是一个同步的过程，是需要等待的过程。这里的同步指的是内核态的数据拷贝到用户程序的缓存区这个过程。**
 
@@ -230,7 +230,7 @@ Redis 是由 C 语言实现的，它采用的正是「单 Reactor 单进程」�
 
 当我们发起 `aio_read` （异步 I/O） 之后，就立即返回，内核自动将数据从内核空间拷贝到用户空间，这个拷贝过程同样是异步的，内核自动完成的，和前面的同步操作不一样，**应用程序并不需要主动发起拷贝动作**。过程如下图：
 
-![png](images/R&P-异步 I:O.png)
+![png](images/R&P-异步I:O.png)
 
 举个你去饭堂吃饭的例子，你好比应用程序，饭堂好比操作系统。
 
@@ -257,7 +257,7 @@ Proactor 正是采用了异步 I/O 技术，所以被称为异步网络模型。
 
 接下来，一起看看 Proactor 模式的示意图：
 
-![png](images/R&P-Proactor 模式示意图.png)
+![png](images/R&P-Proactor模式示意图.png)
 
 介绍一下 Proactor 模式的工作流程：
 

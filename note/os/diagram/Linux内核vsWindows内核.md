@@ -97,7 +97,7 @@ SMP 的意思是**对称多处理**，代表着每个 CPU 的地位是相等的�
 
 ELF 的意思是**可执行文件链接格式**，它是 Linux 操作系统中可执行文件的存储格式，你可以从下图看到它的结构：
 
-![png](images/kernel-ELF 文件格式.png)
+![png](images/kernel-ELF文件格式.png)
 
 ELF 把文件分成了一个个分段，每一个段都有自己的作用，具体每个段的作用这里我就不详细说明了，感兴趣的同学可以去看《程序员的自我修养——链接、装载和库》这本书。
 
@@ -135,7 +135,7 @@ Monolithic Kernel 的意思是**宏内核**，Linux 内核架构就是宏内核�
 
 下图是 Windows NT 的结构图片：
 
-![png](images/kernel-Windows NT 的结构.png)
+![png](images/kernel-WindowsNT的结构.png)
 
 Windows 和 Linux 一样，同样支持 MutiTask 和 SMP，但不同的是，**Windows 的内核设计是混合型内核**，在上图你可以看到内核中有一个 *MicroKernel* 模块，这个就是最小版本的内核，而整个内核实现是一个完整的程序，含有非常多模块。
 
@@ -145,7 +145,7 @@ Windows 的可执行文件格式叫 PE，称为**可移植执行文件**，扩�
 
 PE 的结构你可以从下图中看到，它与 ELF 结构有一点相似。
 
-![png](images/kernel-PE 文件结构.png)
+![png](images/kernel-PE文件结构.png)
 
 ## 四、总结
 

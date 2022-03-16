@@ -304,7 +304,7 @@ max_qlen_log。
 
 根据前面的源码分析，我们可以计算出半连接队列 max_qlen_log 的最大值为 256：
 
-![png](images/TPC队列-计算max_qlen_log 的最大值.png)
+![png](images/TPC队列-计算max_qlen_log的最大值.png)
 
 客户端执行 hping3 发起 SYN 攻击：
 
