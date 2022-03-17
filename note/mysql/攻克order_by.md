@@ -26,7 +26,7 @@
 
 ## 零、开篇
 
-![png](images/攻克order by-提纲.png)
+![png](images/攻克orderby-提纲.png)
 
 ## 一、一个使用order by 的简单例子
 
@@ -46,7 +46,7 @@ INDEX idx_city ( `city` )
 
 表数据如下：
 
-![png](images/order by-员工表数据.png)
+![png](images/orderby-员工表数据.png)
 
 我们现在有这么一个需求：**查询前10个，来自深圳员工的姓名、年龄、城市，并且按照年龄小到大排序**。对应的 SQL 语句就可以这么写：
 
@@ -58,13 +58,13 @@ select name,age,city from staff where city = '深圳' order by age limit 10;
 
 ## 二、order by 工作原理
 
-![png](images/order by-工作原理提纲.png)
+![png](images/orderby-工作原理提纲.png)
 
 ### 1. explain 执行计划
 
 我们先用**Explain**关键字查看一下执行计划：
 
-![png](images/order by-explain查看执行计划.png)
+![png](images/orderby-explain查看执行计划.png)
 
 - 执行计划的**key**这个字段，表示使用到索引idx_city
 - Extra 这个字段的 **Using index condition** 表示索引条件
@@ -78,11 +78,11 @@ MySQL 会给每个查询线程分配一块小**内存**，用于**排序**的，
 
 我们回顾下索引是怎么找到匹配的数据的，现在先把索引树画出来吧，**idx_city**索引树如下：
 
-![png](images/order by-idx_city索引树.png)
+![png](images/orderby-idx_city索引树.png)
 
 idx_city索引树，叶子节点存储的是**主键id**。 还有一棵id主键聚族索引树，我们再画出聚族索引树图吧：
 
-![png](images/order by-聚族索引树图.png)
+![png](images/orderby-聚族索引树图.png)
 
 **我们的查询语句是怎么找到匹配数据的呢**？先通过**idx_city**索引树，找到对应的主键id，然后再通过拿到的主键id，搜索**id主键索引树**，找到对应的行数据。
 
@@ -98,7 +98,7 @@ idx_city索引树，叶子节点存储的是**主键id**。 还有一棵id主键
 
 执行示意图如下：
 
-![png](images/order by-执行示意图.png)
+![png](images/orderby-执行示意图.png)
 
 将查询所需的字段全部读取到sort_buffer中，就是**全字段排序**。这里面，有些小伙伴可能会有个疑问,把查询的所有字段都放到sort_buffer，而sort_buffer是一块内存来的，如果数据量太大，sort_buffer放不下怎么办呢？
 
@@ -119,7 +119,7 @@ select * from information_schema.optimizer_trace
 
 可以从 **number_of_tmp_files** 中看出，是否使用了临时文件。
 
-![png](images/order by-number_of_tmp_files.png)
+![png](images/orderby-number_of_tmp_files.png)
 
 **number_of_tmp_files** 表示使用来排序的磁盘临时文件数。如果number_of_tmp_files>0，则表示使用了磁盘文件来进行排序。
 
@@ -143,7 +143,7 @@ rowid 排序就是，只把查询SQL**需要用于排序的字段和主键id**�
 show variables like 'max_length_for_sort_data';
 ```
 
-![png](images/order by-max_length_for_sort_data.png)
+![png](images/orderby-max_length_for_sort_data.png)
 
 **max_length_for_sort_data** 默认值是1024。因为本文示例中name,age,city长度=64+4+64 =132 < 1024, 所以走的是全字段排序。我们来改下这个参数，改小一点，
 
@@ -166,7 +166,7 @@ select name,age,city from staff where city = '深圳' order by age limit 10;
 
 执行示意图如下：
 
-![png](images/order by-执行示意图2.png)
+![png](images/orderby-执行示意图2.png)
 
 对比一下**全字段排序**的流程，rowid 排序多了一次**回表**。
 
@@ -183,7 +183,7 @@ select name,age,city from staff where city = '深圳' order by age limit 10;
 select * from information_schema.optimizer_trace 
 ```
 
-![png](images/order by-optimizer_trace.png)
+![png](images/orderby-optimizer_trace.png)
 
 ### 5. 全字段排序与rowid排序对比
 
@@ -207,7 +207,7 @@ select * from information_schema.optimizer_trace
 explain select name,age,city from staff where city = '深圳' order by age limit 10;
 ```
 
-![png](images/order by-explain查看执行计划2.png)
+![png](images/orderby-explain查看执行计划2.png)
 
 我们给查询条件`city`和排序字段`age`，加个联合索引**idx_city_age**。再去查看执行计划：
 
@@ -216,7 +216,7 @@ alter table staff add  index idx_city_age(city,age);
 explain select name,age,city from staff where city = '深圳' order by age limit 10;
 ```
 
-![png](images/order by-explain查看执行计划3.png)
+![png](images/orderby-explain查看执行计划3.png)
 
 整个SQL执行流程变成酱紫：
 
@@ -227,7 +227,7 @@ explain select name,age,city from staff where city = '深圳' order by age limit
 
 流程示意图如下：
 
-![png](images/order by-执行示意图3.png)
+![png](images/orderby-执行示意图3.png)
 
 从示意图看来，还是有一次回表操作。针对本次示例，有没有更高效的方案呢？有的，可以使用**覆盖索引**：
 
@@ -286,7 +286,7 @@ select name,age from staff order by age ,name desc limit 10
 
 我们看下执行计划，发现使用到**Using filesort**：
 
-![png](images/order by-explain查看执行计划4.png)
+![png](images/orderby-explain查看执行计划4.png)
 
 这是因为，idx_name_age索引树中，name从小到大排序，如果**name相同，再按age从小到大排序**。而order by 中，是按age从小到大排序，如果**age相同，再按name从大到小排序**。也就是说，索引存储顺序与order by不一致。
 
@@ -312,7 +312,7 @@ CREATE TABLE `staff` (
 select * from staff where city in ('深圳') order by age limit 10;
 ```
 
-![png](images/order by-explain查看执行计划5.png)
+![png](images/orderby-explain查看执行计划5.png)
 
 但是，如果使用in条件，并且有多个条件时，就会有排序过程。
 
@@ -320,7 +320,7 @@ select * from staff where city in ('深圳') order by age limit 10;
  explain select * from staff where city in ('深圳','上海') order by age limit 10;
 ```
 
-![png](images/order by-explain查看执行计划6.png)
+![png](images/orderby-explain查看执行计划6.png)
 
 这是因为：in有两个条件，在满足深圳时，age是排好序的，但是把满足上海的age也加进来，就不能保证满足所有的age都是排好序的。因此需要Using filesort。
 

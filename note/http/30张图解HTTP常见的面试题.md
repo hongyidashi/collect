@@ -57,7 +57,7 @@ HTTP 协议是一个**双向协议**。
 
 我们在上网冲浪时，浏览器是请求方 A ，百度网站就是应答方 B。双方约定用 HTTP 协议来通信，于是浏览器把请求数据发送给网站，网站再把一些数据返回给浏览器，最后由浏览器渲染在屏幕，就可以看到图片、视频了。
 
-![png](images/HTPP请求 - 应答示意图.png)
+![png](images/HTPP请求-应答示意图.png)
 
 数据虽然是在 A 和 B 之间传输，但允许中间有**中转或接力**。
 
@@ -89,7 +89,7 @@ OK，经过了对 HTTP 里这三个名词的详细解释，就可以给出比「
 
 > HTTP 常见的状态码，有哪些？
 
-![png](images/五大类 HTTP 状态码.png)
+![png](images/五大类HTTP状态码.png)
 
 ***1xx***
 
@@ -161,7 +161,7 @@ OK，经过了对 HTTP 里这三个名词的详细解释，就可以给出比「
 
 `Connection` 字段最常用于客户端要求服务器使用 TCP 持久连接，以便其他请求复用。
 
-![png](images/Connection 字段示意图.png)
+![png](images/Connection字段示意图.png)
 
 HTTP/1.1 版本的默认连接都是持久连接，但为了兼容老版本的 HTTP，需要指定 `Connection` 首部字段的值为 `Keep-Alive`。
 
@@ -171,7 +171,7 @@ HTTP/1.1 版本的默认连接都是持久连接，但为了兼容老版本的 H
 
 `Content-Type` 字段用于服务器回应时，告诉客户端，本次数据是什么格式。
 
-![png](images/Content-Type 字段示意图.png)
+![png](images/Content-Type字段示意图.png)
 
 ```
 Content-Type: text/html; charset=utf-8
@@ -191,7 +191,7 @@ Accept: */*
 
 `Content-Encoding` 字段说明数据的压缩方法。表示服务器返回的数据使用了什么压缩格式
 
-![png](images/Content-Encoding 字段示意图.png)
+![png](images/Content-Encoding字段示意图.png)
 
 ```
 Content-Encoding: gzip
@@ -213,13 +213,13 @@ Accept-Encoding: gzip, deflate
 
 比如，你打开我的文章，浏览器就会发送 GET 请求给服务器，服务器就会返回文章的所有文字及资源。
 
-![png](images/GET 请求示意图.png)
+![png](images/GET请求示意图.png)
 
 而`POST` 方法则是相反操作，它向 `URI` 指定的资源提交数据，数据就放在报文的 body 里。
 
 比如，你在我文章底部，敲入了留言后点击「提交」（**暗示你们留言**），浏览器就会执行一次 POST 请求，把你的留言文字放进了报文 body 里，然后拼接好 POST 请求头，通过 TCP 协议发送给服务器。
 
-![png](images/POST 请求示意图.png)
+![png](images/POST请求示意图.png)
 
 > GET 和 POST 方法都是安全和幂等的吗？
 
@@ -274,7 +274,7 @@ HTTP 协议里有优缺点一体的**双刃剑**，分别是「无状态、明�
 
 相当于，**在客户端第一次请求后，服务器会下发一个装有客户信息的「小贴纸」，后续客户端请求服务器的时候，带上「小贴纸」，服务器就能认得了**
 
-![png](images/Cookie 技术示意图.png)
+![png](images/Cookie技术示意图.png)
 
 *2. 明文传输双刃剑*
 
@@ -349,7 +349,7 @@ HTTP 由于是明文传输，所以安全上存在以下三个风险：
 
 HTTP**S** 在 HTTP 与 TCP 层之间加入了 `SSL/TLS` 协议。
 
-![png](images/HTTP 与 HTTPS区别示意图.png)
+![png](images/HTTP与HTTPS区别示意图.png)
 
 可以很好的解决了上述的风险：
 
@@ -413,7 +413,7 @@ SSL/TLS 协议基本流程：
 
 SSL/TLS 的「握手阶段」涉及**四次**通信，可见下图：
 
-![png](images/HTTPS 连接建立过程示意图.png)
+![png](images/HTTPS连接建立过程示意图.png)
 
 SSL/TLS 协议建立的详细流程：
 
@@ -514,7 +514,7 @@ HTTP/2 的数据包不是按顺序发送的，同一个连接里面连续的数�
 
 客户端还可以**指定数据流的优先级**。优先级高的请求，服务器就先响应该请求。
 
-![png](images/HTT:1 ~ HTTP:2.png)
+![png](images/HTTP:1~HTTP:2.png)
 
 *4. 多路复用*
 
@@ -543,7 +543,7 @@ HTTP/2 主要的问题在于：多个 HTTP 请求在复用一个 TCP 连接，�
 
 这都是基于 TCP 传输层的问题，所以 **HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！**
 
-![png](images/HTTP:1 ~ HTTP:3.png)
+![png](images/HTTP:1~HTTP:3.png)
 
 UDP 发生是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的队头阻塞 和 HTTP/2 的一个丢包全部重传问题。
 
@@ -553,7 +553,7 @@ UDP 发生是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的
 - TL3 升级成了最新的 `1.3` 版本，头部压缩算法也升级成了 `QPack`。
 - HTTPS 要建立一个连接，要花费 6 次交互，先是建立三次握手，然后是 `TLS/1.3` 的三次握手。QUIC 直接把以往的 TCP 和 `TLS/1.3` 的 6 次交互**合并成了 3 次，减少了交互次数**。
 
-![png](images/TCP HTTPS（TLS:1.3） 和 QUIC HTTPS.png)
+![png](images/TCP-HTTPS（TLS:1.3）和QUIC-HTTPS.png)
 
 所以， QUIC 是一个在 UDP 之上的**伪** TCP + TLS + HTTP/2 的多路复用的协议。
 

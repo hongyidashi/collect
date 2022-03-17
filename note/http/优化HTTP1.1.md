@@ -70,7 +70,7 @@
 
 如果相同，说明客户端的缓存还是可以继续使用的，那么服务器**仅返回不含有包体的 `304 Not Modified` 响应**，告诉客户端仍然有效，这样就可以减少响应资源在网络中传输的延时，如下图：
 
-![png](images/HTTP1.1响应304 Not Modified.png)
+![png](images/HTTP1.1响应304NotModified.png)
 
 缓存真的是性能优化的一把万能钥匙，小到 CPU Cache、Page Cache、Redis Cache，大到 HTTP 协议的缓存。
 
@@ -118,7 +118,7 @@
 
 有的网页会含有很多小图片、小图标，有多少个小图片，客户端就要发起多少次请求。那么对于这些小图片，我们可以考虑使用 `CSS Image Sprites` 技术把它们合成一个大图片，这样浏览器就可以用一次请求获得一个大图片，然后再根据 CSS 数据把大图片切割成多张小图片。
 
-![png](images/CSS Image Sprites合并图片示意图.png)
+![png](images/CSSImageSprites合并图片示意图.png)
 
 这种方式就是**通过将多个小图片合并成一个大图片来减少 HTTP 请求的次数，以减少 HTTP 请求的次数，从而减少网络的开销**。
 
