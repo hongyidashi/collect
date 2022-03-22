@@ -222,7 +222,7 @@
     - [Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)  最后更新于2022-3-5
 
 + git
-    - [45个GIT经典操作场景，专治不会合代码](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-22
+    - [45个GIT经典操作场景，专治不会合代码](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑)
 
 ### 领域驱动设计-DDD
 

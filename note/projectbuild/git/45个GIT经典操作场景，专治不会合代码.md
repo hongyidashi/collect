@@ -466,3 +466,155 @@ README.md foo.txt
 ```
 
 看！我们把删除的文件找回来了。Git的 `reflog` 在rebasing出错的时候也是同样有用的。
+
+### 24. 我想删除一个分支
+
+删除一个远程分支：
+
+```git
+(main)$ git push origin --delete my-branch
+```
+
+你也可以：
+
+```git
+(main)$ git push origin :my-branch
+```
+
+删除一个本地分支：
+
+```git
+(main)$ git branch -D my-branch
+```
+
+### 25. 我想从别人正在工作的远程分支签出(checkout)一个分支
+
+首先，从远程拉取(fetch) 所有分支：
+
+```git
+(main)$ git fetch --all
+```
+
+假设你想要从远程的`daves`分支签出到本地的`daves`
+
+```git
+(main)$ git checkout --track origin/daves
+Branch daves set up to track remote branch daves from origin.
+Switched to a new branch 'daves'
+```
+
+(`--track` 是 `git checkout -b [branch] [remotename]/[branch]` 的简写)
+
+这样就得到了一个`daves`分支的本地拷贝, 任何推过(pushed)的更新，远程都能看到。
+
+## 五、Rebasing和合并(Merging)
+
+### 26. 我想撤销rebase/merge
+
+你可以合并(merge)或rebase了一个错误的分支，或者完成不了一个进行中的rebase/merge。Git 在进行危险操作的时候会把原始的HEAD保存在一个叫ORIG_HEAD的变量里，所以要把分支恢复到rebase/merge前的状态是很容易的。
+
+```git
+(my-branch)$ git reset --hard ORIG_HEAD
+```
+
+### 27. 我已经rebase过, 但是我不想强推(force push)
+
+不幸的是，如果你想把这些变化(changes)反应到远程分支上，你就必须得强推(force push)。是因你快进(Fast forward)了提交，改变了Git历史，远程分支不会接受变化(changes)，除非强推(force push)。这就是许多人使用 merge 工作流，而不是 rebasing 工作流的主要原因之一，开发者的强推(force push)会使大的团队陷入麻烦。使用时需要注意，一种安全使用 rebase 的方法是，不要把你的变化(changes)反映到远程分支上，而是按下面的做:
+
+```git
+(main)$ git checkout my-branch
+(my-branch)$ git rebase -i main
+(my-branch)$ git checkout main
+(main)$ git merge --ff-only my-branch
+```
+
+### 28. 我需要组合(combine)几个提交(commit)
+
+假设你的工作分支将会做对于 `main` 的pull-request。一般情况下你不关心提交(commit)的时间戳，只想组合 **所有** 提交(commit) 到一个单独的里面，然后重置(reset)重提交(recommit)。确保主(main)分支是最新的和你的变化都已经提交了, 然后:
+
+```git
+(my-branch)$ git reset --soft main
+(my-branch)$ git commit -am "New awesome feature"
+```
+
+如果你想要更多的控制，想要保留时间戳，你需要做交互式rebase (interactive rebase):
+
+```git
+(my-branch)$ git rebase -i main
+```
+
+如果没有相对的其它分支， 你将不得不相对自己的`HEAD` 进行 rebase。例如：你想组合最近的两次提交(commit)，你将相对于`HEAD~2` 进行rebase， 组合最近3次提交(commit), 相对于`HEAD~3`，等等。
+
+```git
+(main)$ git rebase -i HEAD~2
+```
+
+在你执行了交互式 rebase的命令(interactive rebase command)后，你将在你的编辑器里看到类似下面的内容：
+
+```git
+pick a9c8a1d Some refactoring
+pick 01b2fd8 New awesome feature
+pick b729ad5 fixup
+pick e3851e8 another fix
+
+# Rebase 8074d12..b729ad5 onto 8074d12
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+所有以 `#` 开头的行都是注释, 不会影响 rebase。
+
+然后，你可以用任何上面命令列表的命令替换 `pick`，你也可以通过删除对应的行来删除一个提交(commit)。
+
+例如，如果你想 **单独保留最旧(first)的提交(commit)，组合所有剩下的到第二个里面**，你就应该编辑第二个提交(commit)后面的每个提交(commit) 前的单词为 `f`：
+
+```git
+pick a9c8a1d Some refactoring
+pick 01b2fd8 New awesome feature
+f b729ad5 fixup
+f e3851e8 another fix
+```
+
+如果你想组合这些提交(commit) **并重命名这个提交(commit)**, 你应该在第二个提交(commit)旁边添加一个`r`，或者更简单的用`s` 替代 `f`：
+
+```git
+pick a9c8a1d Some refactoring
+pick 01b2fd8 New awesome feature
+s b729ad5 fixup
+s e3851e8 another fix
+```
+
+你可以在接下来弹出的文本提示框里重命名提交(commit)。
+
+```git
+Newer, awesomer features
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# rebase in progress; onto 8074d12
+# You are currently editing a commit while rebasing branch 'main' on '8074d12'.
+#
+# Changes to be committed:
+#	modified:   README.md
+#
+```
+
+如果成功了，你应该看到类似下面的内容：
+
+```git
+(main)$ Successfully rebased and updated refs/heads/main.
+```
