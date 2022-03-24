@@ -8,10 +8,6 @@
 
 ### Java基础
 
-+ JDK
-    - JDK9
-        - [新特性](note/jdk/jdk9/新特性.md)
-
 + JavaSE
     - [序列化](note/javase/serialization.md)  最后更新于2021-1-3
     - [伪共享](note/javase/falsesharing.md)  最后更新于2021-3-11
@@ -28,6 +24,7 @@
         - [三色标记](note/jvm/gc/三色标记.md)  最后更新于2021-5-29
         - [三色标记详解](note/jvm/gc/三色标记详解.md)  最后更新于2021-12-15
         - [Stop The World 是何时发生的](note/jvm/gc/StopTheWorld是何时发生的.md)  最后更新于2021-9-13
+        - [12张图带你彻底理解ZGC](note/jvm/gc/12张图带你彻底理解ZGC.md)  最后更新于2022-3-24
     - JVM深入
         - [JVM深入-基础概念](note/jvm/jvm-deepen/JVM基础概念深入.md)  最后更新于2021-4-22
         - [JVM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15
@@ -210,7 +207,7 @@
         - [避免消息重复消费](note/middleware/mq/避免消息重复消费.md)  最后更新于2021-12-16
 
 + 开箱即用类
-    - [定时器-Quartz](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑
+    - [~~定时器-Quartz~~](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑 不推荐阅读
     - [Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22
     - [Disruptor-Disruptor类分析](note/other-frame/disruptor-Disruptor类分析.md)  最后更新于2021-9-22
 
@@ -223,7 +220,7 @@
     - [Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)  最后更新于2022-3-5
 
 + git
-    - [45个GIT经典操作场景，专治不会合代码](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑)
+    - [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑) 不推荐阅读
 
 ### 领域驱动设计-DDD
 
@@ -232,3 +229,7 @@
 ### 综合面试题
 + [2021-虾皮服务端15连问](note/interview/2021-虾皮服务端15连问.md)  最后更新于2022-1-4  
 + [2022-社招后端(三年工作经验一面)](note/interview/2022-社招后端(三年工作经验一面).md)  最后更新于2022-3-9  
+
++ JDK
+    - JDK9
+        - [~~新特性~~](note/jdk/jdk9/新特性.md)  不推荐阅读
