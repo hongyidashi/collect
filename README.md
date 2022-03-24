@@ -24,7 +24,7 @@
         - [三色标记](note/jvm/gc/三色标记.md)  最后更新于2021-5-29
         - [三色标记详解](note/jvm/gc/三色标记详解.md)  最后更新于2021-12-15
         - [Stop The World 是何时发生的](note/jvm/gc/StopTheWorld是何时发生的.md)  最后更新于2021-9-13
-        - [12张图带你彻底理解ZGC](note/jvm/gc/12张图带你彻底理解ZGC.md)  最后更新于2022-3-24
+        - [12张图带你彻底理解ZGC](note/jvm/gc/12张图带你彻底理解ZGC.md)  最后更新于2022-3-25
     - JVM深入
         - [JVM深入-基础概念](note/jvm/jvm-deepen/JVM基础概念深入.md)  最后更新于2021-4-22
         - [JVM深入-Java锁机制.md](note/jvm/jvm-deepen/JVM深入-Java锁机制.md)  最后更新于2021-5-15
