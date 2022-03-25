@@ -174,6 +174,7 @@
     - [Spring事务管理-传播特性](note/spring/spring事务管理-传播特性.md)  最后更新于2021-10-26
     - [Spring-AOP](note/spring/Spring-AOP.md)  最后更新于2021-11-2
     - [Spring大事务问题到底要如何解决](note/spring/Spring大事务问题到底要如何解决.md)  最后更新于2021-11-30
+    - [Spring中Bean的生命周期](note/spring/Spring中Bean的生命周期.md)  最后更新于2022-3-25
 
 + Spring Security
     - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
