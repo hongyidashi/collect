@@ -1,0 +1,34 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="241px" height="64px" viewBox="-0.5 -0.5 241 64" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T07:21:32.372Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;1bQ4vrIMMlAjJLkUm6ke&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;xZXbUtswEIafJjPtBR0f4kAvsQP0EFpooPR2sRVbIGtdSSEJT9+VLdsY0ynpTKdXsX6t1tn9v5UnYVJuzxRUxTlmTEwCL9tOwvkkCHzfm9GPVXaNchQFjZArnrmgXljyR+ZEz6lrnjE9CDSIwvBqKKYoJUvNQAOlcDMMW6EYvrWCnI2EZQpirN7wzBSuiuCw1z8wnhftm/3Z+2anhDbYVaILyHDzRApPJmGiEE3zVG4TJmzz2r7cfNzdiMX97OzTpf4J1/Hnqy/fD5pkp/sc6UpQTJq/Tn13mG53Vz+Md+1H2Wl0Ii5z3x3xHkCsXb+O1wY3XLHsWEo0YDjKmIG8UJgyrVG5Xphd22C94aUASat4hdIs3Y5PaxA8l/Sc0v9mioQHpgwnb47dhsGK1LTgIlvADte2Om0gvW9XcYGKP1JaEC4nbSvjMAtmg4ilPUmyR6pimmIu2pb5z6Rz2A4CF6CNE1IUAirNb7sySlA5lzEag6ULcm2jctj2GWd/MMnvyKGRY1gyo3Z0zmUJ27Fx0xbM3HrTsxtMnVY84baNAzcueZe6R4IeHBV7EBKOCBkRIHjtvjYK77shs41bcSESFARNOJdYB7VICLYyLwBR8iwTdbIKUi7zKwvI/MDvlUV9cB72yjfXBSspiyw01lmfBNwycYGaW45JU01sXCGXpm5VFE+iea0ok6CkIoDXBjJCYsMsFq9z+/fzNXa7c/d15h79I2+nL3gb27KaYaeZr6w/TL/5entnL+eA3uMlArR+O6KAemM6Cp65vj8Izc0w9Hw69txKSGdXor6ZC8KHyRc4GPodU48T711knaeSotjv1/8NhnD6OhhaaPaggZb9Z6ree/KxD09+AQ==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="4" y="39" width="232" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 0 26 L 0 0 L 240 0 L 240 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 26 L 0 60 L 240 60 L 240 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 26 L 240 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="119.5" y="17.5">
+      
+      
+      
+      AutowiredAnnotationBeanProcessor
+     </text>
+    </g>
+    <path d="M 0 30 L 240 30" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-39-232-26-0)" font-size="12px">
+     <text x="5.5" y="51.5">
+      
+      
+      
+      + processProperties(Object, Class)
+     </text>
+    </g>
+   </g>
+  </svg>

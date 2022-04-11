@@ -1,0 +1,244 @@
+  <svg width="441" height="409" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
+   <defs>
+   </defs>
+   <g transform="translate(25,25.000000000000014)">
+    <path d="M 0 4Q 0 0 4 0L 387 0Q 391 0 391 4L 391 355Q 391 359 387 359L 4 359Q 0 359 0 355Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="381px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="17.017857142857142" transform="rotate(0)">
+      <tspan dy="16" x="195.5">
+       <tspan style="">
+        
+        
+        
+        RootBeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,76.00000000000003)">
+    <path d="M 0 0L 85 0L 85 27L 0 27Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="65px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="3.875" transform="rotate(0)">
+      <tspan dy="16" x="42.5">
+       <tspan style="">
+        
+        
+        
+        beanClass
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(167,76.00000000000003)">
+    <path d="M 0 0L 85 0L 85 27L 0 27Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="65px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="3.875" transform="rotate(0)">
+      <tspan dy="16" x="42.5">
+       <tspan style="">
+        
+        
+        
+        scope
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(275,76.00000000000003)">
+    <path d="M 0 0L 108 0L 108 27L 0 27Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="88px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="3.875" transform="rotate(0)">
+      <tspan dy="16" x="54">
+       <tspan style="">
+        
+        
+        
+        lazyInit
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(219.5,175)">
+    <path d="M 0 0L 127 0L 127 31L 0 31Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="107px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="5.875" transform="rotate(0)">
+      <tspan dy="16" x="63.5">
+       <tspan style="">
+        
+        
+        
+        autowireMode
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(157,124.5)">
+    <path d="M 0 0L 95 0L 95 33L 0 33Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="75px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="6.875" transform="rotate(0)">
+      <tspan dy="16" x="47.5">
+       <tspan style="">
+        
+        
+        
+        dependsOn
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,175)">
+    <path d="M 0 0L 143 0L 143 31L 0 31Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="123px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="5.875" transform="rotate(0)">
+      <tspan dy="16" x="71.5">
+       <tspan style="">
+        
+        
+        
+        autowireCandidate
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,124.5)">
+    <path d="M 0 0L 75 0L 75 33L 0 33Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="55px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="6.875" transform="rotate(0)">
+      <tspan dy="16" x="37.5">
+       <tspan style="">
+        
+        
+        
+        primary
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,220.5)">
+    <path d="M 0 0L 95 0L 95 33L 0 33Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="75px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="6.875" transform="rotate(0)">
+      <tspan dy="16" x="47.5">
+       <tspan style="">
+        
+        
+        
+        qualifiers
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(183,220.5)">
+    <path d="M 0 0L 200 0L 200 33L 0 33Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="180px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="6.875" transform="rotate(0)">
+      <tspan dy="16" x="100">
+       <tspan style="">
+        
+        
+        
+        constructorArgumentValues
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,271.5)">
+    <path d="M 0 0L 115 0L 115 34.5L 0 34.5Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="95px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="7.625" transform="rotate(0)">
+      <tspan dy="16" x="57.5">
+       <tspan style="">
+        
+        
+        
+        propertyValues
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(199,271.5)">
+    <path d="M 0 0L 145 0L 145 34.5L 0 34.5Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="125px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="7.625" transform="rotate(0)">
+      <tspan dy="16" x="72.5">
+       <tspan style="">
+        
+        
+        
+        initMethodName
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(56,323.5)">
+    <path d="M 0 0L 157 0L 157 35.5L 0 35.5Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="137px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="8.125" transform="rotate(0)">
+      <tspan dy="16" x="78.5">
+       <tspan style="">
+        
+        
+        
+        destroyMethodName
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(275,124.5)">
+    <path d="M 0 0L 108 0L 108 33L 0 33Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="88px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="6.875" transform="rotate(0)">
+      <tspan dy="16" x="54">
+       <tspan style="">
+        
+        
+        
+        isFactoryBean
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+   <g transform="translate(235,323.5)">
+    <path d="M 0 0L 104 0L 104 35.5L 0 35.5Z" stroke="rgba(50,50,50,1)" stroke-width="2" fill-opacity="1" fill="#ffffff">
+    </path>
+    <g>
+     <text font-family="微软雅黑" text-anchor="middle" font-size="13px" width="84px" fill="#323232" font-weight="400" align="middle" lineheight="125%" anchor="middle" family="微软雅黑" size="13px" weight="400" font-style="" opacity="1" y="8.125" transform="rotate(0)">
+      <tspan dy="16" x="52">
+       <tspan style="">
+        
+        
+        
+        ......
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+  </svg>

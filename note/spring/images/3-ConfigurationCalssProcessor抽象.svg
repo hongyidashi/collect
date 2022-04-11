@@ -1,0 +1,66 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="221px" height="164px" viewBox="-0.5 -0.5 221 164" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T08:35:38.341Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;HeI0T5xQTIB2jqOtEr5N&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;7VfBUtswEP2azLQHOrFNUnrEDlDawKQFSulN2IqtImtdaZ3EfH0lW7bjmFKgZOiBS6J92pWsfU/P44EXpKsjSbLkBCLKB+4wWg28ycB1HWc41n8GKSpkb+RWQCxZZJNa4IzdUgsOLZqziKpOIgJwZFkXDEEIGmIHI1LCsps2B97dNSMx7QFnIeF99JJFmNhTuO9b/CNlcVLv7Iw/VDMpqZPtSVRCIliuQd7BwAskAFajdBVQbppX9+XyuLjk05vx0acv6he58D+fn37bqRY7fExJcwRJBT556Ssnn+J58cM7lhepPC0Og9lix3ZBYVH3i0a6fTYEiQnEIAg/aFFfQi4ialYd6qjNmQJkGnQ0+JMiFlYLJEfQUIIpt7N0xfC7KX83stGVXcyMJ6v1oKgDgbJYKzLhVb2eCdqyMurUzahkKUUqGzA6ZJzbqGqBOfeGYv7SbpunIJchvafHVj5IZEzxnrxRoyl9GSnoB5aFrpOUE2SL7sMReyviJq9lXg8s+Y8Qgn3IBeG53SkAMWdxLvXmIALClZpJCKlSIHuiUUuWciKMOuYgsNaPIYdwFgs9DnUzDQH+gkpk+n7u2wk0qvHDhPFoSgrITYsUkvCmjvwEJLvVy5JaQHpaopWXO+5knJlKS6ykSufMah6dDeiErDqJU6LQAiFwTjLFrptjpJo9JnxAhLSjG3McunqCcvpM21XcPUuGdVzPs/Gy9a/GlJI17xoPtyQOpyeOngI4K9lXKOGmMVrTuLm+aAFwMHdPQJlUS4LTOd4hiJRFUWk0KiMhE/F5aSs7TotMy8KJ1yJfbRe80p+QIKmoMzxxck35DBQzQtaYrHL9DJjAslUjfzCalIhELXt9CMJKAqmWxJIaWTyM7T9frT7bll13/DBy97bErXsHt35W3fSAE6XelL9vB96+SQO92Cb3uiPYcL/B9ePpr/ygy/Run2kDga6d8/KdnGjRUHEH+12Wfd3ZwLxCNN9uoGOnjV9MAt7uwyRQS+XZNeD1zf9Jfu+9+v0z+L374n6/++r3/3DZvf/a70evfr99v79fAlv0ex22H6Tl3NpnvXfwGw==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="4" y="139" width="212" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="39" width="212" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 110 100 L 110 66.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke">
+    </path>
+    <path d="M 110 61.12 L 113.5 68.12 L 110 66.37 L 106.5 68.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 126 L 0 100 L 220 100 L 220 126" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 126 L 0 160 L 220 160 L 220 126" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 126 L 220 126" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="109.5" y="117.5">
+      
+      
+      
+      ConfigurationCalssProcessor
+     </text>
+    </g>
+    <path d="M 0 130 L 220 130" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-139-212-26-0)" font-size="12px">
+     <text x="5.5" y="151.5">
+      
+      
+      
+      +processClass(Class): void
+     </text>
+    </g>
+    <path d="M 0 26 L 0 0 L 220 0 L 220 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 26 L 0 60 L 220 60 L 220 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 26 L 220 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" font-style="italic" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="109.5" y="17.5">
+      
+      
+      
+      CalssProcessor
+     </text>
+    </g>
+    <path d="M 0 30 L 220 30" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-39-212-26-0)" font-size="12px">
+     <text x="5.5" y="51.5">
+      
+      
+      
+      +processClass(Class): void
+     </text>
+    </g>
+   </g>
+  </svg>

@@ -1,0 +1,70 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="161px" height="142px" viewBox="-0.5 -0.5 161 142" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T07:18:10.440Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;UM6BOqKlZfJR8rCoQCiu&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;7ZddT9swFIZ/TaXtolOdrKVckhQYW8uAsiHtZjpN3MTDyQmOoS2/fseJ0zQNiA9RcYMUqfbrEyc+z3vstOP6yfJYQRZPMOSy4/TCZccddRyHsd6AfoyyKpVh3ymFSInQBtXCVNxzK/aseitCnjcCNaLUImuKAaYpD3RDA6Vw0Qybo2w+NYOIt4RpALKtXolQx3YVzl6tf+Miiqsns8F+OZJAFWxXkscQ4mJDcg87rq8QddlKlj6XJnlVXq5OVldyfD04/n6e38Av78fl6e9uOdnRS25ZL0HxVL966guP5QKcU2d/cnf45zz6e3IjuxbuHchbmy+PQ3oEgUa1ssvWqyqX+UIkElLqeXNM9dSOMOqDFFFK7YBekSsS7rjSgjAc2AGNGalBLGQ4hhXemoXkGoLrqufFqMQ9TQvSzknDSltHOYNGxNTcSXKPVMVzijmrssO2pAksG4FjyLUVApQSslzM1stIQEUi9VBrTGyQzRAthy+3LPUED7Y2CVUXx4Rrk9OencWtKsQWljOw/UVtU1Zp8aZF3aEtD1sa0XruGj81rANe4Ia9lhu6pjIl5PkECN8B9Uxj2xeUGV3wUnjNfZRIBhilWBpFSLklVV6RfK4fdUqeQSDSaFzEjL7WyoXNhJGQ7p3LoihjEYY8NZRRg4YSqeGXoUh1kam+Rxcl1O996Xf69OI+9Vndp8uEK+1jSmsBUdDl5JcFN555nhUer7O2Fdbon0e+intz8PsPgp/RVvDBfYfcq6P03bgPW9xbjKUo2JWMqxOUvQpwQqgkr4leGuCjLmtRd9vU3QcIS5hxeYa50ALN/KqM3SL/XnD3hs+Du6vNvDpeGnA980XGtTnkP021ogR/Lsv75+yf+fr6qPC3NcHwvXd2xp5wgW9O9w8T7NIEjO1un6du/Q+kGNv4H+ce/gc=&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="4" y="31" width="152" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="57" width="152" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="91" width="152" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="117" width="152" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 0 26 L 0 0 L 160 0 L 160 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 26 L 0 138 L 160 138 L 160 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 26 L 160 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="79.5" y="17.5">
+      
+      
+      
+      BeanFactory
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-31-152-26-0)" font-size="12px">
+     <text x="5.5" y="43.5">
+      
+      
+      
+      - classMap: Map
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-57-152-26-0)" font-size="12px">
+     <text x="5.5" y="69.5">
+      
+      
+      
+      - beanMap: Map
+     </text>
+    </g>
+    <path d="M 0 82 L 160 82" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-91-152-26-0)" font-size="12px">
+     <text x="5.5" y="103.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-117-152-26-0)" font-size="12px">
+     <text x="5.5" y="129.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+   </g>
+  </svg>

@@ -1,0 +1,180 @@
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" width="687px" height="312px" style="   left: 0px; top: 0px; width: 687px; height: 312px; background: rgb(255, 255, 255); z-index: 999; ">
+   <defs>
+   </defs>
+   <g>
+    <defs>
+    </defs>
+    <rect x="0" y="0" width="687" height="312" fill="#ffffff">
+    </rect>
+   </g>
+   <g transform="translate(-9867, -9786)">
+    <defs>
+    </defs>
+    <g class="svg-topic-con" transform="translate(0.5,0.5)">
+     <path part="right" sub="true" d="M 10000 9941.5 L 10091 9941.5 C 10131 9941.5 10131 9839 10198 9839" stroke="#0D0B22" fill="none" stroke-width="2">
+     </path>
+     <path part="right" sub="true" d="M 10000 9941.5 L 10091 9941.5 C 10131 9941.5 10131 9908 10198 9908" stroke="#0D0B22" fill="none" stroke-width="2">
+     </path>
+     <path part="right" sub="true" d="M 10000 9941.5 L 10091 9941.5 C 10131 9941.5 10131 9977 10198 9977" stroke="#0D0B22" fill="none" stroke-width="2">
+     </path>
+     <path part="right" sub="true" d="M 10000 9941.5 L 10091 9941.5 C 10131 9941.5 10131 10046 10198 10046" stroke="#0D0B22" fill="none" stroke-width="2">
+     </path>
+    </g>
+    <g class="svg-connection-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-freesums-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-freebos-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g>
+    <rect x="331" y="237" rx="7px" ry="7px" width="217" height="45" style="fill: #F3F3F4; stroke:none;">
+    </rect>
+    <g>
+     <text text-anchor="start" align="top" anchor="start" font-size="16px" font-weight="normal" fill="rgb(13, 11, 34)" style="font-size:16px;font-family:微软雅黑;color:#0D0B22;font-style:normal;text-align:left;font-weight:normal;font-style: normal;">
+      <tspan x="378" y="264.65625">
+       <tspan>
+        
+        
+        
+        RootBeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+    <g>
+     <g transform="translate(353, 252.859375) scale(0.01953125)" fill="rgb(13, 11, 34)">
+      <path d="M558.566802 596.409102 558.566802 366.465197 395.564932 596.409102Z">
+      </path>
+      <path d="M512.036126 4.262904c-280.448474 0-507.75516 227.324749-507.75516 507.773223 0 280.412348 227.306685 507.75516 507.75516 507.75516 280.430411 0 507.737096-227.342812 507.737096-507.75516C1019.773223 231.587652 792.466537 4.262904 512.036126 4.262904zM683.726371 645.902134l-69.850203 0 0 110.60067-55.309367 0 0-110.60067L334.439231 645.902134l0-49.493032 235.76024-340.544576 43.658635 0 0 340.544576 69.850203 0L683.708308 645.902134z">
+      </path>
+     </g>
+    </g>
+   </g>
+   <g>
+    <rect x="331" y="168" rx="7px" ry="7px" width="306" height="45" style="fill: #F3F3F4; stroke:none;">
+    </rect>
+    <g>
+     <text text-anchor="start" align="top" anchor="start" font-size="16px" font-weight="normal" fill="rgb(13, 11, 34)" style="font-size:16px;font-family:微软雅黑;color:#0D0B22;font-style:normal;text-align:left;font-weight:normal;font-style: normal;">
+      <tspan x="378" y="195.65625">
+       <tspan>
+        
+        
+        
+        ScannedGenericBeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+    <g>
+     <path d="M512.036126 4.262904c-280.448474 0-507.75516 227.342812-507.75516 507.75516 0 280.412348 227.306685 507.75516 507.75516 507.75516 280.430411 0 507.737096-227.342812 507.737096-507.75516C1019.773223 231.623778 792.466537 4.262904 512.036126 4.262904zM653.163521 638.604622c-4.877051 37.860363-21.838349 68.405151-50.938084 91.688552s-62.119174 34.464491-98.949938 33.489081c-36.884953-0.957347-68.892856-12.590016-96.059834-34.934133-27.185041-22.289928-44.670171-54.803599-52.383136-97.504886l52.383136-8.724502c7.749092 25.234221 20.375234 46.133286 37.8423 62.570753 17.48513 16.50972 39.305415 24.313001 65.496984 23.283401 26.191568-0.957347 47.018381-11.650732 62.570753-31.989839 15.498183-20.393297 22.271865-43.676698 20.375234-69.850203-1.95082-26.209631-12.138437-46.584865-30.562851-61.143764-18.442477-14.558899-48.011854-24.746516-88.762321-30.562851l0-37.8423c40.750467-3.865514 70.301782-14.558899 88.762321-32.025966 18.442477-17.467067 26.66121-40.244699 24.746516-68.405151-1.95082-28.106262-14.558899-48.481496-37.8423-61.125701-23.283401-12.590016-48.029917-14.053131-74.221485-4.371282-26.191568 9.736038-47.054507 36.884953-62.588816 81.500935l-52.383136-8.724502c11.650732-34.934133 27.654683-64.033868 48.029917-87.317269s48.029917-36.848827 82.96405-40.750467c34.91607-3.865514 65.47892 0.487705 91.688552 13.095784 26.191568 12.644205 44.615982 32.007903 55.309367 58.217534 10.639196 26.209631 12.102311 54.857788 4.353219 85.872217-7.785218 31.068619-30.111272 58.217534-66.942036 81.500935 27.148915 11.650732 48.029917 29.099735 62.588816 52.383136C653.163521 570.199471 657.986382 600.798448 653.163521 638.604622z" fill="rgb(13, 11, 34)" transform="translate(353, 180.859375) scale(0.01953125)">
+     </path>
+    </g>
+   </g>
+   <g>
+    <rect x="331" y="99" rx="7px" ry="7px" width="326" height="45" style="fill: #F3F3F4; stroke:none;">
+    </rect>
+    <g>
+     <text text-anchor="start" align="top" anchor="start" font-size="16px" font-weight="normal" fill="rgb(13, 11, 34)" style="font-size:16px;font-family:微软雅黑;color:#0D0B22;font-style:normal;text-align:left;font-weight:normal;font-style: normal;">
+      <tspan x="378" y="126.65625">
+       <tspan>
+        
+        
+        
+        ConfigurationClassBeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+    <g>
+     <path d="M512.036126 4.262904c-280.448474 0-507.75516 227.342812-507.75516 507.773223 0 280.412348 227.306685 507.75516 507.75516 507.75516 280.430411 0 507.737096-227.342812 507.737096-507.75516C1019.773223 231.623778 792.466537 4.262904 512.036126 4.262904zM654.608573 756.520868 360.630799 756.520868l0-11.650732c1.896631-29.099735 15.498183-55.309367 40.750467-78.592768 25.216158-23.283401 57.224061-59.680649 96.059834-109.155618 38.781584-49.493032 64.015805-87.786911 75.666537-114.990016 11.650732-27.148915 16.022014-50.432316 13.113847-69.850203-2.908167-19.38176-12.1565-35.385712-27.654683-48.029917-15.552373-12.590016-33.489081-17.918645-53.846252-16.003951-20.375234 1.95082-39.79312 9.736038-58.217534 23.283401-18.46054 13.601552-32.513671 33.976786-42.213583 61.125701l-55.309367-8.724502c15.498183-44.615982 35.385712-77.147716 59.680649-97.504886 24.240748-20.375234 52.852778-31.520198 85.872217-33.471018 19.363697-1.914694 36.830764-1.463115 52.383136 1.463115 15.498183 2.908167 31.520198 9.736038 48.029917 20.375234 16.45553 10.693385 30.057082 26.697336 40.750467 48.029917 10.639196 21.38677 14.558899 47.07257 11.650732 77.147716-2.908167 30.111272-17.972835 65.984689-45.12175 107.692503-27.203105 41.762004-79.586241 107.240924-157.185535 196.454824L654.608573 704.119668 654.608573 756.520868z" fill="rgb(13, 11, 34)" transform="translate(353, 111.859375) scale(0.01953125)">
+     </path>
+    </g>
+   </g>
+   <g>
+    <rect x="331" y="30" rx="7px" ry="7px" width="318" height="45" style="fill: #F3F3F4; stroke:none;">
+    </rect>
+    <g>
+     <text text-anchor="start" align="top" anchor="start" font-size="16px" font-weight="normal" fill="rgb(13, 11, 34)" style="font-size:16px;font-family:微软雅黑;color:#0D0B22;font-style:normal;text-align:left;font-weight:normal;font-style: normal;">
+      <tspan x="378" y="57.65625">
+       <tspan>
+        
+        
+        
+        AnnotatedGenericBeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+    <g>
+     <path d="M508.295791 3.713113C227.559513 3.713113 0 231.27262601 0 512s227.568417 508.286887 508.295791 508.286887c280.71847001 0 508.286887-227.568417 508.28688699-508.286887S789.014261 3.713113 508.295791 3.713113zM564.57126999 785.114157l-66.52438299 0L498.046887 361.22267799c-16.01892199 15.279861-37.02427801 30.550817-63.01607 45.82177401-25.991791 15.279861-49.338991 26.730852-70.032696 34.370783l0-64.3072c37.202365-17.488139 69.721043-38.680487 97.564939-63.568139 27.834991-24.878748 47.549217-49.027339 59.13377399-72.43686999l42.86553001-2e-8L564.562365 785.114157z" fill="rgb(13, 11, 34)" transform="translate(353, 42.859375) scale(0.01953125)">
+     </path>
+    </g>
+   </g>
+   <g transform="translate(331, 237)">
+    <g transform="translate(0.5,-0.5)">
+    </g>
+    <g transform="translate(0.5,0)">
+    </g>
+    <g class="svg-summary-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-boundary-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g transform="translate(331, 168)">
+    <g transform="translate(0.5,-0.5)">
+    </g>
+    <g transform="translate(0.5,0)">
+    </g>
+    <g class="svg-summary-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-boundary-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g transform="translate(331, 99)">
+    <g transform="translate(0.5,-0.5)">
+    </g>
+    <g transform="translate(0.5,0)">
+    </g>
+    <g class="svg-summary-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-boundary-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g transform="translate(331, 30)">
+    <g transform="translate(0.5,-0.5)">
+    </g>
+    <g transform="translate(0.5,0)">
+    </g>
+    <g class="svg-summary-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-boundary-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g transform="translate(30, 127)">
+    <g transform="translate(0.5,-0.5)">
+    </g>
+    <g transform="translate(0.5,0)">
+    </g>
+    <g class="svg-summary-con" transform="translate(0.5,0.5)">
+    </g>
+    <g class="svg-boundary-con" transform="translate(0.5,0.5)">
+    </g>
+   </g>
+   <g>
+    <rect x="30" y="127" rx="7px" ry="7px" width="206" height="57" style="fill: rgb(13, 11, 34); stroke:none;">
+    </rect>
+    <g>
+     <text text-anchor="start" align="top" anchor="start" font-size="18px" font-weight="normal" fill="rgb(255, 255, 255)" style="font-size:18px;font-family:微软雅黑;color:#fff;font-style:normal;text-align:left;font-weight:normal;font-style: normal;">
+      <tspan x="70" y="161.75">
+       <tspan>
+        
+        
+        
+        BeanDefinition
+       </tspan>
+      </tspan>
+     </text>
+    </g>
+   </g>
+  </svg>

@@ -1,0 +1,170 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="661px" height="368px" viewBox="-0.5 -0.5 661 368" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T08:23:32.296Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;MJfuw-3JQH6fBS5YXKFq&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;7Zpbc+o2EMc/DTPtA2d8g5BHTJLTC6elyWnpeeoIW9hKZMuVRbDz6buyZYyxEy7F0M54hhm865Ww9P+ttBrTMydB8pmjyP/CXEx7huYmPfOuZxj6rWnCl/SkuWc0MHKHx4mrgkrHE3nDyqkp74q4OK4ECsaoIFHV6bAwxI6o+BDnbF0NWzJa/dUIebjmeHIQrXvnxBW+GoVxU/p/wMTzi1/Wh7f5nQAVwWoksY9ctt5ymfc9c8IZE/lVkEwwlZNXzMv8x3ROpy/Dzz/9Fv+Nfrd//vrLH/28s4djmmyGwHEoTu5ae+tb0/nj7T1ykr/eRvNnmj729aEam0iLCcMuzJ8yGRc+81iI6H3ptTlbhS6W3WpglTFTxiJw6uB8xkKkCga0EgxcvgiouosTIv6UzT8NlPVNdSav75JtIy2MUPB0q5E0vxX9SaNsllmVdjPMSYAF5hun+0AoVVY+BXLcO8jsmW8VF7MVd/AHk6z4EYh7WHwkhrmhCtIRM3hinkJDjikS5LX6dEjlhbeJ2zSdMQLPbWgqhy1Nsa4y2DK1ahf5g6lWJUFwsfUYpSvj6gjG1K+9IrpSQxiHIRMwJBaOo4gSJ7ucsFDgRNR4jNckoCiU4C0hpEBT6o4o8UK4dkAnqa39irmA7uhY3RASSNvxCXWnKGUrOfuxQM5LYdk+4+QNukUFm3CbC0WuMaxEPMmWihmOY4iZFYjoO64vKKkETlEslMNhlKIoJovNMAKYfxLaTAgWVJCUw8HJCVDWGVK99C2twsKgWKbX5dpoFQuev70uDq33uasQcyweeg2PPpgLjMIH5Agm0RuDw95y7CKScSOl4+wFTxhlMs9DljMDeb7jKrCheCnehSaOkENCb5rF3Fml51FNinQxaLuk2abgE9fFYbY6AtooV1dKGcm8yiZtYMMH5nYil7ABPPgEbL204SPDuYBUgLEgkgmNAZ01lvgcRsX7OVinQlFgDA+DoIg7OwNWIwNQEiyJt+L58oBoHM84c3AcSzElE5MPAjpGzstIUfZdjZFBIyOyuFgTjt1yT5ErxQ4o431RHS3npeVmdGVajBotNY0pybTLNS7OBvpJAgcgVVYaK0W/ZoVwX6+pbtZVNxsUpmiB6YzFRJIKPp7H7ih/LXF1zTpM3VFL4poN4tryrImFTOvvngSHCf4+z/1fF8/yXNll+Jkh0K+9IQz3UDChKI47CFqFwLz2On9TP1yefKQ0uyPlCUdKU68eKc2GI6WhNe0ObTGh14+U3eZ/eMrfHHtWbFa3LXGbKrtu878sBGa9AGyEoLVlX99XAnabf+sQDA9c59s741k1Tf9nLy+0T7dDo/eff4Ghqyrram8wzGqJsSkxL/QGQ69XmXO86N5dXLbQtA54d6GPLlloGl2h+W+2F/3oSrNZ3rbU7SrNSxQZeyhoKDUbKWivyuhKzetT0FBrnosCMMv/8OQVQ/lPKPP+Hw==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="4" y="231" width="412" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="257" width="412" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="283" width="412" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="317" width="412" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="343" width="412" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="354" y="39" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="354" y="65" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="484" y="239" width="172" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="484" y="265" width="172" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 210 200 L 210 143 L 450 143 L 450 92.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke">
+    </path>
+    <path d="M 450 87.12 L 453.5 94.12 L 450 92.37 L 446.5 94.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 226 L 0 200 L 420 200 L 420 226" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 226 L 0 364 L 420 364 L 420 226" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 226 L 420 226" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="209.5" y="217.5">
+      
+      
+      
+      AnnotationApplicationContext
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-231-412-26-0)" font-size="12px">
+     <text x="5.5" y="243.5">
+      
+      
+      
+      - beanFactory: BeanFactory
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-257-412-26-0)" font-size="12px">
+     <text x="5.5" y="269.5">
+      
+      
+      
+      - configurationCalssProcessor: ConfigurationCalssProcessor
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-283-412-26-0)" font-size="12px">
+     <text x="5.5" y="295.5">
+      
+      
+      
+      - autowiredAnnotationBeanProcessor: AutowiredAnnotationBeanProcessor
+     </text>
+    </g>
+    <path d="M 0 308 L 420 308" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-317-412-26-0)" font-size="12px">
+     <text x="5.5" y="329.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-343-412-26-0)" font-size="12px">
+     <text x="5.5" y="355.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+    <path d="M 350 26 L 350 0 L 550 0 L 550 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 350 26 L 350 86 L 550 86 L 550 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 350 26 L 550 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" font-style="italic" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="449.5" y="17.5">
+      
+      
+      
+      ApplicationContext
+     </text>
+    </g>
+    <path d="M 350 30 L 550 30" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-354-39-192-26-0)" font-size="12px">
+     <text x="355.5" y="51.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-354-65-192-26-0)" font-size="12px">
+     <text x="355.5" y="77.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+    <path d="M 570 200 L 570 143 L 450 143 L 450 91.38" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 450 86.13 L 453.5 93.13 L 450 91.38 L 446.5 93.13 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 480 226 L 480 200 L 660 200 L 660 226" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 480 226 L 480 286 L 660 286 L 660 226" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 480 226 L 660 226" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="569.5" y="217.5">
+      
+      
+      
+      WebApplicationContext
+     </text>
+    </g>
+    <path d="M 480 230 L 660 230" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-484-239-172-26-0)" font-size="12px">
+     <text x="485.5" y="251.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-484-265-172-26-0)" font-size="12px">
+     <text x="485.5" y="277.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+   </g>
+  </svg>

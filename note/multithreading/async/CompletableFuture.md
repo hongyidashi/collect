@@ -1,4 +1,4 @@
-# CompeletableFuture
+# CompletableFuture
 
 目录
 + [使用场景](#使用场景)

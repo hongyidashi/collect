@@ -1,0 +1,170 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="521px" height="312px" viewBox="-0.5 -0.5 521 312" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T09:00:50.936Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;_MjosXi1mmtggu8YSi9H&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;5GNnp09Q9La34zV4E91e&quot; name=&quot;第 1 页&quot;&gt;7VpLc9owEP41zLSHdPyGHAMkfUwyzZTOtD0KW9hqZYmRRYD8+q4sCWMMCWli6MEnrM+7Qtpvd7Ur6PmjfPVRoHl2xxNMe56TrHr+uOd5rutE8KGQtUYGoaeBVJDECFXAhDxiAzoGXZAEFzVByTmVZF4HY84YjmUNQ0LwZV1sxmn9W+coxQ1gEiPaRH+QRGZmF16/wj9hkmb2m93oUr/JkRU2OykylPDlFuRf9/yR4Fzqp3w1wlQZz9pF690ceLtZmMBMHqOwdH4+fF+xMGLp9NPF4+fw8cv4wpDxgOjCbHiIEbtBseRibdYt19YYxZLkFDEYDWecyYl548MYUZIyeI5hNVgA8ICFJGDHK/NC8jmgcUZocovWfKHWXEgU/7GjYcYFeYRpEYVXLgDwWkjjEl5Uk5goTYAdQAUuQObeGsLdge7QqiZ4iwppgJhTiuYFmZbbUIo5EilhQy4lz42QsRBsB68Omt7dEAqRgHmOpTKfYxR8P9AqJgi8vvGJZeVSbmSwbMudBiZ6kPHidDN1RTQ8GK5fwHvY4L1BNiUl0YUU/M/G95WNZoTSEaccWB4zXgpZ9imeyT3c5yRJaDnZHMWEpd+VL4wv3Aq5LRVLTzLIN2MFBQkukUSaJUUJRVNM73lBJOFqfqFlh3NOmCxNFQ574bhEhBxxBptApOQKA/tLrDzgOGIPR02TbctudCS5LXEb7eF2qFIpliq4302kAPu+7/lXAH6d/lZpc5d8MInckL9D9sv517FfpzpoUq0gDrozWubJDLwGsz3012kegmlHzodQEe6NYOxW47P5gA3453zAayvA+884wYiiouh8oE0fiI5M8q35wKbyqDjFCVQ3ZggmyXjKGaLXFQqGXrAEJ8bMlcwtL5O2ytm/sZRrcy6jheTqZJa5PbXxisifSh3Mr0e/zGTqebzaHqztgMF+tVJwGVig1PtwGXkWqJTLUU37HgsCZlO1hwGTG6LstXWIq90/fYSDsfhCxPgJq5q0DbUJxNJzEdh0DoEpkuShvo43p37QCP8JBBnFkrN/KPDcrsB7usBzQ6dW4AVBM/Y9Z0/su35bVcBlwwMuVJuk0v4dmuvErx66rP/SrD94afW3l/nWsr7tnHeYn0LYd8S3SLy92Dgf8W7X1LXGbn9wHLttpXO3eVPTdXWndoLB2XO737V153YC1z13ot+T10/R19Uaqn/p8o5twl7RNBnVe+VGVXke9g+U53YK3fQZre079J2JAhuA9ponDOsT6a6wMdGVEGi9JWbc/PCC7a8IOws+tK6GvPO0/O4+duThQa+48tENGa9IXkEjeZk+tGtJ374lDQ75/LMtqc1vb396NW+mVWcyq5yga1BedXDpCPuPW9N9t9Jdh/JG9B7bgLbWojQvHbsW5eResOdXhxMHefPmsetRTu0FLXaqMKz+tKJrw+qvP/71Xw==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="188" y="39" width="152" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="188" y="65" width="152" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="201" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="227" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="261" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="4" y="287" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="324" y="201" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="324" y="235" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="324" y="261" width="192" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 184 26 L 184 0 L 344 0 L 344 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 184 26 L 184 86 L 344 86 L 344 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 184 26 L 344 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" font-style="italic" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="263.5" y="17.5">
+      
+      
+      
+      BeanFactory
+     </text>
+    </g>
+    <path d="M 184 30 L 344 30" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-188-39-152-26-0)" font-size="12px">
+     <text x="189.5" y="51.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-188-65-152-26-0)" font-size="12px">
+     <text x="189.5" y="77.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+    <path d="M 100 170 L 100 128 L 263 128 L 263.03 91.38" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 263.04 86.13 L 266.53 93.13 L 263.03 91.38 L 259.53 93.13 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 196 L 0 170 L 200 170 L 200 196" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 196 L 0 308 L 200 308 L 200 196" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 196 L 200 196" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="99.5" y="187.5">
+      
+      
+      
+      SingletonBeanFactory
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-201-192-26-0)" font-size="12px">
+     <text x="5.5" y="213.5">
+      
+      
+      
+      - classMap: Map
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-227-192-26-0)" font-size="12px">
+     <text x="5.5" y="239.5">
+      
+      
+      
+      - beanMap: Map
+     </text>
+    </g>
+    <path d="M 0 252 L 200 252" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-261-192-26-0)" font-size="12px">
+     <text x="5.5" y="273.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-287-192-26-0)" font-size="12px">
+     <text x="5.5" y="299.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+    <path d="M 420 170 L 419 170 L 419 130 L 263 130 L 263 91.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 263 86.12 L 266.5 93.12 L 263 91.37 L 259.5 93.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 320 196 L 320 170 L 520 170 L 520 196" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 320 196 L 320 282 L 520 282 L 520 196" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 320 196 L 520 196" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="419.5" y="187.5">
+      
+      
+      
+      FactoryBeanFactory
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-324-201-192-26-0)" font-size="12px">
+     <text x="325.5" y="213.5">
+      
+      
+      
+      - factoryBeanMap: Map
+     </text>
+    </g>
+    <path d="M 320 226 L 520 226" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-324-235-192-26-0)" font-size="12px">
+     <text x="325.5" y="247.5">
+      
+      
+      
+      + getBean(String): Object
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-324-261-192-26-0)" font-size="12px">
+     <text x="325.5" y="273.5">
+      
+      
+      
+      + getBean(Class): Object
+     </text>
+    </g>
+   </g>
+  </svg>

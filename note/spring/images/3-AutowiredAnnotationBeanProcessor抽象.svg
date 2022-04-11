@@ -1,0 +1,98 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="521px" height="214px" viewBox="-0.5 -0.5 521 214" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-17T08:46:36.101Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;3sS-sUKujAJ3uup2xRJN&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;7VnbctMwEP2azMBDGV+SkDzWSSmXAIEChUfV3sSistZISpPw9axsOa7rUNpACszkqd6jlezdc3RspZ1wlK1OFcvT15iA6AResuqE404Q+L7Xpz8WWZfIoBeUwFzxxCXVwBn/Dg70HLrgCehGokEUhudNMEYpITYNjCmFy2baDEXzrjmbQws4i5loo+c8MamrInha48+Bz9Pqzn5/WI5krEp2leiUJbi8BoUnnXCkEE15la1GIGzzqr6cv1ifi8ll//TlO/2NfYxefXjz6ahc7Nl9pmxKUCDNzkvDePLmdDzExdtoucjTqYLLj0e+I1ObddUwSKh/LkRlUpyjZOKkRiOFC5mAXdajqM6ZIOYE+gR+BWPWTgxsYZCg1GTCjcKKm892+pOei764xez1eHU9WFeBNGrtJnmDCvhSrWiDemIRNWZOQfEMDKgNmDzjQriobIKt/IZoftFxl6dxoWK4pc2hEz5TczC35A02sqL9CEgPrNY0T4Fghl81H465jTHf5NXk04Xj/x5acA95xcTC3emYmFtyBcmxlGjoEVBGwORUYQxao2ppRy95Jpi0IpmhNJWMLENM8Lmk65g6almIrkAZTvv02A0YK54oTrlIJmyNC9snbVh8WUVRiop/p2VZpSMaVsapLOg3Ms7sTMeuAk0504pM/wb0mq0aiROmjQNiFILlml9sysiIQi4jNAazhnhsObDaQT5tuqtVus54nPN2PRcvax8Lqpz0mof1vT0ppNtSSEsBghfsa6PwcmO4tnEz2m0jFGg3oMQiqZKEgJnZIoiMJ0nhNzpnMZfzD4W7HPk1MikmjsMaee+6EBY2RZJlJXWWJ8EuQExRc6tjwlSZG+XIpSla1Ys6vXGBKDNCSUUwXhAIJIklWFncje2f7682247doH83cgd74ra3hdvIllVudtrzueUH9KO3F1/tizqg+3gjwbR+3FIB9cZsVHCD9fsLoXSGJufdNucWQpo7E8VbOiX5gNyigybfEfV4ZF9ExDyV1Iv8Ov5rYgi7dxNDJZo/roZ+Sw07GX94MP4djD/0msYf9LYYv/eQxv/0YPy/sdf79zb+beTuy/gHB+N/SOO/XQzbjH+bGPZm/H54OBA+wIFw+D8cCIctZ3gPZWWH8+Bf+CzoBv/aebD6je/wXbDTq2D4Tx8Iff/wYfCQHwa3q2GPJ0IK6x+xi7Fr/woIT34A&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="4" y="189" width="232" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="164" y="39" width="192" height="26">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="284" y="189" width="232" height="26">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 120 150 L 120 105 L 261.6 105 L 261.6 66.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke">
+    </path>
+    <path d="M 261.6 61.12 L 265.1 68.12 L 261.6 66.37 L 258.1 68.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 176 L 0 150 L 240 150 L 240 176" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 176 L 0 210 L 240 210 L 240 176" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 176 L 240 176" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="119.5" y="167.5">
+      
+      
+      
+      AutowiredAnnotationBeanProcessor
+     </text>
+    </g>
+    <path d="M 0 180 L 240 180" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-189-232-26-0)" font-size="12px">
+     <text x="5.5" y="201.5">
+      
+      
+      
+      + processProperties(Object, Class)
+     </text>
+    </g>
+    <path d="M 160 26 L 160 0 L 360 0 L 360 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 160 26 L 160 60 L 360 60 L 360 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 160 26 L 360 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" font-style="italic" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="259.5" y="17.5">
+      
+      
+      
+      BeanProcessor
+     </text>
+    </g>
+    <path d="M 160 30 L 360 30" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-164-39-192-26-0)" font-size="12px">
+     <text x="165.5" y="51.5">
+      
+      
+      
+      + processProperties(Object, Class)
+     </text>
+    </g>
+    <path d="M 400 150 L 400 105 L 261.6 105 L 261.6 66.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 261.6 61.12 L 265.1 68.12 L 261.6 66.37 L 258.1 68.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 280 176 L 280 150 L 520 150 L 520 176" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 280 176 L 280 210 L 520 210 L 520 176" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 280 176 L 520 176" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+     <text x="399.5" y="167.5">
+      
+      
+      
+      ResourceAnnotationBeanProcessor
+     </text>
+    </g>
+    <path d="M 280 180 L 520 180" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-284-189-232-26-0)" font-size="12px">
+     <text x="285.5" y="201.5">
+      
+      
+      
+      + processProperties(Object, Class)
+     </text>
+    </g>
+   </g>
+  </svg>

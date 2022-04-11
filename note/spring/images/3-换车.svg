@@ -1,0 +1,78 @@
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="572px" height="135px" viewBox="-0.5 -0.5 572 135" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-12-16T07:56:25.264Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/15.8.7 Chrome/91.0.4472.164 Electron/13.6.2 Safari/537.36&quot; etag=&quot;KbO4VwSGtwRWzoACz8Xm&quot; version=&quot;15.8.7&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;Page-1&quot;&gt;7Vhtb9owEP41SNuHTnmBtHyE0NG1dGpHu3afJjcxiVvHxxxToL9+58QmQPoCVVG/IEXC9/js5O557ozc8MNs1pdknJ5DTHnDc+JZw+81PM91nQB/NDIvkaOWVwKJZLFxqoAhe6IGdAw6YTHNVxwVAFdsvApGIASN1ApGpITpqtsI+OpbxyShNWAYEV5Hb1isUhOFd1jhJ5QlqX2zG7TLmYxYZxNJnpIYpkuQf9zwQwmgylE2CynXybN5ufkxv+GDh6B/epn/I9fds6ufvw/Kzb5vs2QRgqRCvXvrwD2NO152OLvu/D27P74c9s/aZonzSPjE5KsLcxOumtsc5lOWcSLQ6o5AqKGZcdEmnCUCxxF+GpUIPFKpGKa/YyYUjBGNUsbjAZnDRAeQKxI9WKubgmRPuC3hZk+clsooyQtWPIZ6JcIOopLm6HNhs+KuQedktuI4ILkyQASck3HO7hZhZEQmTHRBKciM04ZJN+TosOlsSXKGhD6FjCqJOXXsbNsk3RSU5xh7WsnTDQyWLknzyFQiMRWRLLauWMeBIX4LEbg1ERzoV4NILllIkNROI/QaHedkgawLBENXBXESHmgIHHBRT0CpGMb5GmRFw+lIvSiZfEwiJpJB4dNrVsgvkxINAa4d8aIqUxbHVGi6QRFFSm41kWNgQhU5a3XxwcyGzrdWo4UfHqLtVjY+2l2qEATGQljBPEXhTKkWzzOaeLWq3taE1UCwmQS8XUnAq0mgxjFnBXclx7aVuu8iOEOqOK0YvdKE9w7cGut+nXX/GYY5uaP8AnKmGOj9Zem7xvxnkWsPzDfre0fc+s9w29UnumSP9MtXXd44C7jHvqw/lvlgw86+s7Ju1qh/uYfvD/kPPOSb7voh395MChb7cCm09h1+0zpvbsz2lsf3rjp88EKHlxOx7+875N1vfnJ/P6xRKmEiYhqbHGJOUkhAED6AogJ1Ad5Tpeam85KJAt17VWb7Mp0xdbs0/qO3wjyXVs+228KYW0NgMLfLxtIqbVbLCsuu26775jCREX0lG/Z6Ads83YBnGq/cHNRZlpQThf+Rlpy24hDN6nagmFu6Y/GP/wM=&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+   <defs>
+    <clipPath>
+     <rect x="7" y="48" width="226" height="37">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="7" y="99" width="226" height="37">
+     </rect>
+    </clipPath>
+    <clipPath>
+     <rect x="337" y="73" width="226" height="37">
+     </rect>
+    </clipPath>
+   </defs>
+   <g>
+    <path d="M 0 39 L 0 0 L 240 0 L 240 39" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="all">
+    </path>
+    <path d="M 0 39 L 0 129 L 240 129 L 240 39" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 0 39 L 240 39" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="18px">
+     <text x="119.5" y="26.5">
+      
+      
+      
+      Boy
+     </text>
+    </g>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-7-48-226-37-0)" font-size="18px">
+     <text x="8.5" y="65.5">
+      
+      
+      
+      - hongQiCar: HongQiCar
+     </text>
+    </g>
+    <path d="M 0 84 L 240 84" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-7-99-226-37-0)" font-size="18px">
+     <text x="8.5" y="116.5">
+      
+      
+      
+      + drive(): void
+     </text>
+    </g>
+    <path d="M 330 52.5 L 330 13.5 L 570 13.5 L 570 52.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 330 52.5 L 330 103.5 L 570 103.5 L 570 52.5" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 330 52.5 L 570 52.5" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="18px">
+     <text x="449.5" y="40">
+      
+      
+      
+      HongQiCar
+     </text>
+    </g>
+    <path d="M 330 58.5 L 570 58.5" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-337-73-226-37-0)" font-size="18px">
+     <text x="338.5" y="91">
+      
+      
+      
+      + run(): void
+     </text>
+    </g>
+    <path d="M 240 58.5 L 320.45 58.5" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 328.32 58.5 L 317.82 63.75 L 320.45 58.5 L 317.82 53.25 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-width="1.5" stroke-miterlimit="10" pointer-events="none">
+    </path>
+   </g>
+  </svg>
