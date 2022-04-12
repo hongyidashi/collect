@@ -40,7 +40,6 @@
 
 + 多线程和并发
     - [异步编程CompletableFuture](note/multithreading/async/CompletableFuture.md)  最后更新于2021-1-2
-    - [ForkJoinPool](note/multithreading/async/ForkJoinPool.md)  最后更新于2021-4-8
     - [阻塞队列](note/multithreading/queue/BlockingQueue.md)  最后更新于2021-1-9
     - [66个并发多线程基础知识](note/multithreading/interview/66个并发多线程基础知识.md)  最后更新于2021-5-9
     - [16张图解开AbstractQueuedSynchronizer](note/multithreading/juc/16张图解开AbstractQueuedSynchronizer.md)  最后更新于2021-5-19
@@ -59,7 +58,6 @@
 + MySQL
     - [问题合集](note/mysql/问题合集.md)  最后更新于2020-12-13
     - [知识点](note/mysql/知识点.md)  最后更新于2021-2-3
-    - [面试题](note/mysql/面试题.md)  最后更新于2021-1-30
     - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1
     - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14
     - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1
@@ -114,9 +112,7 @@
     - [37张图详解MAC地址、以太网、二层转发、VLAN](note/net/diagram2/37张图详解MAC地址、以太网、二层转发、VLAN.md)  最后更新于2021-11-27
 
 + I/O
-    - [知识点](note/io/知识点.md)  最后更新于2020-12-23
-    - NIO系列
-        - [TPC](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3
+    - [零拷贝和IO模型](note/io/零拷贝和IO模型.md)  最后更新于2020-12-23
     - netty
         - [Netty模型架构](note/io/netty/Netty模型架构.md)  最后更新于2021-5-27
         - [Netty基础-Reactor模型](note/io/netty/Netty基础-Reactor模型.md)  最后更新于2021-5-27
@@ -125,10 +121,10 @@
         - [Netty基础-Netty异步模型](note/io/netty/Netty基础-Netty异步模型.md)  最后更新于2021-5-28
 
 + HTTP
-    - [知识点](note/http/知识点.md)  最后更新于2020-12-23
+    - [HTTPS基础](note/http/HTTPS基础.md)  最后更新于2020-12-23
     - [HTTP1.1](note/http/HTPP1.1.md)  最后更新于2021-4-3
     - [HTTP2](note/http/HTTP2.md)  最后更新于2021-4-3
-    - [30张图解HTTP常见的面试题](note/http/30张图解HTTP常见的面试题.md)  最后更新于2021-5-29
+    - [30张图解HTTP常见面试题](note/http/30张图解HTTP常见的面试题.md)  最后更新于2021-5-29
     - [优化HTTP1.1](note/http/优化HTTP1.1.md)  最后更新于2021-6-2
     - [HTTPS入门](note/http/HTTPS入门.md)  最后更新于2021-6-22
     - [优化HTTPS的手段](note/http/优化HTTPS的手段.md)  最后更新于2021-6-21
@@ -210,7 +206,6 @@
         - [避免消息重复消费](note/middleware/mq/避免消息重复消费.md)  最后更新于2021-12-16
 
 + 开箱即用类
-    - [~~定时器-Quartz~~](note/other-frame/quartz.md)  最后更新于2020-12-29 暂时弃坑 不推荐阅读
     - [Disruptor-入门](note/other-frame/disruptor-入门.md)  最后更新于2021-9-22
     - [Disruptor-Disruptor类分析](note/other-frame/disruptor-Disruptor类分析.md)  最后更新于2021-9-22
 
@@ -222,9 +217,6 @@
 + maven
     - [Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)  最后更新于2022-3-5
 
-+ git
-    - [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑) 不推荐阅读
-
 ### 领域驱动设计-DDD
 
 + [DDD-面向对象思想](note/ddd/DDD-面向对象思想.md)  最后更新于2021-4-4  
@@ -233,6 +225,10 @@
 + [2021-虾皮服务端15连问](note/interview/2021-虾皮服务端15连问.md)  最后更新于2022-1-4  
 + [2022-社招后端(三年工作经验一面)](note/interview/2022-社招后端(三年工作经验一面).md)  最后更新于2022-3-9  
 
-+ JDK
-    - JDK9
-        - [~~新特性~~](note/jdk/jdk9/新特性.md)  不推荐阅读
+### 不推荐阅读
+- [~~JDK9新特性~~](note/jdk/jdk9/新特性.md)(弃坑)
+- [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑) 
+- [~~定时器-Quartz~~](note/other-frame/quartz.md)  最后更新于2020-12-29(弃坑)
+- [~~TCP~~](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3(内容过少)
+- [~~MySQL面试题~~](note/mysql/面试题.md)  最后更新于2021-1-30(内容过少)
+- [ForkJoinPool](note/multithreading/async/ForkJoinPool.md)  最后更新于2021-4-8(弃坑)
