@@ -14,6 +14,7 @@
     - [JDK自带的观察者模式](note/javase/JDK自带的观察者模式实现.md)  最后更新于2021-4-10
     - [Function使用技巧](note/javase/Function使用技巧.md)  最后更新于2021-9-25
     - [Java基础面试题](note/javase/Java基础面试题.md)  最后更新于2021-10-12
+    - [JavaAgent-探针技术](note/javase/JavaAgent-探针技术.md)  最后更新于2022-4-19
 
 ### Java高级
 

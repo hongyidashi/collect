@@ -22,6 +22,8 @@
         <module>server-demo2</module>
         <module>algorithm-demo</module>
         <module>disruptor-demo</module>
+        <module>agent-runtime</module>
+        <module>agent-target</module>
     </modules>
 
     <dependencyManagement>
