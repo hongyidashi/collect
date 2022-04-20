@@ -120,6 +120,8 @@
         - [Netty基础-Netty线程模型](note/io/netty/Netty基础-Netty线程模型.md)  最后更新于2021-5-27
         - [Netty基础-Netty核心api](note/io/netty/Netty基础-Netty核心api.md)  最后更新于2021-5-28
         - [Netty基础-Netty异步模型](note/io/netty/Netty基础-Netty异步模型.md)  最后更新于2021-5-28
+    - netty2
+      - [nio基础之三大核心简介](note/io/netty2/nio基础之三大核心简介.md)  最后更新于2022-4-20
 
 + HTTP
     - [HTTPS基础](note/http/HTTPS基础.md)  最后更新于2020-12-23
