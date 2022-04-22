@@ -24,6 +24,7 @@
         <module>disruptor-demo</module>
         <module>agent-runtime</module>
         <module>agent-target</module>
+        <module>netty-demo</module>
     </modules>
 
     <dependencyManagement>
