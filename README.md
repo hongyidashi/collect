@@ -121,8 +121,9 @@
         - [Netty基础-Netty核心api](note/io/netty/Netty基础-Netty核心api.md)  最后更新于2021-5-28
         - [Netty基础-Netty异步模型](note/io/netty/Netty基础-Netty异步模型.md)  最后更新于2021-5-28
     - netty2
-      - [nio基础之三大核心简介](note/io/netty2/nio基础之三大核心简介.md)  最后更新于2022-4-20
-      - [nio之ByteBuffer](note/io/netty2/nio之ByteBuffer.md)  最后更新于2022-4-22
+        - [nio基础之三大核心简介](note/io/netty2/nio基础之三大核心简介.md)  最后更新于2022-4-20
+        - [nio之ByteBuffer](note/io/netty2/nio之ByteBuffer.md)  最后更新于2022-4-22
+        - [nio之文件编程](note/io/netty2/nio之文件编程.md)  最后更新于2022-4-24
 
 + HTTP
     - [HTTPS基础](note/http/HTTPS基础.md)  最后更新于2020-12-23
@@ -218,20 +219,23 @@
 - [k8s面试题](note/k8s/k8s面试题.md)  最后更新于2021-6-25
 
 ### 项目构建
+
 + maven
     - [Maven的核心概念和最佳实践](note/projectbuild/maven/Maven的核心概念和最佳实践.md)  最后更新于2022-3-5
 
 ### 领域驱动设计-DDD
 
-+ [DDD-面向对象思想](note/ddd/DDD-面向对象思想.md)  最后更新于2021-4-4  
++ [DDD-面向对象思想](note/ddd/DDD-面向对象思想.md)  最后更新于2021-4-4
 
 ### 综合面试题
-+ [2021-虾皮服务端15连问](note/interview/2021-虾皮服务端15连问.md)  最后更新于2022-1-4  
-+ [2022-社招后端(三年工作经验一面)](note/interview/2022-社招后端(三年工作经验一面).md)  最后更新于2022-3-9  
+
++ [2021-虾皮服务端15连问](note/interview/2021-虾皮服务端15连问.md)  最后更新于2022-1-4
++ [2022-社招后端(三年工作经验一面)](note/interview/2022-社招后端(三年工作经验一面).md)  最后更新于2022-3-9
 
 ### 不推荐阅读
+
 - [~~JDK9新特性~~](note/jdk/jdk9/新特性.md)(弃坑)
-- [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑) 
+- [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑)
 - [~~定时器-Quartz~~](note/other-frame/quartz.md)  最后更新于2020-12-29(弃坑)
 - [~~TCP~~](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3(内容过少)
 - [~~MySQL面试题~~](note/mysql/面试题.md)  最后更新于2021-1-30(内容过少)
