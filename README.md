@@ -126,6 +126,7 @@
         - [NIO之文件编程](note/io/netty2/nio之文件编程.md)  最后更新于2022-4-24
         - [NIO之网络编程](note/io/netty2/nio之网络编程.md)  最后更新于2022-4-25
         - [初识Netty-EventLoop介绍](note/io/netty2/初识Netty-EventLoop介绍.md)  最后更新于2022-4-26
+        - [初识Netty-Channel](note/io/netty2/初识Netty-Channel.md)  最后更新于2022-4-26
 
 + HTTP
     - [HTTPS基础](note/http/HTTPS基础.md)  最后更新于2020-12-23
