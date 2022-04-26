@@ -121,10 +121,11 @@
         - [Netty基础-Netty核心api](note/io/netty/Netty基础-Netty核心api.md)  最后更新于2021-5-28
         - [Netty基础-Netty异步模型](note/io/netty/Netty基础-Netty异步模型.md)  最后更新于2021-5-28
     - netty2
-        - [nio基础之三大核心简介](note/io/netty2/nio基础之三大核心简介.md)  最后更新于2022-4-20
-        - [nio之ByteBuffer](note/io/netty2/nio之ByteBuffer.md)  最后更新于2022-4-22
-        - [nio之文件编程](note/io/netty2/nio之文件编程.md)  最后更新于2022-4-24
-        - [nio之网络编程](note/io/netty2/nio之网络编程.md)  最后更新于2022-4-25
+        - [NIO之三大核心简介](note/io/netty2/nio基础之三大核心简介.md)  最后更新于2022-4-20
+        - [NIO之ByteBuffer](note/io/netty2/nio之ByteBuffer.md)  最后更新于2022-4-22
+        - [NIO之文件编程](note/io/netty2/nio之文件编程.md)  最后更新于2022-4-24
+        - [NIO之网络编程](note/io/netty2/nio之网络编程.md)  最后更新于2022-4-25
+        - [初识Netty-EventLoop介绍](note/io/netty2/初识Netty-EventLoop介绍.md)  最后更新于2022-4-26
 
 + HTTP
     - [HTTPS基础](note/http/HTTPS基础.md)  最后更新于2020-12-23
