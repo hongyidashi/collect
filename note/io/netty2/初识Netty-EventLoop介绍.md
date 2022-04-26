@@ -28,7 +28,6 @@
 如上所示，5.x没有太大的意义，所以我们这里也是用maven4.x的版本，首先在项目中引入maven依赖：
 
 ```xml
-
 <dependency>
     <groupId>io.netty</groupId>
     <artifactId>netty-all</artifactId>
@@ -202,9 +201,9 @@ EventLoop 来处理（保证了 io 事件处理时的线程安全）
 
         // for循环获取内部的EventLoop
         for(EventExecutor group:nioEventLoopGroup){
-        System.out.println(group);
+        	System.out.println(group);
         }
-        }
+    }
 ```
 
 结果：
@@ -221,21 +220,21 @@ io.netty.channel.nio.NioEventLoop@33833882
 **执行普通任务 和 定时任务**
 
 ```java
-    static void executeTask(){
-        // 构造方法可以指定线程数，默认不设置会首先根据Netty的环境变量，否则根据线程核心数*2，最小为1
-        NioEventLoopGroup nioEventLoopGroup=new NioEventLoopGroup(2);
+static void executeTask(){
+  // 构造方法可以指定线程数，默认不设置会首先根据Netty的环境变量，否则根据线程核心数*2，最小为1
+  NioEventLoopGroup nioEventLoopGroup=new NioEventLoopGroup(2);
 
-        // 执行普通任务
-        nioEventLoopGroup.next().execute(TestEventLoopGroup::print);
+  // 执行普通任务
+  nioEventLoopGroup.next().execute(TestEventLoopGroup::print);
 
-        // 执行定时任务,延后一秒打印
-        System.out.println(LocalDateTime.now());
-        nioEventLoopGroup.next().schedule(TestEventLoopGroup::print,1000,TimeUnit.MILLISECONDS);
-        }
+  // 执行定时任务,延后一秒打印
+  System.out.println(LocalDateTime.now());
+  nioEventLoopGroup.next().schedule(TestEventLoopGroup::print,1000,TimeUnit.MILLISECONDS);
+}
 
 private static void print(){
-        System.out.println(LocalDateTime.now()+" "+Thread.currentThread());
-        }
+  System.out.println(LocalDateTime.now()+" "+Thread.currentThread());
+}
 ```
 
 结果：
@@ -257,13 +256,13 @@ private static void print(){
  * 为父级（接受者）和子级（客户端）设置EventLoopGroup 。
  */
 public ServerBootstrap group(EventLoopGroup parentGroup,EventLoopGroup childGroup){
-        super.group(parentGroup);
-        if(this.childGroup!=null){
-        throw new IllegalStateException("childGroup set already");
-        }
-        this.childGroup=ObjectUtil.checkNotNull(childGroup,"childGroup");
-        return this;
-        }
+  super.group(parentGroup);
+  if(this.childGroup!=null){
+    throw new IllegalStateException("childGroup set already");
+  }
+  this.childGroup=ObjectUtil.checkNotNull(childGroup,"childGroup");
+  return this;
+}
 ```
 
 在上面的构造当中，第一个参数负责ServerSocketChannel的accept操作，而第二个参数负责SocketChannel的读写。
@@ -444,24 +443,24 @@ defaultEventLoopGroup-2-2: aaa
 
 ```java
 static void invokeChannelRead(final AbstractChannelHandlerContext next,Object msg){
-final Object m=next.pipeline.touch(ObjectUtil.checkNotNull(msg,"msg"),next);
+	final Object m=next.pipeline.touch(ObjectUtil.checkNotNull(msg,"msg"),next);
 
-        // 下一个 handler 的事件循环是否与当前的事件循环是同一个线程，此处就是EventLoop
-        EventExecutor executor=next.executor();
+  // 下一个 handler 的事件循环是否与当前的事件循环是同一个线程，此处就是EventLoop
+  EventExecutor executor=next.executor();
 
-        // 是，直接调用
-        if(executor.inEventLoop()){
+  // 是，直接调用
+  if(executor.inEventLoop()){
+    next.invokeChannelRead(m);
+  }
+  // 不是，将要执行的代码作为任务提交给下一个事件循环处理（换人）
+  else{
+    executor.execute(new Runnable(){
+      @Override
+      public void run(){
         next.invokeChannelRead(m);
-        }
-        // 不是，将要执行的代码作为任务提交给下一个事件循环处理（换人）
-        else{
-        executor.execute(new Runnable(){
-@Override
-public void run(){
-        next.invokeChannelRead(m);
-        }
-        });
-        }
-        }
+      }
+    });
+  }
+}
 ```
 

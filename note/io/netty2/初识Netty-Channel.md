@@ -29,31 +29,31 @@
 ```java
     public static void main(String[]args)throws InterruptedException{
         Channel channel=new Bootstrap()
-        .group(new NioEventLoopGroup(1))
-        .handler(new ChannelInitializer<NioSocketChannel>(){
-@Override
-protected void initChannel(NioSocketChannel ch)throws Exception{
-        System.out.println("init...");
-        ch.pipeline().addLast(new StringEncoder());
-        }
-        })
-        .channel(NioSocketChannel.class)
-        .connect("localhost",8080)
-        .sync()
-        .channel();
+          .group(new NioEventLoopGroup(1))
+          .handler(new ChannelInitializer<NioSocketChannel>(){
+              @Override
+              protected void initChannel(NioSocketChannel ch)throws Exception{
+                  System.out.println("init...");
+                  ch.pipeline().addLast(new StringEncoder());
+                  }
+              })
+          .channel(NioSocketChannel.class)
+          .connect("localhost",8080)
+          .sync()
+          .channel();
 
-        channel.writeAndFlush("aaa");
-        Thread.sleep(1000);
-        channel.writeAndFlush("aaa");
-        }
+          channel.writeAndFlush("aaa");
+          Thread.sleep(1000);
+          channel.writeAndFlush("aaa");
+    }
 ```
 
 主要看到调用connect()方法除，此处返回的其实是一个ChannelFuture 对象，通过channel()方法可以获得channel对象。
 
 ```java
 public ChannelFuture connect(String inetHost,int inetPort){
-        return this.connect(InetSocketAddress.createUnresolved(inetHost,inetPort));
-        }
+  return this.connect(InetSocketAddress.createUnresolved(inetHost,inetPort));
+}
 ```
 
 ```java
@@ -115,8 +115,8 @@ public class ChannelFutureTest {
 ```java
 // 异步
 channelFuture.addListener((ChannelFutureListener)future->{
-        System.out.println(future.channel());
-        });
+  System.out.println(future.channel());
+});
 ```
 
 ChannelFutureListener 会在连接建立时被调用（其中 operationComplete 方法），这里是一个函数式接口调用。
