@@ -21,6 +21,11 @@
     - [4. 配置项：jvm_var](#4-%E9%85%8D%E7%BD%AE%E9%A1%B9jvm_var)
     - [5. 配置项：jvm_options](#5-%E9%85%8D%E7%BD%AE%E9%A1%B9jvm_options)
     - [6. 配置项：jvm_handler_type](#6-%E9%85%8D%E7%BD%AE%E9%A1%B9jvm_handler_type)
+- [四、远程调试](#%E5%9B%9B%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95)
+    - [1. 工具](#1-%E5%B7%A5%E5%85%B7)
+    - [2. 配置](#2-%E9%85%8D%E7%BD%AE)
+    - [3. IDEA上的远程调试操作](#3-idea%E4%B8%8A%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%93%8D%E4%BD%9C)
+    - [4. 开始调试](#4-%E5%BC%80%E5%A7%8B%E8%B0%83%E8%AF%95)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -34,7 +39,9 @@
 - Ring 在 Clojure 中是一个构建 Web 应用的底层接口和库. 它和 Ruby 的 Rack, Python 里面的WSGI 或者 Java Servlet 规范相似
 - 从java开发者角度来看，就是开发NginxJavaRingHandler的实现类，然后该类可以在nginx-clojure模块中被运行
 -
+
 nginx-clojure的最新版本是v0.5.3，官网地址是：[nginx-clojure.github.io](https://link.juejin.cn?target=https%3A%2F%2Fnginx-clojure.github.io)
+
 - 对nginx-clojure的介绍就到这里吧，接下来实战为主
 
 ## 二、HelloWorld
@@ -163,7 +170,9 @@ location /java {
 ### 9. 验证
 
 -
+
 打开postman验证服务是否正常，请求地址是[http://127.0.0.1:8080/java](https://link.juejin.cn/?target=http%3A%2F%2F127.0.0.1%3A8080%2Fjava)
+
 - 响应如下图所示，符合预期，返回的就是咱们定制的HelloHandler的内容
 
 ![png](images/1-helloworld结果.png)
@@ -248,3 +257,48 @@ jvm_options -Djava.awt.headless=true;
 如果有多个location，而且都是java类型，岂不是每个location中都要写一个content_handler_type了？这时候，可以在http配置中增加jvm_handler_type配置项，指定location中的默认content_handler_type值，这样location中的content_handler_type就可以不写了，如下图：
 
 ![png](images/1-handler_type配置2.png)
+
+## 四、远程调试
+
+### 1. 工具
+
+IDEA 2022.1 CE(社区版)
+
+### 2. 配置
+
+- 打开nginx.conf文件，在http的配置中增加以下两行，即可开启nginx-clojure的远程调试
+
+```
+jvm_options "-Xdebug";
+jvm_options "-Xrunjdwp:server=y,transport=dt_socket,address=840#{pno},suspend=n";
+```
+
+- 上述配置中，address=840#{pno}的含义要注意：
+
+1. 如果worker_processes配置的值等于1，address=840#{pno}表示远程调试的端口是**8401**
+2. 如果worker_processes配置的值大于1，例如等于3，此时有3个java进程，每个进程都有一个端口被用于远程调试，这三个端口分别是address=840#{pno}表示远程调试的端口是**8401**、**8402**、**
+   8403**
+
+- 要注意的是，请确保这些端口没有被占用
+- 今天为了简单省事儿，worker_processes的值等于1，所以只有一个java进程，它的远程调试端口是**8401**
+- 配置完成后，启动nginx（如果Nginx是启动状态，建议先关闭Nginx再启动）
+- 用postman访问/java，确认可以响应成功，证明nginx和nginx-clojure是正常的
+
+### 3. IDEA上的远程调试操作
+
+用IDEA打开工程，点击下图红框中的按钮：
+
+![png](images/1-IDEA调试1.png)
+
+操作如下图，新增一个Remote JVM Debug配置：
+
+![png](images/1-IDEA远程调试2.png)
+
+- Remote JVM
+  Debug的设置如下，红框1是nginx的ip地址，我这里IDEA和nginx在同一台电脑上，所以用localhost即可，红框2是端口号，对应nginx配置的jvm_options中的address=840#{pno}：
+
+![png](images/1-IDEA调试3.png)
+
+### 4. 开始调试
+
+剩下的就不教了
