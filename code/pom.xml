@@ -26,6 +26,7 @@
         <module>agent-target</module>
         <module>netty-demo</module>
         <module>nginx-clojure-demo</module>
+        <module>guava-demo</module>
     </modules>
 
     <dependencyManagement>
