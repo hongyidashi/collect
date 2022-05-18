@@ -187,6 +187,9 @@
     - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
     - [知识点](note/security/知识点.md)  最后更新于2021-1-19
 
++ Mybatis
+    - [手撸Mybatis-01-创建简单的映射器代理工厂](note/mybatis/手撸Mybatis-01-创建简单的映射器代理工厂.md)  最后更新于2022-5-18
+
 + 微服务
     - 分布式事务
         - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25

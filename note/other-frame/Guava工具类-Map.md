@@ -3,12 +3,12 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-    - [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
-    - [一、Table：双键 Map](#%E4%B8%80table%E5%8F%8C%E9%94%AE-map)
-    - [二、BiMap：双向 Map](#%E4%BA%8Cbimap%E5%8F%8C%E5%90%91-map)
-    - [三、Multimap：多值 Map](#%E4%B8%89multimap%E5%A4%9A%E5%80%BC-map)
-    - [四、RangeMap：范围 Map](#%E5%9B%9Brangemap%E8%8C%83%E5%9B%B4-map)
-    - [五、ClassToInstanceMap：实例 Map](#%E4%BA%94classtoinstancemap%E5%AE%9E%E4%BE%8B-map)
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、Table：双键 Map](#%E4%B8%80table%E5%8F%8C%E9%94%AE-map)
+- [二、BiMap：双向 Map](#%E4%BA%8Cbimap%E5%8F%8C%E5%90%91-map)
+- [三、Multimap：多值 Map](#%E4%B8%89multimap%E5%A4%9A%E5%80%BC-map)
+- [四、RangeMap：范围 Map](#%E5%9B%9Brangemap%E8%8C%83%E5%9B%B4-map)
+- [五、ClassToInstanceMap：实例 Map](#%E4%BA%94classtoinstancemap%E5%AE%9E%E4%BE%8B-map)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
