@@ -189,6 +189,7 @@
 
 + Mybatis
     - [手撸Mybatis-01-创建简单的映射器代理工厂](note/mybatis/手撸Mybatis-01-创建简单的映射器代理工厂.md)  最后更新于2022-5-18
+    - [手撸Mybatis-02-实现映射器的注册和使用.md](note/mybatis/手撸Mybatis-02-实现映射器的注册和使用.md)  最后更新于2022-5-19
 
 + 微服务
     - 分布式事务
