@@ -191,6 +191,7 @@
     - [手撸Mybatis-01-创建简单的映射器代理工厂](note/mybatis/手撸Mybatis-01-创建简单的映射器代理工厂.md)  最后更新于2022-5-18
     - [手撸Mybatis-02-实现映射器的注册和使用](note/mybatis/手撸Mybatis-02-实现映射器的注册和使用.md)  最后更新于2022-5-19
     - [手撸Mybatis-03-Mapper-XML的解析和注册使用](note/mybatis/手撸Mybatis-03-Mapper-XML的解析和注册使用.md)  最后更新于2022-5-21
+    - [手撸Mybatis-04-数据源的解析、创建和使用](note/mybatis/手撸Mybatis-04-数据源的解析、创建和使用.md)  最后更新于2022-5-24
 
 + 微服务
     - 分布式事务
