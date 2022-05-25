@@ -28,7 +28,7 @@
 
 [TOC]
 
-## 零、源码
+## 一、源码
 
 工程源码在本项目`mybatis-code`-`mybatis-04`
 
