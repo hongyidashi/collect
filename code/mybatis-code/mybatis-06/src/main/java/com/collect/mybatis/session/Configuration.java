@@ -4,8 +4,16 @@ import com.collect.mybatis.binding.MapperRegistry;
 import com.collect.mybatis.datasource.druid.DruidDataSourceFactory;
 import com.collect.mybatis.datasource.pooled.PooledDataSourceFactory;
 import com.collect.mybatis.datasource.unpooled.UnPooledDataSourceFactory;
+import com.collect.mybatis.executor.Executor;
+import com.collect.mybatis.executor.SimpleExecutor;
+import com.collect.mybatis.executor.resultset.DefaultResultSetHandler;
+import com.collect.mybatis.executor.resultset.ResultSetHandler;
+import com.collect.mybatis.executor.statement.PreparedStatementHandler;
+import com.collect.mybatis.executor.statement.StatementHandler;
+import com.collect.mybatis.mapping.BoundSql;
 import com.collect.mybatis.mapping.Environment;
 import com.collect.mybatis.mapping.MappedStatement;
+import com.collect.mybatis.transaction.Transaction;
 import com.collect.mybatis.transaction.jdbc.JdbcTransactionFactory;
 import com.collect.mybatis.type.TypeAliasRegistry;
 
@@ -43,6 +51,27 @@ public class Configuration {
         typeAliasRegistry.registerAlias("UNPOOLED", UnPooledDataSourceFactory.class);
         typeAliasRegistry.registerAlias("POOLED", PooledDataSourceFactory.class);
 
+    }
+
+    /**
+     * 创建结果集处理器
+     */
+    public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, BoundSql boundSql) {
+        return new DefaultResultSetHandler(executor, mappedStatement, boundSql);
+    }
+
+    /**
+     * 创建语句处理器
+     */
+    public StatementHandler newStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameter, ResultHandler resultHandler, BoundSql boundSql) {
+        return new PreparedStatementHandler(executor, mappedStatement, parameter, resultHandler, boundSql);
+    }
+
+    /**
+     * 生产执行器
+     */
+    public Executor newExecutor(Transaction transaction) {
+        return new SimpleExecutor(this, transaction);
     }
 
     public <T> void addMapper(Class<T> type) {
