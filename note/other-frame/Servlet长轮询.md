@@ -1,6 +1,39 @@
-# SpringBoot实现长轮询
+# Servlet长轮询
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Servlet长轮询](#servlet%E9%95%BF%E8%BD%AE%E8%AF%A2)
+    - [零、代码](#%E9%9B%B6%E4%BB%A3%E7%A0%81)
+    - [一、长轮询](#%E4%B8%80%E9%95%BF%E8%BD%AE%E8%AF%A2)
+    - [二、Servlet异步处理实现长轮询](#%E4%BA%8Cservlet%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%AE%9E%E7%8E%B0%E9%95%BF%E8%BD%AE%E8%AF%A2)
+        - [1. 基本原理](#1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86)
+            - [同步&异步](#%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5)
+            - [Servlet 3.0](#servlet-30)
+        - [2. 代码实现](#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+            - [0. 大体思路](#0-%E5%A4%A7%E4%BD%93%E6%80%9D%E8%B7%AF)
+            - [1. 基于springboot-web创建一个工程](#1-%E5%9F%BA%E4%BA%8Espringboot-web%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B)
+            - [2. 长轮询请求接口](#2-%E9%95%BF%E8%BD%AE%E8%AF%A2%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3)
+            - [3. 配置异步监听器](#3-%E9%85%8D%E7%BD%AE%E5%BC%82%E6%AD%A5%E7%9B%91%E5%90%AC%E5%99%A8)
+            - [4. 长轮询请求管理器](#4-%E9%95%BF%E8%BD%AE%E8%AF%A2%E8%AF%B7%E6%B1%82%E7%AE%A1%E7%90%86%E5%99%A8)
+            - [5. 请求处理器](#5-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%99%A8)
+            - [6. 触发事件请求体](#6-%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E8%AF%B7%E6%B1%82%E4%BD%93)
+        - [3. 测试](#3-%E6%B5%8B%E8%AF%95)
+    - [三、DeferredResult实现长轮询](#%E4%B8%89deferredresult%E5%AE%9E%E7%8E%B0%E9%95%BF%E8%BD%AE%E8%AF%A2)
+        - [1. 基本原理](#1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1)
+        - [2. 代码实现](#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1)
+            - [1. 沿用](#1-%E6%B2%BF%E7%94%A8)
+            - [2. 长轮询请求接口](#2-%E9%95%BF%E8%BD%AE%E8%AF%A2%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3-1)
+            - [4. 请求处理器](#4-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%99%A8)
+        - [3. 测试](#3-%E6%B5%8B%E8%AF%95-1)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 [TOC]
+
+## 零、代码
+
+[我的项目代码](https://gitee.com/hongyidashi/giants/tree/2.0.0/giants-framework/giants-web/src/main/java/org/giants/web/longpoll)
 
 ## 一、长轮询
 
@@ -11,8 +44,6 @@
 适用场景：长轮询在处理一些简单信息传递，不频繁的应用中比较常用。但对于一些实时传递要求比较高的应用来说，比如在线游戏，在线证券，在线聊天，在线新闻播报等应用来说就显得力不从心，一来要处理实时信息，二来要在极短的时间内处理大量的数据，此时就要用的长连接websocket。
 
 ## 二、Servlet异步处理实现长轮询
-
-### 0. [我的项目代码](https://gitee.com/hongyidashi/giants/tree/2.0.0/giants-framework/giants-web/src/main/java/org/giants/web/longpoll)
 
 ### 1. 基本原理
 
@@ -26,7 +57,10 @@
 
 #### Servlet 3.0
 
-在Servlet 3.0之前，Servlet采用Thread-Per-Request的方式处理请求，即每一次Http请求都由某一个线程从头到尾负责处理。如果一个请求需要进行IO操作，比如访问数据库、调用第三方服务接口等，那么其所对应的线程将同步地等待IO操作完成， 而IO操作是非常慢的，所以此时的线程并不能及时地释放回线程池以供后续使用。在并发量越来越大的情况下，这将带来严重的性能问题。即便是像Spring之类的高层框架也脱离不了这样的桎梏，因为他们都是建立在Servlet之上的。为了解决这样的问题，Servlet 3.0引入了异步处理，然后在Servlet 3.1中又引入了非阻塞IO来进一步增强异步处理的性能。
+在Servlet
+3.0之前，Servlet采用Thread-Per-Request的方式处理请求，即每一次Http请求都由某一个线程从头到尾负责处理。如果一个请求需要进行IO操作，比如访问数据库、调用第三方服务接口等，那么其所对应的线程将同步地等待IO操作完成，
+而IO操作是非常慢的，所以此时的线程并不能及时地释放回线程池以供后续使用。在并发量越来越大的情况下，这将带来严重的性能问题。即便是像Spring之类的高层框架也脱离不了这样的桎梏，因为他们都是建立在Servlet之上的。为了解决这样的问题，Servlet
+3.0引入了异步处理，然后在Servlet 3.1中又引入了非阻塞IO来进一步增强异步处理的性能。
 
 Servlet 3.0 开始提供了AsyncContext用来支持异步处理请求，使用AsyncContext，我们就可以将耗时的操作交给另一个thread去做，这样HTTP thread就被释放出来了，可以去处理其他请求了。
 
@@ -94,15 +128,15 @@ public class LongPollRest {
         request.setAttribute(ServletLongPollReq.ATTRIBUTE_NAME, req);
         // 添加监听器
         asyncContext.addListener(new LongPollAsyncListener());
-      	// 设置请求超时时间，超时时会触发监听器里的onTimout()方法
+        // 设置请求超时时间，超时时会触发监听器里的onTimout()方法
         asyncContext.setTimeout(req.getTimeoutUint().toMillis(req.getTimeout()));
         req.setAsyncContext(asyncContext);
 
         // 添加到队列
         LongPollManager.addReq(req);
     }
-  
-  	/**
+
+    /**
      * 触发响应
      *
      * @param trigger 触发对象
@@ -191,7 +225,7 @@ public class ServletLongPollReq extends BasicLongPollReq {
 
 #### 3. 配置异步监听器
 
-异步监听器可以监听请求的各种时间，我们需要用它来实现超时返回
+异步监听器可以监听请求的各种事件，我们需要用它来实现超时返回
 
 ```java
 import lombok.extern.slf4j.Slf4j;
@@ -654,7 +688,7 @@ public class DefaultServletLongPollProcessor extends AbsLongPollProcessor {
         AsyncContext asyncContext = context.getAsyncContext();
         try {
             ServletResponse response = asyncContext.getResponse();
-          	// 返回json格式数据
+            // 返回json格式数据
             response.setContentType("application/json");
             response.setCharacterEncoding(asyncContext.getRequest().getCharacterEncoding());
             PrintWriter writer = response.getWriter();
@@ -734,12 +768,12 @@ post
 
 ```json
 {
-    "code": 200,
-    "message": "success",
-    "data": {
-        "name": "大福",
-        "age": 3
-    }
+  "code": 200,
+  "message": "success",
+  "data": {
+    "name": "大福",
+    "age": 3
+  }
 }
 ```
 
@@ -761,15 +795,203 @@ post
 
 ```json
 {
-    "code": 200,
-    "message": "success",
-    "data": {
-        "name": "大福",
-        "age": 3
-    }
+  "code": 200,
+  "message": "success",
+  "data": {
+    "name": "大福",
+    "age": 3
+  }
 }
 ```
 
 ## 三、DeferredResult实现长轮询
 
-TODO
+### 1. 基本原理
+
+DeferredResult是SpringMvc封装的异步返回对象，底层也是基于Servlet3.0的异步，只是用起来要更加方便。
+
+### 2. 代码实现
+
+#### 1. 沿用
+
+沿用Servlet实现的部分逻辑
+
+#### 2. 长轮询请求接口
+
+直接在原接口上加即可
+
+```java
+import cn.hutool.core.util.IdUtil;
+import org.giants.core.bean.R;
+import org.giants.web.longpoll.deferredresult.DeferredResultLongPollReq;
+import org.giants.web.longpoll.servlet.LongPollAsyncListener;
+import org.giants.web.longpoll.servlet.ServletLongPollReq;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import javax.servlet.AsyncContext;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @description: 长轮询rest
+ * @author: panhongtong
+ * @date: 2022/8/19 16:35
+ **/
+@RestController
+@RequestMapping("/longPoll")
+public class LongPollRest {
+
+    /**
+     * 获取数据 DeferredResult方式
+     *
+     * @param req 请求对象
+     * @return DeferredResult对象
+     */
+    @PostMapping("/deferredResult/get")
+    public DeferredResult<R<?>> get(@RequestBody @Validated DeferredResultLongPollReq req) {
+        req.setReqId(IdUtil.nanoId());
+        // 创建DeferredResult
+        long timeout = req.getTimeoutUint().toMillis(req.getTimeout());
+        DeferredResult<R<?>> deferredResult = new DeferredResult<>(timeout);
+
+        // 超时逻辑
+        deferredResult.onTimeout(() -> LongPollManager.onEvent(req.getNotifyEvent(), req.getReqId(), null));
+        req.setDeferredResult(deferredResult);
+
+        // 添加到队列
+        LongPollManager.addReq(req);
+        return deferredResult;
+    }
+
+}
+
+```
+
+请求体内容：
+
+```java
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.giants.core.bean.R;
+import org.giants.web.longpoll.BasicLongPollReq;
+import org.springframework.web.context.request.async.DeferredResult;
+
+/**
+ * @description: DeferredResult长轮询请求
+ * @author: panhongtong
+ * @date: 2022/8/25 09:12
+ **/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class DeferredResultLongPollReq extends BasicLongPollReq {
+
+    /**
+     * deferredResult 延迟响应对象
+     */
+    private DeferredResult<R<?>> deferredResult;
+
+}
+```
+
+#### 4. 请求处理器
+
+```java
+import cn.hutool.core.bean.BeanUtil;
+import org.giants.core.bean.R;
+import org.giants.web.longpoll.AbsLongPollProcessor;
+import org.giants.web.longpoll.BasicLongPollContext;
+import org.giants.web.longpoll.BasicLongPollReq;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import java.util.Objects;
+
+/**
+ * @description: 默认Servlet长轮询请求处理器
+ * @author: panhongtong
+ * @date: 2022/8/17 18:15
+ **/
+public class DefaultDeferredResultLongPollProcessor extends AbsLongPollProcessor {
+
+    /**
+     * 感兴趣类型
+     */
+    public static final String NOTIFY_EVENT = "DEFAULT_DEFERRED_RESULT";
+
+    /**
+     * 空数据
+     */
+    private static final R<Object> EMPTY_DATA = R.ok();
+
+    /**
+     * 创建context
+     *
+     * @param req  请求
+     * @param data 接收到的数据
+     * @param <T>  数据泛型
+     * @return context
+     */
+    @Override
+    protected <T> BasicLongPollContext<T> createContext(BasicLongPollReq req, T data) {
+        DeferredResultLongPollContext<T> context = new DeferredResultLongPollContext<>();
+        BeanUtil.copyProperties(req, context, true);
+        context.setData(data);
+        return context;
+    }
+
+    /**
+     * 处理逻辑
+     *
+     * @param <T>          数据泛型
+     * @param basicContext 上下文
+     * @return 响应结果
+     */
+    @Override
+    protected <T> R<?> doProcess(BasicLongPollContext<T> basicContext) {
+        DeferredResultLongPollContext<T> context = (DeferredResultLongPollContext<T>) basicContext;
+        T data = context.getData();
+        R<?> respData = Objects.isNull(data) ? EMPTY_DATA : R.ok(data);
+        DeferredResult<R<?>> deferredResult = context.getDeferredResult();
+        deferredResult.setResult(respData);
+        return respData;
+    }
+
+    /**
+     * 获取处理的事件
+     *
+     * @return 事件
+     */
+    @Override
+    protected String getNotifyEvent() {
+        return NOTIFY_EVENT;
+    }
+
+}
+```
+
+context上下文
+
+```java
+/**
+ * @description: Servlet 长轮询处理上下文
+ * @author: panhongtong
+ * @date: 2022/8/24 17:19
+ **/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class DeferredResultLongPollContext<T> extends BasicLongPollContext<T> {
+
+    /**
+     * deferredResult 延迟响应对象
+     */
+    private DeferredResult<R<?>> deferredResult;
+
+}
+```
+
+### 3. 测试
+
+参照Servlet测试即可

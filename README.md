@@ -229,7 +229,7 @@
     - [Nginx扩展-五大handler](note/other-frame/Nginx扩展-五大handler.md)  最后更新于2022-4-28
     - [Nginx扩展-两大filter](note/other-frame/Nginx扩展-两大filter.md)  最后更新于2022-4-29
     - [Guava工具类-Map](note/other-frame/Guava工具类-Map.md)  最后更新于2022-5-16
-    - [SpringBoot实现长轮询](note/other-frame/SpringBoot实现长轮询.md)  最后更新于2022-8-25
+    - [Servlet长轮询](note/other-frame/Servlet长轮询.md)  最后更新于2022-8-25
 
 ### Kubernetes
 
