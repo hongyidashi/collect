@@ -182,6 +182,7 @@
     - [Spring大事务问题到底要如何解决](note/spring/Spring大事务问题到底要如何解决.md)  最后更新于2021-11-30
     - [Spring中Bean的生命周期](note/spring/Spring中Bean的生命周期.md)  最后更新于2022-3-25
     - [深入浅出Spring架构设计](note/spring/深入浅出Spring架构设计.md)  最后更新于2022-4-11
+    - [SpringBoot扩展点](note/spring/SpringBoot扩展点.md)  最后更新于2022-9-18
 
 + Spring Security
     - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
@@ -257,3 +258,5 @@
 - [~~TCP~~](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3(内容过少)
 - [~~MySQL面试题~~](note/mysql/面试题.md)  最后更新于2021-1-30(内容过少)
 - [~~ForkJoinPool~~](note/multithreading/async/ForkJoinPool.md)  最后更新于2021-4-8(弃坑)
+
+生成目录命令: doctoc
