@@ -183,6 +183,7 @@
     - [Spring中Bean的生命周期](note/spring/Spring中Bean的生命周期.md)  最后更新于2022-3-25
     - [深入浅出Spring架构设计](note/spring/深入浅出Spring架构设计.md)  最后更新于2022-4-11
     - [SpringBoot扩展点](note/spring/SpringBoot扩展点.md)  最后更新于2022-9-18
+    - [控制SpringBoot中bean的加载顺序](note/spring/控制SpringBoot中bean的加载顺序.md)  最后更新于2022-9-19
 
 + Spring Security
     - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
