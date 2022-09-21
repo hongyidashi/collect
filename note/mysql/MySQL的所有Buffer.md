@@ -5,12 +5,12 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-    - [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
-    - [一、buffer pool](#%E4%B8%80buffer-pool)
-    - [二、change buffer](#%E4%BA%8Cchange-buffer)
-    - [三、Log Buffer](#%E4%B8%89log-buffer)
-    - [四、Doublewrite Buffer](#%E5%9B%9Bdoublewrite-buffer)
-    - [五、最后](#%E4%BA%94%E6%9C%80%E5%90%8E)
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、buffer pool](#%E4%B8%80buffer-pool)
+- [二、change buffer](#%E4%BA%8Cchange-buffer)
+- [三、Log Buffer](#%E4%B8%89log-buffer)
+- [四、Doublewrite Buffer](#%E5%9B%9Bdoublewrite-buffer)
+- [五、最后](#%E4%BA%94%E6%9C%80%E5%90%8E)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
