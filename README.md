@@ -57,8 +57,7 @@
 ### 数据库
 
 + MySQL
-    - [问题合集](note/mysql/问题合集.md)  最后更新于2020-12-13
-    - [知识点](note/mysql/知识点.md)  最后更新于2021-2-3
+    - [MySQL大杂烩](note/mysql/MySQL大杂烩.md)  最后更新于2021-2-3
     - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1
     - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14
     - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1
@@ -144,7 +143,7 @@
     - [QUIC协议](note/http/QUIC协议.md)  最后更新于2021-6-25
 
 + WebSocket
-    - [知识点](note/websocket/知识点.md)  最后更新于2020-12-28
+    - [WebSocket实现长连接](note/websocket/WebSocket实现长连接.md)  最后更新于2020-12-28
 
 ### 计算机组成
 
@@ -177,7 +176,7 @@
 ### 框架
 
 + Spring
-    - [知识点](note/spring/知识点.md)  最后更新于2021-2-4
+    - [Spring的一些常见问题](note/spring/Spring的一些常见问题.md)  最后更新于2022-9-25
     - [Spring使用技巧](note/spring/spring使用技巧.md)  最后更新于2021-3-14
     - [Spring事务管理](note/spring/spring事务管理.md)  最后更新于2021-6-23
     - [Spring事务管理-传播特性](note/spring/spring事务管理-传播特性.md)  最后更新于2021-10-26
@@ -189,7 +188,7 @@
     - [控制SpringBoot中bean的加载顺序](note/spring/控制SpringBoot中bean的加载顺序.md)  最后更新于2022-9-19
 
 + Spring Security
-    - [问题合集](note/security/问题合集.md)  最后更新于2021-1-19
+    - [Security跨域问题](note/security/Security跨域问题.md)  最后更新于2021-1-19
     - [知识点](note/security/知识点.md)  最后更新于2021-1-19
 
 + Mybatis
@@ -202,13 +201,12 @@
 
 + 微服务
     - 分布式事务
-        - [知识点](note/microservice/transaction/知识点.md)  最后更新于2020-12-25
-        - [Seata](note/microservice/transaction/Seata.md)  最后更新于2020-12-25
-        - [Seata分布式事务TA模式源码解读](note/microservice/transaction/Seata分布式事务TA模式源码解读.md)  最后更新于2021-5-29
+        - [分布式事务基本原理](note/microservice/transaction/分布式事务基本原理.md)  最后更新于2020-12-25
+        - [Seata分布式事务AT模式源码解读](note/microservice/transaction/Seata分布式事务AT模式源码解读.md)  最后更新于2021-5-29
         - [分布式事务的七种解决方案](note/microservice/transaction/分布式事务的七种解决方案.md)  最后更新于2021-8-1
 
     - 远程调用
-        - [Feign](note/microservice/rpc/Feign.md)  最后更新于2021-2-19
+        - [Feign调用请求头丢失问题](note/microservice/rpc/Feign调用请求头丢失问题.md)  最后更新于2021-2-19
         - [微服务之间的最佳调用方式](note/microservice/rpc/微服务之间的最佳调用方式.md)  最后更新于2021-6-28
 
     - 服务发现
@@ -223,7 +221,7 @@
 
 + 中间件
     - 消息队列
-        - [知识点](note/middleware/mq/知识点.md)  最后更新于2020-12-28
+        - [MQ消息丢失、重复消费、有序性、堆积](note/middleware/mq/MQ消息丢失、重复消费、有序性、堆积.md)  最后更新于2020-12-28
         - [面试角度学习Kafka](note/middleware/mq/面试角度学习Kafka.md)  最后更新于2021-4-28
         - [避免消息重复消费](note/middleware/mq/避免消息重复消费.md)  最后更新于2021-12-16
 
@@ -259,8 +257,9 @@
 - [~~JDK9新特性~~](note/jdk/jdk9/新特性.md)(弃坑)
 - [~~45个GIT经典操作场景，专治不会合代码~~](note/projectbuild/git/45个GIT经典操作场景，专治不会合代码.md)  最后更新于2022-3-23(弃坑)
 - [~~定时器-Quartz~~](note/other-frame/quartz.md)  最后更新于2020-12-29(弃坑)
-- [~~TCP~~](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3(内容过少)
-- [~~MySQL面试题~~](note/mysql/面试题.md)  最后更新于2021-1-30(内容过少)
+- [~~TCP~~](note/io/nio/NIO系列-TCP.md)  最后更新于2021-4-3(有用内容过少)
+- [~~MySQL面试题~~](note/mysql/面试题.md)  最后更新于2021-1-30(有用内容过少)
 - [~~ForkJoinPool~~](note/multithreading/async/ForkJoinPool.md)  最后更新于2021-4-8(弃坑)
+- [~~Seata-AT模式简介~~](note/microservice/transaction/Seata-AT模式简介.md)  最后更新于2020-12-25(有用内容过少)
 
 生成目录命令: doctoc

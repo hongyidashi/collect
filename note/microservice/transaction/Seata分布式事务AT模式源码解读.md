@@ -1,4 +1,4 @@
-# Seata分布式事务TA模式源码解读
+# Seata分布式事务AT模式源码解读
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -40,7 +40,8 @@
 
 ### 1. 原理和设计
 
-`Seata`把一个分布式事务理解成一个包含了若干 **分支事务** 的 **全局事务** 。**全局事务** 的职责是协调其下管辖的 **分支事务** 达成一致，要么一起成功提交，要么一起失败回滚。此外，通常 **分支事务** 本身就是一个满足 ACID 的 本地事务。
+`Seata`把一个分布式事务理解成一个包含了若干 **分支事务** 的 **全局事务** 。**全局事务** 的职责是协调其下管辖的 **分支事务** 达成一致，要么一起成功提交，要么一起失败回滚。此外，通常 **分支事务**
+本身就是一个满足 ACID 的 本地事务。
 
 `Seata`定义了3个组件来协议分布式事务的处理过程。
 
@@ -66,7 +67,8 @@ Seata有4种分布式事务解决方案，分别是 AT 模式、TCC 模式、Sag
 
 - 一阶段：
 
-在一阶段，Seata 会拦截“业务 SQL”，首先解析 SQL 语义，找到“业务 SQL”要更新的业务数据，在业务数据被更新前，将其保存成“before image”，然后执行“业务 SQL”更新业务数据，在业务数据更新之后，再将其保存成“after image”，最后生成行锁。以上操作全部在一个数据库事务内完成，这样保证了一阶段操作的原子性。
+在一阶段，Seata 会拦截“业务 SQL”，首先解析 SQL 语义，找到“业务 SQL”要更新的业务数据，在业务数据被更新前，将其保存成“before image”，然后执行“业务
+SQL”更新业务数据，在业务数据更新之后，再将其保存成“after image”，最后生成行锁。以上操作全部在一个数据库事务内完成，这样保证了一阶段操作的原子性。
 
 - 二阶段提交：
 
@@ -185,9 +187,7 @@ public class GlobalTransactionScanner extends AbstractAutoProxyCreator
 
 这里我们看到它是`AbstractAutoProxyCreator`的子类，又实现了`InitializingBean`接口。
 
-这俩哥们都是Spring大家族的成员，一个用于Spring AOP生成代理；一个用于调用Bean的初始化方法。 
-
-
+这俩哥们都是Spring大家族的成员，一个用于Spring AOP生成代理；一个用于调用Bean的初始化方法。
 
 - InitializingBean
 
@@ -263,8 +263,6 @@ public abstract class AbstractNettyRemotingClient extends AbstractNettyRemoting 
 
 最后，注册钩子程序，用于清理这两个组件中的资源。
 
-
-
 - AbstractAutoProxyCreator
 
 它实际上是一个Bean的后置处理器，在Bean初始化之后，调用`postProcessAfterInitialization`方法：
@@ -287,67 +285,67 @@ public Object postProcessAfterInitialization(@Nullable Object bean, String beanN
 
 ```java
 @Override
-protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
-    // do checkers
-    if (!doCheckers(bean, beanName)) {
-      return bean;
-    }
+protected Object wrapIfNecessary(Object bean,String beanName,Object cacheKey){
+        // do checkers
+        if(!doCheckers(bean,beanName)){
+        return bean;
+        }
 
-    try {
-      synchronized (PROXYED_SET) {
+        try{
+synchronized (PROXYED_SET){
         // 已经生成代理则返回
-        if (PROXYED_SET.contains(beanName)) {
-          return bean;
+        if(PROXYED_SET.contains(beanName)){
+        return bean;
         }
-        interceptor = null;
+        interceptor=null;
         //check TCC proxy 检查是不是TCC的代理
-        if (TCCBeanParserUtils.isTccAutoProxy(bean, beanName, applicationContext)) {
-          //TCC interceptor, proxy bean of sofa:reference/dubbo:reference, and LocalTCC
-          interceptor = new TccActionInterceptor(TCCBeanParserUtils.getRemotingDesc(beanName));
-          ConfigurationCache.addConfigListener(ConfigurationKeys.DISABLE_GLOBAL_TRANSACTION,
-                                               (ConfigurationChangeListener)interceptor);
-        } else {
-          // 判断类方法上是否包含GlobalTransactional注解和GlobalLock注解
-          Class<?> serviceInterface = SpringProxyUtils.findTargetClass(bean);
-          Class<?>[] interfacesIfJdk = SpringProxyUtils.findInterfaces(bean);
+        if(TCCBeanParserUtils.isTccAutoProxy(bean,beanName,applicationContext)){
+        //TCC interceptor, proxy bean of sofa:reference/dubbo:reference, and LocalTCC
+        interceptor=new TccActionInterceptor(TCCBeanParserUtils.getRemotingDesc(beanName));
+        ConfigurationCache.addConfigListener(ConfigurationKeys.DISABLE_GLOBAL_TRANSACTION,
+        (ConfigurationChangeListener)interceptor);
+        }else{
+        // 判断类方法上是否包含GlobalTransactional注解和GlobalLock注解
+        Class<?> serviceInterface=SpringProxyUtils.findTargetClass(bean);
+        Class<?>[]interfacesIfJdk=SpringProxyUtils.findInterfaces(bean);
 
-          if (!existsAnnotation(new Class[]{serviceInterface})
-              && !existsAnnotation(interfacesIfJdk)) {
-            return bean;
-          }
-
-          // 创建拦截器
-          if (globalTransactionalInterceptor == null) {
-            globalTransactionalInterceptor = new GlobalTransactionalInterceptor(failureHandlerHook);
-            ConfigurationCache.addConfigListener(
-              ConfigurationKeys.DISABLE_GLOBAL_TRANSACTION,
-              (ConfigurationChangeListener)globalTransactionalInterceptor);
-          }
-          interceptor = globalTransactionalInterceptor;
+        if(!existsAnnotation(new Class[]{serviceInterface})
+        &&!existsAnnotation(interfacesIfJdk)){
+        return bean;
         }
 
-        LOGGER.info("Bean[{}] with name [{}] would use interceptor [{}]", bean.getClass().getName(), beanName, interceptor.getClass().getName());
+        // 创建拦截器
+        if(globalTransactionalInterceptor==null){
+        globalTransactionalInterceptor=new GlobalTransactionalInterceptor(failureHandlerHook);
+        ConfigurationCache.addConfigListener(
+        ConfigurationKeys.DISABLE_GLOBAL_TRANSACTION,
+        (ConfigurationChangeListener)globalTransactionalInterceptor);
+        }
+        interceptor=globalTransactionalInterceptor;
+        }
+
+        LOGGER.info("Bean[{}] with name [{}] would use interceptor [{}]",bean.getClass().getName(),beanName,interceptor.getClass().getName());
 
         // 如果不是AOP代理，则创建代理；如果是代理，则将拦截器加入到Advisor
-        if (!AopUtils.isAopProxy(bean)) {
-          bean = super.wrapIfNecessary(bean, beanName, cacheKey);
-        } else {
-          AdvisedSupport advised = SpringProxyUtils.getAdvisedSupport(bean);
-          Advisor[] advisor = buildAdvisors(beanName, getAdvicesAndAdvisorsForBean(null, null, null));
-          int pos;
-          for (Advisor avr : advisor) {
-            // Find the position based on the advisor's order, and add to advisors by pos
-            pos = findAddSeataAdvisorPosition(advised, avr);
-            advised.addAdvisor(pos, avr);
-          }
+        if(!AopUtils.isAopProxy(bean)){
+        bean=super.wrapIfNecessary(bean,beanName,cacheKey);
+        }else{
+        AdvisedSupport advised=SpringProxyUtils.getAdvisedSupport(bean);
+        Advisor[]advisor=buildAdvisors(beanName,getAdvicesAndAdvisorsForBean(null,null,null));
+        int pos;
+        for(Advisor avr:advisor){
+        // Find the position based on the advisor's order, and add to advisors by pos
+        pos=findAddSeataAdvisorPosition(advised,avr);
+        advised.addAdvisor(pos,avr);
+        }
         }
         PROXYED_SET.add(beanName);
         return bean;
-      }
-    } catch (Exception exx) {
-      throw new RuntimeException(exx);
-    }
-}
+        }
+        }catch(Exception exx){
+        throw new RuntimeException(exx);
+        }
+        }
 ```
 
 至此，我们已经确定了一件事。我们`ServiceImpl`实现类上带有`GlobalTransactional`注解的方法，会生成一个代理类。
@@ -481,109 +479,109 @@ public abstract class AbstractConnectionProxy implements Connection {
 它会调用到`TransactionalTemplate.execute()`，`TransactionalTemplate`是业务逻辑和全局事务的模板：
 
 ```java
-public Object execute(TransactionalExecutor business) throws Throwable {
-    // 1. Get transactionInfo 获取事务信息，比如超时时间、事务名称
-    TransactionInfo txInfo = business.getTransactionInfo();
-    if (txInfo == null) {
-      throw new ShouldNeverHappenException("transactionInfo does not exist");
-    }
-    // 1.1 Get current transaction, if not null, the tx role is 'GlobalTransactionRole.Participant'.
-    // 1.1 获取当前全局事务，如果为空，则当前事务的角色是参与者
-    GlobalTransaction tx = GlobalTransactionContext.getCurrent();
+public Object execute(TransactionalExecutor business)throws Throwable{
+        // 1. Get transactionInfo 获取事务信息，比如超时时间、事务名称
+        TransactionInfo txInfo=business.getTransactionInfo();
+        if(txInfo==null){
+        throw new ShouldNeverHappenException("transactionInfo does not exist");
+        }
+        // 1.1 Get current transaction, if not null, the tx role is 'GlobalTransactionRole.Participant'.
+        // 1.1 获取当前全局事务，如果为空，则当前事务的角色是参与者
+        GlobalTransaction tx=GlobalTransactionContext.getCurrent();
 
-    // 1.2 Handle the transaction propagation. 获取事务的传播特性
-    Propagation propagation = txInfo.getPropagation();
-    SuspendedResourcesHolder suspendedResourcesHolder = null;
-    try {
-      switch (propagation) {
+        // 1.2 Handle the transaction propagation. 获取事务的传播特性
+        Propagation propagation=txInfo.getPropagation();
+        SuspendedResourcesHolder suspendedResourcesHolder=null;
+        try{
+        switch(propagation){
         case NOT_SUPPORTED:
-          // If transaction is existing, suspend it.
-          if (existingTransaction(tx)) {
-            suspendedResourcesHolder = tx.suspend();
-          }
-          // Execute without transaction and return.
-          return business.execute();
+        // If transaction is existing, suspend it.
+        if(existingTransaction(tx)){
+        suspendedResourcesHolder=tx.suspend();
+        }
+        // Execute without transaction and return.
+        return business.execute();
         case REQUIRES_NEW:
-          // If transaction is existing, suspend it, and then begin new transaction.
-          if (existingTransaction(tx)) {
-            suspendedResourcesHolder = tx.suspend();
-            tx = GlobalTransactionContext.createNew();
-          }
-          // Continue and execute with new transaction
-          break;
+        // If transaction is existing, suspend it, and then begin new transaction.
+        if(existingTransaction(tx)){
+        suspendedResourcesHolder=tx.suspend();
+        tx=GlobalTransactionContext.createNew();
+        }
+        // Continue and execute with new transaction
+        break;
         case SUPPORTS:
-          // If transaction is not existing, execute without transaction.
-          if (notExistingTransaction(tx)) {
-            return business.execute();
-          }
-          // Continue and execute with new transaction
-          break;
+        // If transaction is not existing, execute without transaction.
+        if(notExistingTransaction(tx)){
+        return business.execute();
+        }
+        // Continue and execute with new transaction
+        break;
         case REQUIRED:
-          // If current transaction is existing, execute with current transaction,
-          // else continue and execute with new transaction.
-          break;
+        // If current transaction is existing, execute with current transaction,
+        // else continue and execute with new transaction.
+        break;
         case NEVER:
-          // If transaction is existing, throw exception.
-          if (existingTransaction(tx)) {
-            throw new TransactionException(
-              String.format("Existing transaction found for transaction marked with propagation 'never', xid = %s"
-                            , tx.getXid()));
-          } else {
-            // Execute without transaction and return.
-            return business.execute();
-          }
+        // If transaction is existing, throw exception.
+        if(existingTransaction(tx)){
+        throw new TransactionException(
+        String.format("Existing transaction found for transaction marked with propagation 'never', xid = %s"
+        ,tx.getXid()));
+        }else{
+        // Execute without transaction and return.
+        return business.execute();
+        }
         case MANDATORY:
-          // If transaction is not existing, throw exception.
-          if (notExistingTransaction(tx)) {
-            throw new TransactionException("No existing transaction found for transaction marked with propagation 'mandatory'");
-          }
-          // Continue and execute with current transaction.
-          break;
-        default:
-          throw new TransactionException("Not Supported Propagation:" + propagation);
-      }
+        // If transaction is not existing, throw exception.
+        if(notExistingTransaction(tx)){
+        throw new TransactionException("No existing transaction found for transaction marked with propagation 'mandatory'");
+        }
+        // Continue and execute with current transaction.
+        break;
+default:
+        throw new TransactionException("Not Supported Propagation:"+propagation);
+        }
 
-      // 1.3 If null, create new transaction with role 'GlobalTransactionRole.Launcher'.
-      // 如果 tx 为空，则创建一个新的全局事务
-      if (tx == null) {
-        tx = GlobalTransactionContext.createNew();
-      }
+        // 1.3 If null, create new transaction with role 'GlobalTransactionRole.Launcher'.
+        // 如果 tx 为空，则创建一个新的全局事务
+        if(tx==null){
+        tx=GlobalTransactionContext.createNew();
+        }
 
-      // set current tx config to holder
-      GlobalLockConfig previousConfig = replaceGlobalLockConfig(txInfo);
+        // set current tx config to holder
+        GlobalLockConfig previousConfig=replaceGlobalLockConfig(txInfo);
 
-      try {
+        try{
         // 2. If the tx role is 'GlobalTransactionRole.Launcher', send the request of beginTransaction to TC,
         //    else do nothing. Of course, the hooks will still be triggered.
-        beginTransaction(txInfo, tx);
+        beginTransaction(txInfo,tx);
 
         Object rs;
-        try {
-          // Do Your Business 执行业务
-          rs = business.execute();
-        } catch (Throwable ex) {
-          // 3. The needed business exception to rollback. 回滚
-          completeTransactionAfterThrowing(txInfo, tx, ex);
-          throw ex;
+        try{
+        // Do Your Business 执行业务
+        rs=business.execute();
+        }catch(Throwable ex){
+        // 3. The needed business exception to rollback. 回滚
+        completeTransactionAfterThrowing(txInfo,tx,ex);
+        throw ex;
         }
 
         // 4. everything is fine, commit.
         commitTransaction(tx);
 
         return rs;
-      } finally {
+        }finally{
         //5. clear 清理资源
         resumeGlobalLockConfig(previousConfig);
         triggerAfterCompletion();
         cleanUp();
-      }
-    } finally {
-      // If the transaction is suspended, resume it.
-      if (suspendedResourcesHolder != null) {
+        }
+        }finally{
+        // If the transaction is suspended, resume it.
+        if(suspendedResourcesHolder!=null){
         tx.resume(suspendedResourcesHolder);
-      }
-    }
-}
+        }
+        }
+        }
 ```
 
 这里的代码很清晰，事务的流程也一目了然。
@@ -606,7 +604,8 @@ TC先生会根据应用名称、事务分组、事务名称等创建全局Sessio
 
 ### 2. 执行业务逻辑
 
-开启事务之后，开始执行我们自己的业务逻辑。这就涉及到了数据库操作，上面我们说到`Seata`已经将`PreparedStatement`对象做了代理。所以在执行的时候将会调用到`PreparedStatementProxy.execute()`：
+开启事务之后，开始执行我们自己的业务逻辑。这就涉及到了数据库操作，上面我们说到`Seata`已经将`PreparedStatement`
+对象做了代理。所以在执行的时候将会调用到`PreparedStatementProxy.execute()`：
 
 ```java
 public class PreparedStatementProxy extends AbstractPreparedStatementProxy implements PreparedStatement, ParametersHolder {
