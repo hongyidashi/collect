@@ -75,6 +75,7 @@
     - [为什么MySQL数据库单表最大是两千万](note/mysql/index/为什么MySQL数据库单表最大是两千万.md)  最后更新于2022-4-18
     - [MySQL的所有Buffer](note/mysql/MySQL的所有Buffer.md)  最后更新于2022-9-20
     - [MySQL六十六问](note/mysql/MySQL六十六问.md)  最后更新于2022-9-21
+    - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15

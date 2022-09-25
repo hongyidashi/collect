@@ -1,25 +1,24 @@
+# Redis分布式锁的8大坑
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Redis分布式锁的8大坑](#redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%848%E5%A4%A7%E5%9D%91)
-  - [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
-  - [一、非原子操作](#%E4%B8%80%E9%9D%9E%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
-  - [二、忘了释放锁](#%E4%BA%8C%E5%BF%98%E4%BA%86%E9%87%8A%E6%94%BE%E9%94%81)
-  - [三、释放了别人的锁](#%E4%B8%89%E9%87%8A%E6%94%BE%E4%BA%86%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%81)
-  - [四、大量失败请求](#%E5%9B%9B%E5%A4%A7%E9%87%8F%E5%A4%B1%E8%B4%A5%E8%AF%B7%E6%B1%82)
-  - [五、锁重入问题](#%E4%BA%94%E9%94%81%E9%87%8D%E5%85%A5%E9%97%AE%E9%A2%98)
-  - [六、锁竞争问题](#%E5%85%AD%E9%94%81%E7%AB%9E%E4%BA%89%E9%97%AE%E9%A2%98)
+- [零、开篇](#%E9%9B%B6%E5%BC%80%E7%AF%87)
+- [一、非原子操作](#%E4%B8%80%E9%9D%9E%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
+- [二、忘了释放锁](#%E4%BA%8C%E5%BF%98%E4%BA%86%E9%87%8A%E6%94%BE%E9%94%81)
+- [三、释放了别人的锁](#%E4%B8%89%E9%87%8A%E6%94%BE%E4%BA%86%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%81)
+- [四、大量失败请求](#%E5%9B%9B%E5%A4%A7%E9%87%8F%E5%A4%B1%E8%B4%A5%E8%AF%B7%E6%B1%82)
+- [五、锁重入问题](#%E4%BA%94%E9%94%81%E9%87%8D%E5%85%A5%E9%97%AE%E9%A2%98)
+- [六、锁竞争问题](#%E5%85%AD%E9%94%81%E7%AB%9E%E4%BA%89%E9%97%AE%E9%A2%98)
     - [1. 读写锁](#1-%E8%AF%BB%E5%86%99%E9%94%81)
     - [2. 锁分段](#2-%E9%94%81%E5%88%86%E6%AE%B5)
-  - [七、锁超时问题](#%E4%B8%83%E9%94%81%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98)
-  - [八、主从复制的问题](#%E5%85%AB%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E9%97%AE%E9%A2%98)
+- [七、锁超时问题](#%E4%B8%83%E9%94%81%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98)
+- [八、主从复制的问题](#%E5%85%AB%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E9%97%AE%E9%A2%98)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Redis分布式锁的8大坑
+[TOC]
 
 ## 零、开篇
 
@@ -383,6 +382,7 @@ return redis.call('pttl', KEYS[1]);
 - ARGV[1]：过期时间
 
 - ARGV[2]：uuid + ":" + threadId，可认为是requestId
+
 1. 先判断如果锁名不存在，则加锁。
 
 2. 接下来，判断如果锁名和requestId值都存在，则使用hincrby命令给该锁名和requestId值计数，每次都加1。注意一下，这里就是重入锁的关键，锁重入一次值就加1。
@@ -620,11 +620,11 @@ RedissonRedLock加锁过程如下：
 在分布式环境中，CAP是绕不过去的。
 
 > CAP指的是在一个分布式系统中：
-> 
+>
 > - 一致性（Consistency）
-> 
+>
 > - 可用性（Availability）
-> 
+>
 > - 分区容错性（Partition tolerance）
 
 如果你的实际业务场景，更需要的是保证数据一致性。那么请使用CP类型的分布式锁，比如：zookeeper，它是基于磁盘的，性能可能没那么好，但数据一般不会丢。
