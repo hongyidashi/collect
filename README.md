@@ -49,6 +49,7 @@
     - [ThreadLocal机制](note/multithreading/juc/ThreadLocal机制.md)  最后更新于2021-9-14
     - [FastThreadLocal](note/multithreading/juc/FastThreadLocal.md)  最后更新于2021-9-14
     - [TransmittableThreadLocal](note/multithreading/juc/TransmittableThreadLocal.md)  最后更新于2021-9-30
+    - [线程池使用案例-多线程永动任务](note/multithreading/async/线程池使用案例-多线程永动任务.md)  最后更新于2022-9-28
 
 + 代码优化
     - [代码优化细节](note/optimization/代码优化细节.md)  最后更新于2021-5-12
