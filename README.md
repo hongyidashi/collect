@@ -176,6 +176,9 @@
     - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
     - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
 
++ 高速缓存与一致性
+    - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
+    
 ### 框架
 
 + Spring
