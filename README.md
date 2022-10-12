@@ -93,7 +93,7 @@
     - [Redis缓存使用技巧和设计方案](note/redis/Redis缓存使用技巧和设计方案.md)  最后更新于2021-11-28
     - [Redis分布式锁的8大坑](note/redis/Redis分布式锁的8大坑.md)  最后更新于2021-12-10
     - [Redis大key的处理](note/redis/Redis大key的处理.md)  最后更新于2022-10-9
-    
+    - [Redis是单线程的进程吗](note/redis/Redis是单线程的进程吗.md)  最后更新于2022-10-10
 
 + Elasticsearch
     - [Elasticsearch如何做到快速检索](note/es/Elasticsearch如何做到快速检索.md)  最后更新于2021-9-1
