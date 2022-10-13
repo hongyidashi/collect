@@ -176,10 +176,12 @@
     - [图解操作系统-申请内存](note/os/diagram/申请内存.md)  最后更新于2021-6-16
     - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
     - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
+    
 
 + 高速缓存与一致性
     - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
     - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
+    - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
 
 ### 框架
 

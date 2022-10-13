@@ -6,7 +6,7 @@
 - [一、Redis 是单线程吗？](#%E4%B8%80redis-%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97)
 - [二、Redis 单线程模式是怎样的？](#%E4%BA%8Credis-%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84)
 - [三、Redis 采用单线程为什么还这么快？](#%E4%B8%89redis-%E9%87%87%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%BF%99%E4%B9%88%E5%BF%AB)
-- [## 四、Redis 6.0 之前为什么使用单线程？](#-%E5%9B%9Bredis-60-%E4%B9%8B%E5%89%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B)
+- [四、Redis 6.0 之前为什么使用单线程？](#%E5%9B%9Bredis-60-%E4%B9%8B%E5%89%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B)
 - [五、Redis 6.0 之后为什么引入了多线程？](#%E4%BA%94redis-60-%E4%B9%8B%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%95%E5%85%A5%E4%BA%86%E5%A4%9A%E7%BA%BF%E7%A8%8B)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -72,7 +72,7 @@ Redis 6.0 版本之前的单线模式如下图：
   只运行单线程的情况下，该机制允许内核中，同时存在多个监听 Socket 和已连接 Socket。内核会一直监听这些 Socket 上的连接请求或数据请求。一旦有请求到达，就会交给 Redis 线程处理，这就实现了一个 Redis
   线程处理多个 IO 流的效果。
 
-## ## 四、Redis 6.0 之前为什么使用单线程？
+## 四、Redis 6.0 之前为什么使用单线程？
 
 我们都知道单线程的程序是无法利用服务器的多核 CPU 的，那么早期 Redis 版本的主要工作（网络 I/O 和执行命令）为什么还要使用单线程呢？我们不妨先看一下Redis官方给出的FAQ。
 
