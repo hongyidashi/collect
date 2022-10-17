@@ -185,12 +185,11 @@
     - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
     - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
     - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
+    - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
 
-[//]: # (    - [Cache和DMA一致性]&#40;note/os/diagram2/Cache和DMA一致性.md&#41;  最后更新于2022-10-16)
+[//]: # (    - [iCache和dCache一致性]&#40;note/os/diagram2/iCache和dCache一致性.md&#41;  最后更新于2022-10-18)
 
-[//]: # (    - [iCache和dCache一致性]&#40;note/os/diagram2/iCache和dCache一致性.md&#41;  最后更新于2022-10-17)
-
-[//]: # (    - [多核Cache一致性]&#40;note/os/diagram2/多核Cache一致性.md&#41;  最后更新于2022-10-18)
+[//]: # (    - [多核Cache一致性]&#40;note/os/diagram2/多核Cache一致性.md&#41;  最后更新于2022-10-19)
 
 ### 框架
 
