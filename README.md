@@ -78,6 +78,8 @@
     - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
     - [MySQL幻读被彻底解决了吗](note/mysql/transaction/MySQL幻读被彻底解决了吗.md)  最后更新于2022-9-26
 
+[//]: # (    - [InnoDB B-TREE 索引怎么定位一条记录]&#40;note/mysql/index/InnoDB-B-TREE-索引怎么定位一条记录.md&#41;  最后更新于2022-10-22)
+
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
     - [Redis分布式锁五种方案](note/redis/Redis分布式锁五种方案.md)  最后更新于2021-6-7
@@ -117,6 +119,8 @@
 
 [//]: # (    - [图解网络-TCP存在的缺陷]&#40;note/net/diagram/图解网络-TCP存在的缺陷.md&#41;  最后更新于2022-10-20)
 
+[//]: # (    - [图解网络-QUIC.md]&#40;note/net/diagram/图解网络-QUIC.md.md&#41;  最后更新于2021-10-21)
+
 + 其他系列
     - [重放攻击](note/net/other/重放攻击.md)  最后更新于2021-7-31
     - [CDN基础](note/net/other/CDN基础.md)  最后更新于2021-10-4
@@ -148,7 +152,7 @@
     - [HTTPS入门](note/http/HTTPS入门.md)  最后更新于2021-6-22
     - [优化HTTPS的手段](note/http/优化HTTPS的手段.md)  最后更新于2021-6-21
     - [ECDHE算法](note/http/ECDHE算法.md)  最后更新于2021-6-23
-    - [QUIC协议](note/http/QUIC协议.md)  最后更新于2021-6-25
+    - [HTTP3-QUIC](note/http/HTTP3-QUIC.md)  最后更新于2021-6-25
 
 + WebSocket
     - [WebSocket实现长连接](note/websocket/WebSocket实现长连接.md)  最后更新于2020-12-28
@@ -189,8 +193,7 @@
     - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
     - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
     - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
-
-[//]: # (    - [多核Cache一致性]&#40;note/os/diagram2/多核Cache一致性.md&#41;  最后更新于2022-10-19)
+    - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
 
 ### 框架
 
