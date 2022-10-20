@@ -116,8 +116,7 @@
     - [图解网络-TCP半连接队列和全连接队列](note/net/diagram/图解网络-TCP半连接队列和全连接队列.md)  最后更新于2021-7-5
     - [图解网络-TCP面向字节流协议](note/net/diagram/图解网络-TCP面向字节流协议.md)  最后更新于2021-10-5
     - [图解网络-Keepalive](note/net/diagram/图解网络-Keepalive.md)  最后更新于2021-10-13
-
-[//]: # (    - [图解网络-TCP存在的缺陷]&#40;note/net/diagram/图解网络-TCP存在的缺陷.md&#41;  最后更新于2022-10-20)
+    - [图解网络-TCP存在的缺陷](note/net/diagram/图解网络-TCP存在的缺陷.md)  最后更新于2022-10-20
 
 [//]: # (    - [图解网络-QUIC.md]&#40;note/net/diagram/图解网络-QUIC.md.md&#41;  最后更新于2021-10-21)
 
@@ -194,6 +193,8 @@
     - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
     - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
     - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
+
+[//]: # (    - [atomic实现原理]&#40;note/os/diagram2/atomic实现原理.md&#41;  最后更新于2022-10-23)
 
 ### 框架
 
