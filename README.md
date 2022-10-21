@@ -117,8 +117,7 @@
     - [图解网络-TCP面向字节流协议](note/net/diagram/图解网络-TCP面向字节流协议.md)  最后更新于2021-10-5
     - [图解网络-Keepalive](note/net/diagram/图解网络-Keepalive.md)  最后更新于2021-10-13
     - [图解网络-TCP存在的缺陷](note/net/diagram/图解网络-TCP存在的缺陷.md)  最后更新于2022-10-20
-
-[//]: # (    - [图解网络-QUIC.md]&#40;note/net/diagram/图解网络-QUIC.md.md&#41;  最后更新于2021-10-21)
+    - [图解网络-QUIC.md](note/net/diagram/图解网络-QUIC.md.md)  最后更新于2021-10-21
 
 + 其他系列
     - [重放攻击](note/net/other/重放攻击.md)  最后更新于2021-7-31
