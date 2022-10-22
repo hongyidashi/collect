@@ -78,7 +78,7 @@
     - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
     - [MySQL幻读被彻底解决了吗](note/mysql/transaction/MySQL幻读被彻底解决了吗.md)  最后更新于2022-9-26
 
-[//]: # (    - [InnoDB B-TREE 索引怎么定位一条记录]&#40;note/mysql/index/InnoDB-B-TREE-索引怎么定位一条记录.md&#41;  最后更新于2022-10-22)
+[//]: # (    - [InnoDB B-TREE 索引怎么定位一条记录]&#40;note/mysql/index/InnoDB-B-TREE-索引怎么定位一条记录.md&#41;  最后更新于2022-10-23)
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
@@ -192,8 +192,7 @@
     - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
     - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
     - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
-
-[//]: # (    - [atomic实现原理]&#40;note/os/diagram2/atomic实现原理.md&#41;  最后更新于2022-10-23)
+    - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
 
 ### 框架
 
