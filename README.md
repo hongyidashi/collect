@@ -195,6 +195,7 @@
     - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
     - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
     - [spinlock前世今生](note/os/diagram2/spinlock前世今生.md)  最后更新于2022-10-25
+    - [内存一致性模型-TSO](note/os/diagram2/内存一致性模型-TSO.md)  最后更新于2022-10-28
 
 ### 框架
 
