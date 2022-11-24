@@ -165,6 +165,9 @@
     - [图解计算机-CPU执行任务过程](note/computer/diagram/CPU执行任务过程.md)  最后更新于2021-6-18
     - [图解计算机-float](note/computer/diagram/float.md)  最后更新于2021-6-20
 
++ 计算机组成原理
+    - [计算机基本组成](note/computer/composition_principle/计算机基本组成.md) 最后更新于2022-11-24
+
 ### 操作系统
 
 + 图解操作系统
