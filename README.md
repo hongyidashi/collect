@@ -167,6 +167,7 @@
 
 + 计算机组成原理
     - [计算机基本组成](note/computer/composition_principle/计算机基本组成.md) 最后更新于2022-11-24
+    - [总线控制](note/computer/composition_principle/总线控制.md) 最后更新于2022-11-25
 
 ### 操作系统
 
