@@ -170,6 +170,7 @@
     - [总线控制](note/computer/composition_principle/总线控制.md) 最后更新于2022-11-25
     - [主存储器-上](note/computer/composition_principle/主存储器-上.md) 最后更新于2022-12-1
     - [主存储器-下](note/computer/composition_principle/主存储器-下.md) 最后更新于2022-12-16
+    - [高速缓冲存储器](note/computer/composition_principle/高速缓冲存储器.md) 最后更新于2022-12-21
 
 ### 操作系统
 
