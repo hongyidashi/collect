@@ -4,7 +4,58 @@
 
 学习资料整理，内容均为**抄袭、整合**
 
-## 目录
+## 导航
+
+### 计算机组成
+
++ 图解计算机
+    - [图解计算机-CPU执行程序过程](note/computer/diagram/CPU执行程序过程.md)  最后更新于2021-6-2
+    - [图解计算机-存储器的层次结构](note/computer/diagram/存储器的层次结构.md)  最后更新于2021-6-3
+    - [图解计算机-CPU缓存一致性](note/computer/diagram/CPU缓存一致性.md)  最后更新于2021-6-17
+    - [图解计算机-CPU执行任务过程](note/computer/diagram/CPU执行任务过程.md)  最后更新于2021-6-18
+    - [图解计算机-float](note/computer/diagram/float.md)  最后更新于2021-6-20
+
++ 计算机组成原理
+    - [计算机基本组成](note/computer/composition_principle/计算机基本组成.md) 最后更新于2022-11-24
+    - [总线控制](note/computer/composition_principle/总线控制.md) 最后更新于2022-11-25
+    - [主存储器-上](note/computer/composition_principle/主存储器-上.md) 最后更新于2022-12-1
+    - [主存储器-下](note/computer/composition_principle/主存储器-下.md) 最后更新于2022-12-16
+    - [高速缓冲存储器](note/computer/composition_principle/高速缓冲存储器.md) 最后更新于2022-12-21
+    - [输入输出设备-上](note/computer/composition_principle/输入输出设备-上.md) 最后更新于2022-12-24
+    - [输入输出设备-下](note/computer/composition_principle/输入输出设备-下.md) 最后更新于2022-12-27
+    - [无符号数和有符号数](note/computer/composition_principle/无符号数和有符号数.md) 最后更新于2023-1-4
+
+### 操作系统
+
++ 图解操作系统
+    - [图解操作系统-内存管理](note/os/diagram/内存管理.md)  最后更新于2021-6-4
+    - [图解操作系统-进程和线程基础知识](note/os/diagram/进程和线程基础知识.md)  最后更新于2021-6-6
+    - [图解操作系统-线程竞争与协作](note/os/diagram/线程竞争与协作.md)  最后更新于2021-6-6
+    - [图解操作系统-进程间通信](note/os/diagram/进程间通信.md)  最后更新于2021-6-7
+    - [图解操作系统-文件系统](note/os/diagram/文件系统.md)  最后更新于2021-6-8
+    - [图解操作系统-输入输出设备](note/os/diagram/输入输出设备.md)  最后更新于2021-6-9
+    - [图解操作系统-调度算法](note/os/diagram/调度算法.md)  最后更新于2021-6-10
+    - [图解操作系统-零拷贝](note/os/diagram/零拷贝.md)  最后更新于2021-6-11
+    - [图解操作系统-IO多路复用](note/os/diagram/IO多路复用.md)  最后更新于2021-6-12
+    - [图解操作系统-Reactor和Proactor](note/os/diagram/Reactor和Proactor.md)  最后更新于2021-6-13
+    - [图解操作系统-Linux内核vsWindows内核](note/os/diagram/Linux内核vsWindows内核.md)  最后更新于2021-6-14
+    - [图解操作系统-线程间共享资源](note/os/diagram/线程间共享资源.md)  最后更新于2021-6-15
+    - [图解操作系统-申请内存](note/os/diagram/申请内存.md)  最后更新于2021-6-16
+    - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
+    - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
+    - [图解操作系统-内存满了会发生什么](note/os/diagram/内存满了会发生什么.md)  最后更新于2022-10-14
+    - [图解操作系统-如何避免预读失效和缓存污染的问题](note/os/diagram/如何避免预读失效和缓存污染的问题.md)  最后更新于2022-10-15
+
++ 高速缓存与一致性
+    - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
+    - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
+    - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
+    - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
+    - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
+    - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
+    - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
+    - [spinlock前世今生](note/os/diagram2/spinlock前世今生.md)  最后更新于2022-10-25
+    - [内存一致性模型-TSO](note/os/diagram2/内存一致性模型-TSO.md)  最后更新于2022-10-28
 
 ### Java基础
 
@@ -155,56 +206,6 @@
 
 + WebSocket
     - [WebSocket实现长连接](note/websocket/WebSocket实现长连接.md)  最后更新于2020-12-28
-
-### 计算机组成
-
-+ 图解计算机
-    - [图解计算机-CPU执行程序过程](note/computer/diagram/CPU执行程序过程.md)  最后更新于2021-6-2
-    - [图解计算机-存储器的层次结构](note/computer/diagram/存储器的层次结构.md)  最后更新于2021-6-3
-    - [图解计算机-CPU缓存一致性](note/computer/diagram/CPU缓存一致性.md)  最后更新于2021-6-17
-    - [图解计算机-CPU执行任务过程](note/computer/diagram/CPU执行任务过程.md)  最后更新于2021-6-18
-    - [图解计算机-float](note/computer/diagram/float.md)  最后更新于2021-6-20
-
-+ 计算机组成原理
-    - [计算机基本组成](note/computer/composition_principle/计算机基本组成.md) 最后更新于2022-11-24
-    - [总线控制](note/computer/composition_principle/总线控制.md) 最后更新于2022-11-25
-    - [主存储器-上](note/computer/composition_principle/主存储器-上.md) 最后更新于2022-12-1
-    - [主存储器-下](note/computer/composition_principle/主存储器-下.md) 最后更新于2022-12-16
-    - [高速缓冲存储器](note/computer/composition_principle/高速缓冲存储器.md) 最后更新于2022-12-21
-    - [输入输出设备-上](note/computer/composition_principle/输入输出设备-上.md) 最后更新于2022-12-24
-    - [输入输出设备-下](note/computer/composition_principle/输入输出设备-下.md) 最后更新于2022-12-27
-
-### 操作系统
-
-+ 图解操作系统
-    - [图解操作系统-内存管理](note/os/diagram/内存管理.md)  最后更新于2021-6-4
-    - [图解操作系统-进程和线程基础知识](note/os/diagram/进程和线程基础知识.md)  最后更新于2021-6-6
-    - [图解操作系统-线程竞争与协作](note/os/diagram/线程竞争与协作.md)  最后更新于2021-6-6
-    - [图解操作系统-进程间通信](note/os/diagram/进程间通信.md)  最后更新于2021-6-7
-    - [图解操作系统-文件系统](note/os/diagram/文件系统.md)  最后更新于2021-6-8
-    - [图解操作系统-输入输出设备](note/os/diagram/输入输出设备.md)  最后更新于2021-6-9
-    - [图解操作系统-调度算法](note/os/diagram/调度算法.md)  最后更新于2021-6-10
-    - [图解操作系统-零拷贝](note/os/diagram/零拷贝.md)  最后更新于2021-6-11
-    - [图解操作系统-IO多路复用](note/os/diagram/IO多路复用.md)  最后更新于2021-6-12
-    - [图解操作系统-Reactor和Proactor](note/os/diagram/Reactor和Proactor.md)  最后更新于2021-6-13
-    - [图解操作系统-Linux内核vsWindows内核](note/os/diagram/Linux内核vsWindows内核.md)  最后更新于2021-6-14
-    - [图解操作系统-线程间共享资源](note/os/diagram/线程间共享资源.md)  最后更新于2021-6-15
-    - [图解操作系统-申请内存](note/os/diagram/申请内存.md)  最后更新于2021-6-16
-    - [图解操作系统-虚拟内存](note/os/diagram/虚拟内存.md)  最后更新于2021-8-18
-    - [图解操作系统-中断](note/os/diagram/中断.md)  最后更新于2021-8-24
-    - [图解操作系统-内存满了会发生什么](note/os/diagram/内存满了会发生什么.md)  最后更新于2022-10-14
-    - [图解操作系统-如何避免预读失效和缓存污染的问题](note/os/diagram/如何避免预读失效和缓存污染的问题.md)  最后更新于2022-10-15
-
-+ 高速缓存与一致性
-    - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
-    - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
-    - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
-    - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
-    - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
-    - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
-    - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
-    - [spinlock前世今生](note/os/diagram2/spinlock前世今生.md)  最后更新于2022-10-25
-    - [内存一致性模型-TSO](note/os/diagram2/内存一致性模型-TSO.md)  最后更新于2022-10-28
 
 ### 框架
 
