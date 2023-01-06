@@ -24,6 +24,7 @@
     - [输入输出设备-上](note/computer/composition_principle/输入输出设备-上.md) 最后更新于2022-12-24
     - [输入输出设备-下](note/computer/composition_principle/输入输出设备-下.md) 最后更新于2022-12-27
     - [无符号数和有符号数](note/computer/composition_principle/无符号数和有符号数.md) 最后更新于2023-1-4
+    - [数的定点表示和浮点表示](note/computer/composition_principle/数的定点表示和浮点表示.md) 最后更新于2023-1-6
 
 ### 操作系统
 
