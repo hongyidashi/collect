@@ -26,6 +26,7 @@
     - [无符号数和有符号数](note/computer/composition_principle/无符号数和有符号数.md) 最后更新于2023-1-4
     - [数的定点表示和浮点表示](note/computer/composition_principle/数的定点表示和浮点表示.md) 最后更新于2023-1-6
     - [定点运算和浮点运算](note/computer/composition_principle/定点运算和浮点运算.md) 最后更新于2023-1-13
+    - [指令系统](note/computer/composition_principle/指令系统.md) 最后更新于2023-1-19
 
 ### 操作系统
 
