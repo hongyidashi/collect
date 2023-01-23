@@ -28,6 +28,7 @@
     - [定点运算和浮点运算](note/computer/composition_principle/定点运算和浮点运算.md) 最后更新于2023-1-13
     - [指令系统](note/computer/composition_principle/指令系统.md) 最后更新于2023-1-19
     - [CPU的结构和功能-指令周期和指令流水](note/computer/composition_principle/指令周期和指令流水.md) 最后更新于2023-1-21
+    - [CPU的结构和功能-中断系统](note/computer/composition_principle/中断系统.md) 最后更新于2023-1-23
 
 ### 操作系统
 
