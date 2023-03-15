@@ -8,13 +8,6 @@
 
 ### 计算机组成
 
-+ 图解计算机
-    - [图解计算机-CPU执行程序过程](note/computer/diagram/CPU执行程序过程.md)  最后更新于2021-6-2
-    - [图解计算机-存储器的层次结构](note/computer/diagram/存储器的层次结构.md)  最后更新于2021-6-3
-    - [图解计算机-CPU缓存一致性](note/computer/diagram/CPU缓存一致性.md)  最后更新于2021-6-17
-    - [图解计算机-CPU执行任务过程](note/computer/diagram/CPU执行任务过程.md)  最后更新于2021-6-18
-    - [图解计算机-float](note/computer/diagram/float.md)  最后更新于2021-6-20
-
 + 计算机组成原理
     - [计算机基本组成](note/computer/composition_principle/计算机基本组成.md) 最后更新于2022-11-24
     - [总线控制](note/computer/composition_principle/总线控制.md) 最后更新于2022-11-25
@@ -30,6 +23,24 @@
     - [指令周期和指令流水](note/computer/composition_principle/指令周期和指令流水.md) 最后更新于2023-1-21
     - [中断系统](note/computer/composition_principle/中断系统.md) 最后更新于2023-1-23
     - [控制单元](note/computer/composition_principle/控制单元.md) 最后更新于2023-1-27
+
++ 图解计算机
+    - [图解计算机-CPU执行程序过程](note/computer/diagram/CPU执行程序过程.md)  最后更新于2021-6-2
+    - [图解计算机-存储器的层次结构](note/computer/diagram/存储器的层次结构.md)  最后更新于2021-6-3
+    - [图解计算机-CPU缓存一致性](note/computer/diagram/CPU缓存一致性.md)  最后更新于2021-6-17
+    - [图解计算机-CPU执行任务过程](note/computer/diagram/CPU执行任务过程.md)  最后更新于2021-6-18
+    - [图解计算机-float](note/computer/diagram/float.md)  最后更新于2021-6-20
+
++ 高速缓存与一致性
+    - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
+    - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
+    - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
+    - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
+    - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
+    - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
+    - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
+    - [spinlock前世今生](note/os/diagram2/spinlock前世今生.md)  最后更新于2022-10-25
+    - [内存一致性模型-TSO](note/os/diagram2/内存一致性模型-TSO.md)  最后更新于2022-10-28
 
 ### 操作系统
 
@@ -61,17 +72,6 @@
         - [死锁](note/os/wd/死锁.md)  最后更新于2023-3-8
     + 内存管理
         - [内存管理的概念-上](note/os/wd/内存管理的概念-上.md)  最后更新于2023-3-15
-
-+ 高速缓存与一致性
-    - [Cache的基本原理](note/os/diagram2/Cache的基本原理.md)  最后更新于2022-10-9
-    - [Cache组织方式](note/os/diagram2/Cache组织方式.md)  最后更新于2022-10-10
-    - [TLB原理](note/os/diagram2/TLB原理.md)  最后更新于2022-10-13
-    - [Cache和DMA一致性](note/os/diagram2/Cache和DMA一致性.md)  最后更新于2022-10-17
-    - [iCache和dCache一致性](note/os/diagram2/iCache和dCache一致性.md)  最后更新于2022-10-18
-    - [多核Cache一致性](note/os/diagram2/多核Cache一致性.md)  最后更新于2022-10-19
-    - [atomic实现原理](note/os/diagram2/atomic实现原理.md)  最后更新于2022-10-22
-    - [spinlock前世今生](note/os/diagram2/spinlock前世今生.md)  最后更新于2022-10-25
-    - [内存一致性模型-TSO](note/os/diagram2/内存一致性模型-TSO.md)  最后更新于2022-10-28
 
 ### Java基础
 
