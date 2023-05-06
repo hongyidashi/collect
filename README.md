@@ -131,26 +131,32 @@
 ### 数据库
 
 + MySQL
-    - [MySQL大杂烩](note/mysql/MySQL大杂烩.md)  最后更新于2021-2-3
-    - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1
-    - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14
-    - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1
-    - [Buffer Pool](note/mysql/BufferPool.md)  最后更新于2021-8-19
-    - [innodb是如何存数据的](note/mysql/innodb是如何存数据的.md)  最后更新于2021-9-2
-    - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
-    - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
-    - [MySQL是这样执行的](note/mysql/MySQL是这样执行的.md)  最后更新于2021-10-4
-    - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-30
-    - [Innodb到底是怎么加锁的](note/mysql/lock/Innodb到底是怎么加锁的.md)  最后更新于2021-12-14
-    - [聊聊数据页变成索引这件事](note/mysql/index/聊聊数据页变成索引这件事.md)  最后更新于2022-3-5
-    - [读写分离从库读到新值主库读到旧值](note/mysql/ms/读写分离从库读到新值主库读到旧值.md)  最后更新于2022-3-5
-    - [ChangeBuffer是如何提升索引性能的](note/mysql/index/ChangeBuffer是如何提升索引性能的.md)  最后更新于2022-3-23
-    - [为什么MySQL数据库单表最大是两千万](note/mysql/index/为什么MySQL数据库单表最大是两千万.md)  最后更新于2022-4-18
-    - [MySQL的所有Buffer](note/mysql/MySQL的所有Buffer.md)  最后更新于2022-9-20
-    - [MySQL六十六问](note/mysql/MySQL六十六问.md)  最后更新于2022-9-21
-    - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
-    - [MySQL幻读被彻底解决了吗](note/mysql/transaction/MySQL幻读被彻底解决了吗.md)  最后更新于2022-9-26
-    - [InnoDB B-TREE 索引怎么定位一条记录](note/mysql/index/InnoDB-B-TREE-索引怎么定位一条记录.md)  最后更新于2022-10-23(比较水，作用不是很大)
+    + 索引
+        - [explain-索引优化](note/mysql/index/explain-索引优化.md)  最后更新于2021-11-30
+        - [聊聊数据页变成索引这件事](note/mysql/index/聊聊数据页变成索引这件事.md)  最后更新于2022-3-5
+        - [ChangeBuffer是如何提升索引性能的](note/mysql/index/ChangeBuffer是如何提升索引性能的.md)  最后更新于2022-3-23
+        - [为什么MySQL数据库单表最大是两千万](note/mysql/index/为什么MySQL数据库单表最大是两千万.md)  最后更新于2022-4-18
+        - [InnoDB B-TREE 索引怎么定位一条记录](note/mysql/index/InnoDB-B-TREE-索引怎么定位一条记录.md)  最后更新于2022-10-23
+    + 事务
+        - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1
+        - [MySQL幻读被彻底解决了吗](note/mysql/transaction/MySQL幻读被彻底解决了吗.md)  最后更新于2022-9-26
+        - [MySQL事务二阶段提交](note/mysql/transaction/MySQL事务二阶段提交.md)  最后更新于2023-5-6(细节比较晦涩)
+    + 优化
+        - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
+    + 综合
+        - [攻克order_by](note/mysql/攻克order_by.md)  最后更新于2021-6-14
+        - [主从延迟](note/mysql/主从延迟.md)  最后更新于2021-8-1
+        - [Buffer Pool](note/mysql/BufferPool.md)  最后更新于2021-8-19
+        - [innodb是如何存数据的](note/mysql/innodb是如何存数据的.md)  最后更新于2021-9-2
+        - [MySQL是这样执行的](note/mysql/MySQL是这样执行的.md)  最后更新于2021-10-4
+        - [Innodb到底是怎么加锁的](note/mysql/lock/Innodb到底是怎么加锁的.md)  最后更新于2021-12-14
+        - [读写分离从库读到新值主库读到旧值](note/mysql/ms/读写分离从库读到新值主库读到旧值.md)  最后更新于2022-3-5
+        - [MySQL的所有Buffer](note/mysql/MySQL的所有Buffer.md)  最后更新于2022-9-20
+    + 其他
+        - [MySQL大杂烩](note/mysql/MySQL大杂烩.md)  最后更新于2021-2-3(前期文章，质量较差，不建议阅读)
+        - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
+        - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
+        - [MySQL六十六问](note/mysql/MySQL六十六问.md)  最后更新于2022-9-21
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
