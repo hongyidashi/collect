@@ -140,7 +140,8 @@
     + 事务
         - [InnoDB解决幻读的方案--LBCC&MVCC](note/mysql/transaction/InnoDB解决幻读的方案--LBCC&MVCC.md)  最后更新于2021-6-1
         - [MySQL幻读被彻底解决了吗](note/mysql/transaction/MySQL幻读被彻底解决了吗.md)  最后更新于2022-9-26
-        - [MySQL事务二阶段提交](note/mysql/transaction/MySQL事务二阶段提交.md)  最后更新于2023-5-6(细节比较晦涩)
+        - [MySQL事务二阶段提交(细节比较晦涩)](note/mysql/transaction/MySQL事务二阶段提交.md)  最后更新于2023-5-6
+        - [UndoLog存储结构](note/mysql/transaction/UndoLog存储结构.md)  最后更新于2023-5-10
     + 优化
         - [MySQL慢查询优化](note/mysql/optimization/MySQL慢查询优化.md)  最后更新于2022-9-25
     + 综合
