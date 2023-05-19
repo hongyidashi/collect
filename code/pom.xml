@@ -29,6 +29,7 @@
         <module>guava-demo</module>
         <module>mybatis-code</module>
         <module>springboot2</module>
+        <module>shardingsphere-demo</module>
     </modules>
 
     <dependencyManagement>

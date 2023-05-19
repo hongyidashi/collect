@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.collect.sharding.mapper.OrderMapper">
+
+    <insert id="insert" parameterType="com.collect.sharding.model.Order">
+        INSERT INTO t_order(user_id, total_price, state, create_time, update_time)
+        VALUES (#{userId}, #{totalPrice}, #{state}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="selectListByIds" resultType="com.collect.sharding.model.Order">
+        SELECT order_id, user_id, total_price, state FROM t_order WHERE order_id IN
+        <foreach collection="idList" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
