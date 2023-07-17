@@ -157,7 +157,7 @@
         - [MySQL大杂烩](note/mysql/MySQL大杂烩.md)  最后更新于2021-2-3(前期文章，质量较差，不建议阅读)
         - [MySQL日志15连问](note/mysql/MySQL日志15连问.md)  最后更新于2021-9-28
         - [MySQL基础30问](note/mysql/MySQL基础30问.md)  最后更新于2021-10-3
-        - [MySQL六十六问](note/mysql/MySQL六十六问.md)  最后更新于2022-9-21
+        - [MySQL六十六问](note/mysql/MySQL六十六问.md)  最后更新于2023-7-17
 
 + Redis
     - [Redis主从复制](note/redis/Redis主从复制.md)  最后更新于2020-12-15
